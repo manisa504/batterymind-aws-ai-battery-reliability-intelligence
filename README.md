@@ -15,7 +15,7 @@ It does not present laboratory observations as field safety outcomes.
 - The AWS stack (CDK: ECS Fargate ARM64, RDS PostgreSQL + pgvector, Cognito with MFA, CloudFront, SQS,
   ECR) was deployed and tested live in `us-east-2`: authenticated assessment memory in RDS and
   Amazon Bedrock (Nova Micro) explanations, which only rephrase values already computed by the rules.
-  Embedding-based recall and the SQS path are not yet exercised; gate G5 is PARTIAL
+  Embedding-based recall and the SQS path are not yet exercised; gate G5 is BLOCKED
   (`reports/release/aws-deployment.json`).
 
 ## Local setup
