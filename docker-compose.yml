@@ -1,0 +1,30 @@
+services:
+  database:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: batterymind
+      POSTGRES_USER: batterymind
+      POSTGRES_PASSWORD: local-development-only
+    ports: ["5432:5432"]
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./packages/memory_engine/schema.sql:/docker-entrypoint-initdb.d/10-memory.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U batterymind"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  api:
+    build: {context: ., dockerfile: apps/api/Dockerfile}
+    environment:
+      BATTERYMIND_DATABASE_URL: postgresql+psycopg://batterymind:local-development-only@database:5432/batterymind
+      BATTERYMIND_LOCAL_AUTH_ENABLED: "true"
+      BATTERYMIND_AWS_REGION: us-east-2
+    ports: ["8000:8000"]
+    depends_on:
+      database: {condition: service_healthy}
+    volumes:
+      - ./data/processed:/app/data/processed:ro
+volumes:
+  postgres-data:
+

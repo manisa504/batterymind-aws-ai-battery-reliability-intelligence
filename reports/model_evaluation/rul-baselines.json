@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "evaluation_version": "chronological-and-battery-disjoint-v1",
+  "train_fraction": 0.6,
+  "future_leakage_control": "Per-cell models fit only rows at or before training_cutoff_cycle.",
+  "per_cell_chronological": {
+    "B0005": {
+      "training_cutoff_cycle": 100,
+      "first_evaluation_cycle": 101,
+      "training_points": 100,
+      "linear": {
+        "mae_ah": 0.02270838719885016,
+        "rmse_ah": 0.0255946314094935,
+        "evaluated_points": 68
+      },
+      "persistence": {
+        "mae_ah": 0.11190972843238343,
+        "rmse_ah": 0.1257517355485605,
+        "evaluated_points": 68
+      }
+    },
+    "B0006": {
+      "training_cutoff_cycle": 100,
+      "first_evaluation_cycle": 101,
+      "training_points": 100,
+      "linear": {
+        "mae_ah": 0.13512921806242836,
+        "rmse_ah": 0.144031914647037,
+        "evaluated_points": 68
+      },
+      "persistence": {
+        "mae_ah": 0.1250364455144411,
+        "rmse_ah": 0.14783274909044145,
+        "evaluated_points": 68
+      }
+    },
+    "B0007": {
+      "training_cutoff_cycle": 100,
+      "first_evaluation_cycle": 101,
+      "training_points": 100,
+      "linear": {
+        "mae_ah": 0.027627638805209173,
+        "rmse_ah": 0.0355177716508434,
+        "evaluated_points": 68
+      },
+      "persistence": {
+        "mae_ah": 0.08896260610370976,
+        "rmse_ah": 0.10127856549906264,
+        "evaluated_points": 68
+      }
+    },
+    "B0018": {
+      "training_cutoff_cycle": 79,
+      "first_evaluation_cycle": 80,
+      "training_points": 79,
+      "linear": {
+        "mae_ah": 0.051148302497271404,
+        "rmse_ah": 0.06663840052759681,
+        "evaluated_points": 53
+      },
+      "persistence": {
+        "mae_ah": 0.056608727064794216,
+        "rmse_ah": 0.06532445427831342,
+        "evaluated_points": 53
+      }
+    }
+  },
+  "leave_one_battery_out": {
+    "B0005": {
+      "mae_ah": 0.02509778606321376,
+      "rmse_ah": 0.030793612327313334,
+      "evaluated_points": 168
+    },
+    "B0006": {
+      "mae_ah": 0.0903718918755419,
+      "rmse_ah": 0.09768297798377434,
+      "evaluated_points": 168
+    },
+    "B0007": {
+      "mae_ah": 0.1068932961015557,
+      "rmse_ah": 0.11916437509396836,
+      "evaluated_points": 168
+    },
+    "B0018": {
+      "mae_ah": 0.10356021377221508,
+      "rmse_ah": 0.11037819068432687,
+      "evaluated_points": 132
+    }
+  },
+  "limitations": [
+    "Four experimental cells are insufficient to establish broad model generalization.",
+    "Leave-one-cell-out capacity-vs-cycle regression does not adjust for operating-profile differences.",
+    "Errors describe this dataset and model only; they are not field reliability guarantees."
+  ]
+}

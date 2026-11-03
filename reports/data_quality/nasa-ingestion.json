@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "archive_sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
+  "source_files": [
+    {
+      "battery_id": "B0005",
+      "sha256": "0eae4585baf3f200c09fe24c5ab884f1889679fc75206ca1aa19da704104f0b0",
+      "bytes": 15956874
+    },
+    {
+      "battery_id": "B0006",
+      "sha256": "fa818ab4db5db8ab21e910b6dd6c3e20d3761bb9672089e1a4de8f96074616c5",
+      "bytes": 16028159
+    },
+    {
+      "battery_id": "B0007",
+      "sha256": "d022afa086efaf54ab5b63f05220f5be178c8027e2fa8d68589db0e85a441a3b",
+      "bytes": 16049460
+    },
+    {
+      "battery_id": "B0018",
+      "sha256": "d1e6c923a43ea1c9666b3a90bbb521757a067fd60b4d17dbfaa49c50b179da69",
+      "bytes": 8502218
+    }
+  ],
+  "cells": [
+    "B0005",
+    "B0006",
+    "B0007",
+    "B0018"
+  ],
+  "cycle_rows": 2167,
+  "sample_rows": 2089050,
+  "impedance_rows": 42576,
+  "quality_flags": {
+    "": 2167
+  },
+  "measurement_validation": {
+    "capacity_ah": {
+      "unit": "Ah",
+      "present": 636,
+      "missing": 1531,
+      "minimum": 1.15381833159625,
+      "maximum": 2.035337591005598,
+      "nonfinite": 0
+    },
+    "voltage_measured_v": {
+      "unit": "V",
+      "present": 2089048,
+      "missing": 2,
+      "minimum": -0.0014221565384104913,
+      "maximum": 8.393141180564633,
+      "nonfinite": 0
+    },
+    "current_measured_a": {
+      "unit": "A",
+      "present": 2089048,
+      "missing": 2,
+      "minimum": -4.50882765791034,
+      "maximum": 1.536047031556956,
+      "nonfinite": 0
+    },
+    "temperature_measured_c": {
+      "unit": "degC",
+      "present": 2089048,
+      "missing": 2,
+      "minimum": 21.810169604006642,
+      "maximum": 42.33252236723314,
+      "nonfinite": 0
+    },
+    "re_ohm": {
+      "unit": "ohm",
+      "present": 42576,
+      "missing": 0,
+      "minimum": 0.03591968009886427,
+      "maximum": 0.07914099539982122,
+      "nonfinite": 0
+    },
+    "rct_ohm": {
+      "unit": "ohm",
+      "present": 42576,
+      "missing": 0,
+      "minimum": 0.060073134186248135,
+      "maximum": 0.10668360253694291,
+      "nonfinite": 0
+    }
+  },
+  "quality_concerns": [
+    "Two sample rows have missing core measured fields due to unequal source-array lengths; values were not filled.",
+    "Measured-voltage extrema include values below 0 V and above 5 V; source values are preserved and require operation-level interpretation.",
+    "Capacity is defined only for discharge operations, so null capacity on charge and impedance rows is expected.",
+    "MATLAB date vectors contain no timezone; timestamps remain timezone-naive."
+  ],
+  "missing_experiment_timestamps": 0,
+  "parquet_sha256": {
+    "cycles": "d66c5a60e832a81d21675c5dc918d43dcc22231ed3cc13cc01bfc820a3c88968",
+    "samples": "0945e423711dc2cea430ac8a59d22fb6aeafa1c15d1feb1f6f518502a3bb935d",
+    "impedance": "b00361cebade4a04ad65ab0cfd4cc3746e2de59f44e7e82f18a4a9f5308dcb4e"
+  },
+  "timezone_assigned": false
+}

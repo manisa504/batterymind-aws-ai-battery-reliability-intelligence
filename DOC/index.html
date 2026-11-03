@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BatteryMind · Manisha</title>
+    <style>
+      :root {
+        font-family: Inter, system-ui;
+        color: #eaf0ee;
+        background: #0a1110;
+        line-height: 1.65;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        background: #0a1110eb;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #29322f;
+        padding: 18px max(20px, 6vw);
+        display: flex;
+        justify-content: space-between;
+        z-index: 2;
+      }
+      nav b {
+        color: #b6ff62;
+      }
+      nav span {
+        color: #8d9994;
+      }
+      .hero,
+      section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 80px 24px;
+      }
+      .hero {
+        min-height: 70vh;
+        display: grid;
+        align-content: center;
+      }
+      .kicker {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: #b6ff62;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(48px, 9vw, 110px);
+        line-height: 0.95;
+        margin: 20px 0;
+      }
+      h1 em {
+        color: #b6ff62;
+        font-style: normal;
+      }
+      h2 {
+        font-size: clamp(28px, 5vw, 52px);
+        line-height: 1.1;
+      }
+      p {
+        color: #a6b1ad;
+        max-width: 800px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid #2a3531;
+        padding: 22px;
+        background: #101916;
+      }
+      .card b {
+        display: block;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .diagram {
+        background: #edf2ef;
+        padding: 15px;
+        border-radius: 6px;
+      }
+      .diagram img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .actions a {
+        padding: 11px 16px;
+        border: 1px solid #b6ff62;
+        color: #b6ff62;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td,
+      th {
+        border-bottom: 1px solid #303a37;
+        padding: 12px;
+        text-align: left;
+      }
+      footer {
+        border-top: 1px solid #29322f;
+        padding: 35px 6vw;
+        color: #7d8984;
+      }
+      @media (max-width: 700px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .hero,
+        section {
+          padding: 55px 20px;
+        }
+        table {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav><b>BATTERYMIND</b><span>Manisha's engineering project</span></nav>
+    <main>
+      <header class="hero">
+        <p class="kicker">Battery reliability decision intelligence</p>
+        <h1>Evidence that<br /><em>remembers.</em></h1>
+        <p>
+          BatteryMind turns authentic NASA Ames laboratory measurements into
+          transparent degradation analysis, experimental RUL baselines,
+          versioned engineering classifications, and evidence-linked assessment
+          memory.
+        </p>
+        <div class="actions">
+          <a href="architecture/batterymind-aws.drawio"
+            >Editable draw.io source</a
+          ><a href="https://batterymind-showcase.vercel.app"
+            >Interactive showcase</a
+          >
+        </div>
+      </header>
+      <section>
+        <p class="kicker">The business problem</p>
+        <h2>Analysis history is part of the engineering evidence.</h2>
+        <p>
+          Battery teams need to see degradation and understand why a decision
+          changed across sessions. BatteryMind preserves the measurement cutoff,
+          policy and model versions, supporting values, prior assessment, and
+          correction state. It does not infer field safety from laboratory aging
+          experiments.
+        </p>
+      </section>
+      <section>
+        <p class="kicker">Verified data</p>
+        <h2>NASA Ames Li-ion battery aging experiments</h2>
+        <div class="cards">
+          <div class="card">
+            <b>4 verified cells</b>B0005, B0006, B0007, and B0018 were
+            discovered in the downloaded archive.
+          </div>
+          <div class="card">
+            <b>2,089,050 samples</b>Voltage, current, temperature, and
+            elapsed-time samples parsed without synthetic filling.
+          </div>
+          <div class="card">
+            <b>Traceable source</b>Archive and MATLAB file hashes connect every
+            processed operation to its origin.
+          </div>
+        </div>
+        <p>
+          The NASA experiment stopped relevant 2 Ah cells at 1.4 Ah, a 30%
+          capacity fade. BatteryMind labels that threshold as
+          experiment-specific and does not generalize it to unrelated products.
+        </p>
+      </section>
+      <section>
+        <p class="kicker">Architecture</p>
+        <h2>Private production and public demonstration stay separate.</h2>
+        <div class="diagram">
+          <img
+            src="architecture/batterymind-aws.svg"
+            alt="BatteryMind AWS architecture showing private production, data, memory, deployment, and independent publishing boundaries"
+          />
+        </div>
+        <p>
+          The AWS system uses CloudFront/S3, Cognito, an HTTPS load balancer,
+          ECS Fargate, SQS, private RDS PostgreSQL with pgvector, Bedrock,
+          Secrets Manager, and CloudWatch. The Vercel showcase uses only a
+          versioned static export.
+        </p>
+      </section>
+      <section>
+        <p class="kicker">Method</p>
+        <h2>Measured, derived, and predicted values remain distinct.</h2>
+        <table>
+          <tr>
+            <th>Layer</th>
+            <th>Method</th>
+            <th>Evidence rule</th>
+          </tr>
+          <tr>
+            <td>Measurements</td>
+            <td>NASA MATLAB cycles and samples</td>
+            <td>Preserve source indices, units, hashes, and missingness</td>
+          </tr>
+          <tr>
+            <td>SOH</td>
+            <td>Measured capacity ÷ 2 Ah × 100</td>
+            <td>Derived and cutoff-aware</td>
+          </tr>
+          <tr>
+            <td>RUL</td>
+            <td>Linear trend with residual bootstrap interval</td>
+            <td>Prediction, evaluated chronologically</td>
+          </tr>
+          <tr>
+            <td>Decision</td>
+            <td>Versioned deterministic SOH bands</td>
+            <td>LLM explains but cannot classify</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>Structured assessments plus pgvector recall</td>
+            <td>Structured evidence remains authoritative</td>
+          </tr>
+        </table>
+      </section>
+      <section id="evaluation">
+        <p class="kicker">Evaluation</p>
+        <h2>Release claims follow executed gates.</h2>
+        <p>
+          G0 and G1 have local evidence. Analytics, memory, infrastructure,
+          application, and public-release gates stay partial or blocked until
+          their remaining checks run. Live Cognito, RDS, ECS, SQS, and Bedrock
+          behavior is not claimed without an authorized deployment.
+        </p>
+        <div class="actions">
+          <a href="architecture/batterymind-aws.drawio">Editable diagram</a
+          ><a href="architecture/batterymind-aws.md">Architecture guide</a
+          ><a href="architecture/batterymind-aws.png">Architecture PNG</a>
+        </div>
+      </section>
+      <section id="showcase">
+        <p class="kicker">Independent showcase</p>
+        <h2>Explore the verified measurements without signing in.</h2>
+        <p>
+          The static Vercel application builds from a versioned export of the
+          verified NASA measurements and has no connection to AWS databases or
+          private memory.
+        </p>
+        <div class="actions">
+          <a href="https://batterymind-showcase.vercel.app"
+            >Open the interactive showcase</a
+          >
+        </div>
+      </section>
+      <section>
+        <p class="kicker">Security, cost, and limits</p>
+        <h2>Designed for scheduled demonstrations.</h2>
+        <p>
+          Production uses Cognito, least-privilege roles, private database
+          networking, encryption, secret storage, immutable images, bounded
+          retries, and log retention. RDS and the load balancer create idle
+          costs even when ECS scales to zero. The current dataset is small and
+          laboratory-specific; model performance cannot establish broad product
+          generalization.
+        </p>
+      </section>
+    </main>
+    <footer>
+      BatteryMind · Project owner: Manisha · AWS Region: us-east-2 · No career
+      history or credentials are implied.
+    </footer>
+  </body>
+</html>

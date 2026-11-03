@@ -1,0 +1,30 @@
+{
+  "executed_date": "2026-11-02",
+  "region": "us-east-2",
+  "checks": {
+    "nasa_ingestion": "PASS",
+    "python_tests_13": "PASS",
+    "python_lint": "PASS",
+    "model_evaluation": "PASS",
+    "postgresql_pgvector_0_8_7": "PASS",
+    "container_restart_recall": "PASS",
+    "cross_user_isolation": "PASS",
+    "concurrent_idempotency": "PASS",
+    "production_web_build": "PASS",
+    "showcase_build": "PASS",
+    "vercel_production_deployment": "PASS",
+    "npm_dependency_audits": "PASS",
+    "cdk_tests_2": "PASS",
+    "cdk_synthesis": "PASS",
+    "cdk_nag_errors": 0,
+    "drawio_xml_and_exports": "PASS",
+    "documentation_local_links": "PASS"
+  },
+  "blocked": {
+    "aws_identity": "No AWS credentials are configured.",
+    "bedrock_model_access": "Account discovery in us-east-2 found active amazon.nova-micro-v1:0 and amazon.titan-embed-text-v2:0 models; live inference is not yet executed.",
+    "paid_aws_deployment": "Not authorized.",
+    "github_pages_publication": "Not authorized."
+  },
+  "claims": "Local and Vercel showcase validation completed; no AWS deployment occurred."
+}

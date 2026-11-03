@@ -1,0 +1,12 @@
+{
+  "dataset": "NASA Ames Li-ion Battery Aging Datasets",
+  "catalog_url": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
+  "archive_url": "https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip",
+  "archive_sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
+  "archive_bytes": 209668106,
+  "retrieved_date": "2026-11-02",
+  "timezone_claim": null,
+  "candidate_cells_verified_in_archive": ["B0005", "B0006", "B0007", "B0018"],
+  "license_note": "The NASA catalog does not specify a license; retain attribution and provenance."
+}
+

@@ -1,0 +1,2 @@
+{"app":"python3 app.py","context":{"region":"us-east-2","stage":"demo","certificateArn":"arn:aws:acm:us-east-2:111111111111:certificate/00000000-0000-0000-0000-000000000000"}}
+

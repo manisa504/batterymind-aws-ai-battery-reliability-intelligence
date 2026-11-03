@@ -1,0 +1,1 @@
+"""BatteryMind applications."""

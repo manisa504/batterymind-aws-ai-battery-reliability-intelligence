@@ -1,0 +1,25 @@
+{
+  "region": "us-east-2",
+  "stack": "BatteryMindDemo",
+  "stack_status": "CREATE_COMPLETE",
+  "recorded": "2026-11-03",
+  "notes": "First attempt rolled back (PostgreSQL 16.8 no longer offered); retried with 16.15.",
+  "public_url": "https://d1j7jpzzsqdmya.cloudfront.net",
+  "image": {
+    "tag": "release",
+    "digest": "sha256:7c07ee86e180c0dfc79aebf4315e7f7a3a8979786b4a12ef7c852d21e5154592",
+    "architecture": "arm64",
+    "ecr_scan": {"status": "COMPLETE", "HIGH": 3, "MEDIUM": 9, "LOW": 3,
+      "high_findings": "Debian base packages only: zlib, glibc x2. Accepted for the time-boxed demo; rebuild on a patched base before long-lived use."}
+  },
+  "ecs": {"desired": 1, "running": 1, "state": "steady"},
+  "executed_checks": {
+    "GET /api/v1/batteries": "200, four cells",
+    "GET /api/v1/batteries/B0005/analysis": "200",
+    "POST /api/v1/sessions without token": "401",
+    "POST /api/v1/sessions with invalid token": "401",
+    "direct ALB access": "unreachable (CloudFront prefix list only)",
+    "frontend / and /data/batteries.v1.json": "200 after S3 sync of apps/web/dist"
+  },
+  "not_yet_executed": ["authenticated Cognito flow", "RDS memory write/restart recall", "pgvector schema on RDS", "Bedrock invoke/embeddings", "SQS async path"]
+}

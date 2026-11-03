@@ -1,0 +1,13 @@
+name: GitHub Pages
+on: {workflow_dispatch: {}}
+permissions: {contents: read, pages: write, id-token: write}
+jobs:
+  deploy:
+    environment: github-pages-approval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: DOC}
+      - uses: actions/deploy-pages@v4
+

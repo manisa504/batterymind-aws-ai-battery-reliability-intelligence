@@ -1,0 +1,3295 @@
+{
+  "schema_version": "1.0.0",
+  "source_manifest": "data/manifests/nasa-source.json",
+  "generated_from": "data/processed/cycles.parquet",
+  "batteries": [
+    {
+      "battery_id": "B0005",
+      "cutoff_cycle": 168,
+      "latest_capacity_ah": 1.3250793286429356,
+      "rated_capacity_ah": 2.0,
+      "soh_percent": 66.25396643214678,
+      "degradation_rate_ah_per_cycle": -0.0038666144884018554,
+      "measurements": [
+        {
+          "cycle": 1,
+          "capacity_ah": 1.8564874208181574,
+          "soh_percent": 92.82437104090788
+        },
+        {
+          "cycle": 2,
+          "capacity_ah": 1.846327249719927,
+          "soh_percent": 92.31636248599635
+        },
+        {
+          "cycle": 3,
+          "capacity_ah": 1.8353491942234077,
+          "soh_percent": 91.76745971117039
+        },
+        {
+          "cycle": 4,
+          "capacity_ah": 1.8352625275821128,
+          "soh_percent": 91.76312637910564
+        },
+        {
+          "cycle": 5,
+          "capacity_ah": 1.8346455082120419,
+          "soh_percent": 91.7322754106021
+        },
+        {
+          "cycle": 6,
+          "capacity_ah": 1.8356616600675495,
+          "soh_percent": 91.78308300337747
+        },
+        {
+          "cycle": 7,
+          "capacity_ah": 1.8351461429226603,
+          "soh_percent": 91.75730714613302
+        },
+        {
+          "cycle": 8,
+          "capacity_ah": 1.8257567905665537,
+          "soh_percent": 91.28783952832768
+        },
+        {
+          "cycle": 9,
+          "capacity_ah": 1.8247738529891333,
+          "soh_percent": 91.23869264945667
+        },
+        {
+          "cycle": 10,
+          "capacity_ah": 1.824613268496936,
+          "soh_percent": 91.2306634248468
+        },
+        {
+          "cycle": 11,
+          "capacity_ah": 1.8246195526864504,
+          "soh_percent": 91.23097763432251
+        },
+        {
+          "cycle": 12,
+          "capacity_ah": 1.8142019357673917,
+          "soh_percent": 90.71009678836958
+        },
+        {
+          "cycle": 13,
+          "capacity_ah": 1.8137521577549054,
+          "soh_percent": 90.68760788774527
+        },
+        {
+          "cycle": 14,
+          "capacity_ah": 1.8134404914735822,
+          "soh_percent": 90.67202457367911
+        },
+        {
+          "cycle": 15,
+          "capacity_ah": 1.8025980036306504,
+          "soh_percent": 90.12990018153252
+        },
+        {
+          "cycle": 16,
+          "capacity_ah": 1.80210690024615,
+          "soh_percent": 90.10534501230751
+        },
+        {
+          "cycle": 17,
+          "capacity_ah": 1.802579500826209,
+          "soh_percent": 90.12897504131045
+        },
+        {
+          "cycle": 18,
+          "capacity_ah": 1.8030683142834096,
+          "soh_percent": 90.15341571417048
+        },
+        {
+          "cycle": 19,
+          "capacity_ah": 1.8027776247196041,
+          "soh_percent": 90.13888123598021
+        },
+        {
+          "cycle": 20,
+          "capacity_ah": 1.8470259949329193,
+          "soh_percent": 92.35129974664596
+        },
+        {
+          "cycle": 21,
+          "capacity_ah": 1.847417311283644,
+          "soh_percent": 92.3708655641822
+        },
+        {
+          "cycle": 22,
+          "capacity_ah": 1.8361774213478947,
+          "soh_percent": 91.80887106739473
+        },
+        {
+          "cycle": 23,
+          "capacity_ah": 1.8257807475776242,
+          "soh_percent": 91.2890373788812
+        },
+        {
+          "cycle": 24,
+          "capacity_ah": 1.8251136435078368,
+          "soh_percent": 91.25568217539184
+        },
+        {
+          "cycle": 25,
+          "capacity_ah": 1.8255815042203762,
+          "soh_percent": 91.2790752110188
+        },
+        {
+          "cycle": 26,
+          "capacity_ah": 1.8140311275083907,
+          "soh_percent": 90.70155637541953
+        },
+        {
+          "cycle": 27,
+          "capacity_ah": 1.8147691941158939,
+          "soh_percent": 90.7384597057947
+        },
+        {
+          "cycle": 28,
+          "capacity_ah": 1.813969388710352,
+          "soh_percent": 90.69846943551761
+        },
+        {
+          "cycle": 29,
+          "capacity_ah": 1.802765665167823,
+          "soh_percent": 90.13828325839116
+        },
+        {
+          "cycle": 30,
+          "capacity_ah": 1.804077040117352,
+          "soh_percent": 90.2038520058676
+        },
+        {
+          "cycle": 31,
+          "capacity_ah": 1.8518025516704486,
+          "soh_percent": 92.59012758352243
+        },
+        {
+          "cycle": 32,
+          "capacity_ah": 1.8307038456739428,
+          "soh_percent": 91.53519228369714
+        },
+        {
+          "cycle": 33,
+          "capacity_ah": 1.8199041089501267,
+          "soh_percent": 90.99520544750634
+        },
+        {
+          "cycle": 34,
+          "capacity_ah": 1.8093079637028517,
+          "soh_percent": 90.46539818514259
+        },
+        {
+          "cycle": 35,
+          "capacity_ah": 1.80460990458052,
+          "soh_percent": 90.23049522902599
+        },
+        {
+          "cycle": 36,
+          "capacity_ah": 1.7993770651972192,
+          "soh_percent": 89.96885325986096
+        },
+        {
+          "cycle": 37,
+          "capacity_ah": 1.7884432335370462,
+          "soh_percent": 89.42216167685231
+        },
+        {
+          "cycle": 38,
+          "capacity_ah": 1.7829230484252723,
+          "soh_percent": 89.14615242126361
+        },
+        {
+          "cycle": 39,
+          "capacity_ah": 1.7730337158018288,
+          "soh_percent": 88.65168579009143
+        },
+        {
+          "cycle": 40,
+          "capacity_ah": 1.773037755078937,
+          "soh_percent": 88.65188775394685
+        },
+        {
+          "cycle": 41,
+          "capacity_ah": 1.7678721106662054,
+          "soh_percent": 88.39360553331026
+        },
+        {
+          "cycle": 42,
+          "capacity_ah": 1.7623150704093087,
+          "soh_percent": 88.11575352046543
+        },
+        {
+          "cycle": 43,
+          "capacity_ah": 1.7676172924938447,
+          "soh_percent": 88.38086462469224
+        },
+        {
+          "cycle": 44,
+          "capacity_ah": 1.762668359743147,
+          "soh_percent": 88.13341798715734
+        },
+        {
+          "cycle": 45,
+          "capacity_ah": 1.7517304870664143,
+          "soh_percent": 87.58652435332071
+        },
+        {
+          "cycle": 46,
+          "capacity_ah": 1.7418496047960008,
+          "soh_percent": 87.09248023980004
+        },
+        {
+          "cycle": 47,
+          "capacity_ah": 1.7360913511847138,
+          "soh_percent": 86.8045675592357
+        },
+        {
+          "cycle": 48,
+          "capacity_ah": 1.7936240148573608,
+          "soh_percent": 89.68120074286804
+        },
+        {
+          "cycle": 49,
+          "capacity_ah": 1.7831890223273275,
+          "soh_percent": 89.15945111636637
+        },
+        {
+          "cycle": 50,
+          "capacity_ah": 1.7673642076278957,
+          "soh_percent": 88.36821038139479
+        },
+        {
+          "cycle": 51,
+          "capacity_ah": 1.7570177850353066,
+          "soh_percent": 87.85088925176532
+        },
+        {
+          "cycle": 52,
+          "capacity_ah": 1.7468706179837907,
+          "soh_percent": 87.34353089918953
+        },
+        {
+          "cycle": 53,
+          "capacity_ah": 1.7417172507457144,
+          "soh_percent": 87.08586253728572
+        },
+        {
+          "cycle": 54,
+          "capacity_ah": 1.7364225056478186,
+          "soh_percent": 86.82112528239094
+        },
+        {
+          "cycle": 55,
+          "capacity_ah": 1.7263217239235826,
+          "soh_percent": 86.31608619617913
+        },
+        {
+          "cycle": 56,
+          "capacity_ah": 1.7158065389330133,
+          "soh_percent": 85.79032694665067
+        },
+        {
+          "cycle": 57,
+          "capacity_ah": 1.710533351135192,
+          "soh_percent": 85.52666755675959
+        },
+        {
+          "cycle": 58,
+          "capacity_ah": 1.706014499648521,
+          "soh_percent": 85.30072498242605
+        },
+        {
+          "cycle": 59,
+          "capacity_ah": 1.7003110272642588,
+          "soh_percent": 85.01555136321294
+        },
+        {
+          "cycle": 60,
+          "capacity_ah": 1.6945798601797895,
+          "soh_percent": 84.72899300898948
+        },
+        {
+          "cycle": 61,
+          "capacity_ah": 1.6849029086609286,
+          "soh_percent": 84.24514543304643
+        },
+        {
+          "cycle": 62,
+          "capacity_ah": 1.6744741591159717,
+          "soh_percent": 83.72370795579859
+        },
+        {
+          "cycle": 63,
+          "capacity_ah": 1.6745692479879102,
+          "soh_percent": 83.72846239939551
+        },
+        {
+          "cycle": 64,
+          "capacity_ah": 1.663716375981405,
+          "soh_percent": 83.18581879907026
+        },
+        {
+          "cycle": 65,
+          "capacity_ah": 1.659013868748246,
+          "soh_percent": 82.9506934374123
+        },
+        {
+          "cycle": 66,
+          "capacity_ah": 1.6538540573335014,
+          "soh_percent": 82.69270286667508
+        },
+        {
+          "cycle": 67,
+          "capacity_ah": 1.642653782130131,
+          "soh_percent": 82.13268910650655
+        },
+        {
+          "cycle": 68,
+          "capacity_ah": 1.6378578430223698,
+          "soh_percent": 81.89289215111849
+        },
+        {
+          "cycle": 69,
+          "capacity_ah": 1.6327350407099108,
+          "soh_percent": 81.63675203549555
+        },
+        {
+          "cycle": 70,
+          "capacity_ah": 1.6277528915533617,
+          "soh_percent": 81.38764457766808
+        },
+        {
+          "cycle": 71,
+          "capacity_ah": 1.622125485521159,
+          "soh_percent": 81.10627427605796
+        },
+        {
+          "cycle": 72,
+          "capacity_ah": 1.6113256603765849,
+          "soh_percent": 80.56628301882924
+        },
+        {
+          "cycle": 73,
+          "capacity_ah": 1.6065631397488385,
+          "soh_percent": 80.32815698744193
+        },
+        {
+          "cycle": 74,
+          "capacity_ah": 1.6015142233917594,
+          "soh_percent": 80.07571116958798
+        },
+        {
+          "cycle": 75,
+          "capacity_ah": 1.590369231400328,
+          "soh_percent": 79.5184615700164
+        },
+        {
+          "cycle": 76,
+          "capacity_ah": 1.5857889968242211,
+          "soh_percent": 79.28944984121105
+        },
+        {
+          "cycle": 77,
+          "capacity_ah": 1.5849430707374117,
+          "soh_percent": 79.24715353687058
+        },
+        {
+          "cycle": 78,
+          "capacity_ah": 1.5955263892495937,
+          "soh_percent": 79.77631946247968
+        },
+        {
+          "cycle": 79,
+          "capacity_ah": 1.5747301747801037,
+          "soh_percent": 78.73650873900519
+        },
+        {
+          "cycle": 80,
+          "capacity_ah": 1.5649019950937946,
+          "soh_percent": 78.24509975468973
+        },
+        {
+          "cycle": 81,
+          "capacity_ah": 1.5597659473370362,
+          "soh_percent": 77.98829736685181
+        },
+        {
+          "cycle": 82,
+          "capacity_ah": 1.5594815668184234,
+          "soh_percent": 77.97407834092117
+        },
+        {
+          "cycle": 83,
+          "capacity_ah": 1.55468935359061,
+          "soh_percent": 77.7344676795305
+        },
+        {
+          "cycle": 84,
+          "capacity_ah": 1.5488741079890418,
+          "soh_percent": 77.44370539945209
+        },
+        {
+          "cycle": 85,
+          "capacity_ah": 1.538236598942558,
+          "soh_percent": 76.9118299471279
+        },
+        {
+          "cycle": 86,
+          "capacity_ah": 1.527914258251028,
+          "soh_percent": 76.39571291255139
+        },
+        {
+          "cycle": 87,
+          "capacity_ah": 1.5285252629756445,
+          "soh_percent": 76.42626314878223
+        },
+        {
+          "cycle": 88,
+          "capacity_ah": 1.522647325284378,
+          "soh_percent": 76.1323662642189
+        },
+        {
+          "cycle": 89,
+          "capacity_ah": 1.5174859938489869,
+          "soh_percent": 75.87429969244934
+        },
+        {
+          "cycle": 90,
+          "capacity_ah": 1.605818899130659,
+          "soh_percent": 80.29094495653295
+        },
+        {
+          "cycle": 91,
+          "capacity_ah": 1.5638491446744425,
+          "soh_percent": 78.19245723372212
+        },
+        {
+          "cycle": 92,
+          "capacity_ah": 1.5480915247767786,
+          "soh_percent": 77.40457623883893
+        },
+        {
+          "cycle": 93,
+          "capacity_ah": 1.5323755631868592,
+          "soh_percent": 76.61877815934297
+        },
+        {
+          "cycle": 94,
+          "capacity_ah": 1.5269528268489705,
+          "soh_percent": 76.34764134244853
+        },
+        {
+          "cycle": 95,
+          "capacity_ah": 1.5169573017136326,
+          "soh_percent": 75.84786508568163
+        },
+        {
+          "cycle": 96,
+          "capacity_ah": 1.5118975960142693,
+          "soh_percent": 75.59487980071347
+        },
+        {
+          "cycle": 97,
+          "capacity_ah": 1.5065638960681105,
+          "soh_percent": 75.32819480340552
+        },
+        {
+          "cycle": 98,
+          "capacity_ah": 1.5015453526671363,
+          "soh_percent": 75.07726763335681
+        },
+        {
+          "cycle": 99,
+          "capacity_ah": 1.4908444050400238,
+          "soh_percent": 74.54222025200119
+        },
+        {
+          "cycle": 100,
+          "capacity_ah": 1.485868384561201,
+          "soh_percent": 74.29341922806006
+        },
+        {
+          "cycle": 101,
+          "capacity_ah": 1.480413677976106,
+          "soh_percent": 74.02068389880529
+        },
+        {
+          "cycle": 102,
+          "capacity_ah": 1.4752095869031632,
+          "soh_percent": 73.76047934515816
+        },
+        {
+          "cycle": 103,
+          "capacity_ah": 1.4859035988304024,
+          "soh_percent": 74.29517994152012
+        },
+        {
+          "cycle": 104,
+          "capacity_ah": 1.4960918298136696,
+          "soh_percent": 74.80459149068348
+        },
+        {
+          "cycle": 105,
+          "capacity_ah": 1.4808005946928984,
+          "soh_percent": 74.04002973464492
+        },
+        {
+          "cycle": 106,
+          "capacity_ah": 1.4697543268466824,
+          "soh_percent": 73.48771634233412
+        },
+        {
+          "cycle": 107,
+          "capacity_ah": 1.4539012274845928,
+          "soh_percent": 72.69506137422964
+        },
+        {
+          "cycle": 108,
+          "capacity_ah": 1.4541462067235693,
+          "soh_percent": 72.70731033617847
+        },
+        {
+          "cycle": 109,
+          "capacity_ah": 1.455023751906683,
+          "soh_percent": 72.75118759533416
+        },
+        {
+          "cycle": 110,
+          "capacity_ah": 1.449042163761236,
+          "soh_percent": 72.4521081880618
+        },
+        {
+          "cycle": 111,
+          "capacity_ah": 1.4386709371480566,
+          "soh_percent": 71.93354685740283
+        },
+        {
+          "cycle": 112,
+          "capacity_ah": 1.433445432156979,
+          "soh_percent": 71.67227160784894
+        },
+        {
+          "cycle": 113,
+          "capacity_ah": 1.4333958900838095,
+          "soh_percent": 71.66979450419048
+        },
+        {
+          "cycle": 114,
+          "capacity_ah": 1.42806487344776,
+          "soh_percent": 71.403243672388
+        },
+        {
+          "cycle": 115,
+          "capacity_ah": 1.4229203181741186,
+          "soh_percent": 71.14601590870593
+        },
+        {
+          "cycle": 116,
+          "capacity_ah": 1.417429032731308,
+          "soh_percent": 70.8714516365654
+        },
+        {
+          "cycle": 117,
+          "capacity_ah": 1.412409228794446,
+          "soh_percent": 70.6204614397223
+        },
+        {
+          "cycle": 118,
+          "capacity_ah": 1.412578792940193,
+          "soh_percent": 70.62893964700964
+        },
+        {
+          "cycle": 119,
+          "capacity_ah": 1.4075983731469897,
+          "soh_percent": 70.37991865734948
+        },
+        {
+          "cycle": 120,
+          "capacity_ah": 1.4333920485221476,
+          "soh_percent": 71.66960242610739
+        },
+        {
+          "cycle": 121,
+          "capacity_ah": 1.4382550176792908,
+          "soh_percent": 71.91275088396453
+        },
+        {
+          "cycle": 122,
+          "capacity_ah": 1.4173547174485526,
+          "soh_percent": 70.86773587242763
+        },
+        {
+          "cycle": 123,
+          "capacity_ah": 1.406981663677643,
+          "soh_percent": 70.34908318388216
+        },
+        {
+          "cycle": 124,
+          "capacity_ah": 1.4012037783587625,
+          "soh_percent": 70.06018891793812
+        },
+        {
+          "cycle": 125,
+          "capacity_ah": 1.3967008232726328,
+          "soh_percent": 69.83504116363164
+        },
+        {
+          "cycle": 126,
+          "capacity_ah": 1.391284788852726,
+          "soh_percent": 69.5642394426363
+        },
+        {
+          "cycle": 127,
+          "capacity_ah": 1.3862287677978349,
+          "soh_percent": 69.31143838989175
+        },
+        {
+          "cycle": 128,
+          "capacity_ah": 1.3804366761974138,
+          "soh_percent": 69.02183380987069
+        },
+        {
+          "cycle": 129,
+          "capacity_ah": 1.3752364150256224,
+          "soh_percent": 68.76182075128112
+        },
+        {
+          "cycle": 130,
+          "capacity_ah": 1.3705128024895008,
+          "soh_percent": 68.52564012447505
+        },
+        {
+          "cycle": 131,
+          "capacity_ah": 1.3705085566270399,
+          "soh_percent": 68.52542783135199
+        },
+        {
+          "cycle": 132,
+          "capacity_ah": 1.3647355108681518,
+          "soh_percent": 68.23677554340759
+        },
+        {
+          "cycle": 133,
+          "capacity_ah": 1.375392016895762,
+          "soh_percent": 68.7696008447881
+        },
+        {
+          "cycle": 134,
+          "capacity_ah": 1.3861115151535393,
+          "soh_percent": 69.30557575767696
+        },
+        {
+          "cycle": 135,
+          "capacity_ah": 1.3698500035838939,
+          "soh_percent": 68.49250017919469
+        },
+        {
+          "cycle": 136,
+          "capacity_ah": 1.3647827949260758,
+          "soh_percent": 68.23913974630379
+        },
+        {
+          "cycle": 137,
+          "capacity_ah": 1.3543220466259964,
+          "soh_percent": 67.71610233129982
+        },
+        {
+          "cycle": 138,
+          "capacity_ah": 1.3546417018378962,
+          "soh_percent": 67.73208509189482
+        },
+        {
+          "cycle": 139,
+          "capacity_ah": 1.3547039213192407,
+          "soh_percent": 67.73519606596203
+        },
+        {
+          "cycle": 140,
+          "capacity_ah": 1.349314997503458,
+          "soh_percent": 67.4657498751729
+        },
+        {
+          "cycle": 141,
+          "capacity_ah": 1.3441891937970554,
+          "soh_percent": 67.20945968985276
+        },
+        {
+          "cycle": 142,
+          "capacity_ah": 1.3389913790695755,
+          "soh_percent": 66.94956895347877
+        },
+        {
+          "cycle": 143,
+          "capacity_ah": 1.3389145230206971,
+          "soh_percent": 66.94572615103486
+        },
+        {
+          "cycle": 144,
+          "capacity_ah": 1.3340066759761655,
+          "soh_percent": 66.70033379880827
+        },
+        {
+          "cycle": 145,
+          "capacity_ah": 1.3286444309174914,
+          "soh_percent": 66.43222154587457
+        },
+        {
+          "cycle": 146,
+          "capacity_ah": 1.3231708992276219,
+          "soh_percent": 66.1585449613811
+        },
+        {
+          "cycle": 147,
+          "capacity_ah": 1.3181691588445197,
+          "soh_percent": 65.90845794222598
+        },
+        {
+          "cycle": 148,
+          "capacity_ah": 1.3184664436640334,
+          "soh_percent": 65.92332218320168
+        },
+        {
+          "cycle": 149,
+          "capacity_ah": 1.318293040102702,
+          "soh_percent": 65.9146520051351
+        },
+        {
+          "cycle": 150,
+          "capacity_ah": 1.323872422244268,
+          "soh_percent": 66.19362111221339
+        },
+        {
+          "cycle": 151,
+          "capacity_ah": 1.3601216766554785,
+          "soh_percent": 68.00608383277392
+        },
+        {
+          "cycle": 152,
+          "capacity_ah": 1.3395306867947354,
+          "soh_percent": 66.97653433973677
+        },
+        {
+          "cycle": 153,
+          "capacity_ah": 1.3290286565120697,
+          "soh_percent": 66.45143282560349
+        },
+        {
+          "cycle": 154,
+          "capacity_ah": 1.3236741274998955,
+          "soh_percent": 66.18370637499478
+        },
+        {
+          "cycle": 155,
+          "capacity_ah": 1.318633896753293,
+          "soh_percent": 65.93169483766465
+        },
+        {
+          "cycle": 156,
+          "capacity_ah": 1.3134751321324272,
+          "soh_percent": 65.67375660662135
+        },
+        {
+          "cycle": 157,
+          "capacity_ah": 1.3132020634442203,
+          "soh_percent": 65.66010317221101
+        },
+        {
+          "cycle": 158,
+          "capacity_ah": 1.3077959946944353,
+          "soh_percent": 65.38979973472176
+        },
+        {
+          "cycle": 159,
+          "capacity_ah": 1.3030329186405918,
+          "soh_percent": 65.1516459320296
+        },
+        {
+          "cycle": 160,
+          "capacity_ah": 1.3033573559038205,
+          "soh_percent": 65.16786779519103
+        },
+        {
+          "cycle": 161,
+          "capacity_ah": 1.3034100438655642,
+          "soh_percent": 65.17050219327821
+        },
+        {
+          "cycle": 162,
+          "capacity_ah": 1.2978870806495706,
+          "soh_percent": 64.89435403247853
+        },
+        {
+          "cycle": 163,
+          "capacity_ah": 1.2980735056918902,
+          "soh_percent": 64.90367528459451
+        },
+        {
+          "cycle": 164,
+          "capacity_ah": 1.293463613844243,
+          "soh_percent": 64.67318069221216
+        },
+        {
+          "cycle": 165,
+          "capacity_ah": 1.288003392619118,
+          "soh_percent": 64.4001696309559
+        },
+        {
+          "cycle": 166,
+          "capacity_ah": 1.2874525221379407,
+          "soh_percent": 64.37262610689703
+        },
+        {
+          "cycle": 167,
+          "capacity_ah": 1.3090153642307354,
+          "soh_percent": 65.45076821153677
+        },
+        {
+          "cycle": 168,
+          "capacity_ah": 1.3250793286429356,
+          "soh_percent": 66.25396643214678
+        }
+      ],
+      "classification": {
+        "decision": "EOL_REVIEW",
+        "policy_version": "experimental-soh-v1",
+        "rationale": "Classification uses project-defined SOH bands; only the 70% threshold corresponds to this NASA experiment's 2 Ah to 1.4 Ah criterion."
+      },
+      "rul": {
+        "status": "available",
+        "model_version": "linear-residual-bootstrap-v1",
+        "threshold_ah": 1.4,
+        "estimated_remaining_cycles": 0.0,
+        "interval_90_cycles": [
+          0.0,
+          0.0
+        ],
+        "slope_ah_per_cycle": -0.0038666144884018554,
+        "prediction_kind": "model_prediction"
+      }
+    },
+    {
+      "battery_id": "B0006",
+      "cutoff_cycle": 168,
+      "latest_capacity_ah": 1.1856752327929356,
+      "rated_capacity_ah": 2.0,
+      "soh_percent": 59.283761639646784,
+      "degradation_rate_ah_per_cycle": -0.0050866150698990874,
+      "measurements": [
+        {
+          "cycle": 1,
+          "capacity_ah": 2.035337591005598,
+          "soh_percent": 101.7668795502799
+        },
+        {
+          "cycle": 2,
+          "capacity_ah": 2.0251402460314116,
+          "soh_percent": 101.25701230157058
+        },
+        {
+          "cycle": 3,
+          "capacity_ah": 2.013326371345464,
+          "soh_percent": 100.6663185672732
+        },
+        {
+          "cycle": 4,
+          "capacity_ah": 2.0132846655407413,
+          "soh_percent": 100.66423327703706
+        },
+        {
+          "cycle": 5,
+          "capacity_ah": 2.000528337624771,
+          "soh_percent": 100.02641688123855
+        },
+        {
+          "cycle": 6,
+          "capacity_ah": 2.0138990759931645,
+          "soh_percent": 100.69495379965822
+        },
+        {
+          "cycle": 7,
+          "capacity_ah": 2.013101105626967,
+          "soh_percent": 100.65505528134835
+        },
+        {
+          "cycle": 8,
+          "capacity_ah": 1.9687898262728398,
+          "soh_percent": 98.439491313642
+        },
+        {
+          "cycle": 9,
+          "capacity_ah": 1.9681661764334244,
+          "soh_percent": 98.40830882167123
+        },
+        {
+          "cycle": 10,
+          "capacity_ah": 1.9572307917560536,
+          "soh_percent": 97.86153958780268
+        },
+        {
+          "cycle": 11,
+          "capacity_ah": 1.9455991514129352,
+          "soh_percent": 97.27995757064676
+        },
+        {
+          "cycle": 12,
+          "capacity_ah": 1.9347505044841131,
+          "soh_percent": 96.73752522420565
+        },
+        {
+          "cycle": 13,
+          "capacity_ah": 1.9232799539368028,
+          "soh_percent": 96.16399769684014
+        },
+        {
+          "cycle": 14,
+          "capacity_ah": 1.911889930948487,
+          "soh_percent": 95.59449654742434
+        },
+        {
+          "cycle": 15,
+          "capacity_ah": 1.9010667141979305,
+          "soh_percent": 95.05333570989653
+        },
+        {
+          "cycle": 16,
+          "capacity_ah": 1.8891989948061458,
+          "soh_percent": 94.4599497403073
+        },
+        {
+          "cycle": 17,
+          "capacity_ah": 1.878278372248849,
+          "soh_percent": 93.91391861244244
+        },
+        {
+          "cycle": 18,
+          "capacity_ah": 1.8675697161520206,
+          "soh_percent": 93.37848580760102
+        },
+        {
+          "cycle": 19,
+          "capacity_ah": 1.8675892574453767,
+          "soh_percent": 93.37946287226883
+        },
+        {
+          "cycle": 20,
+          "capacity_ah": 1.979626548250818,
+          "soh_percent": 98.98132741254089
+        },
+        {
+          "cycle": 21,
+          "capacity_ah": 1.9575499080884022,
+          "soh_percent": 97.87749540442012
+        },
+        {
+          "cycle": 22,
+          "capacity_ah": 1.9458150170787551,
+          "soh_percent": 97.29075085393775
+        },
+        {
+          "cycle": 23,
+          "capacity_ah": 1.9242461121680094,
+          "soh_percent": 96.21230560840047
+        },
+        {
+          "cycle": 24,
+          "capacity_ah": 1.9459811331421641,
+          "soh_percent": 97.29905665710821
+        },
+        {
+          "cycle": 25,
+          "capacity_ah": 1.901407930553079,
+          "soh_percent": 95.07039652765395
+        },
+        {
+          "cycle": 26,
+          "capacity_ah": 1.878674213680085,
+          "soh_percent": 93.93371068400424
+        },
+        {
+          "cycle": 27,
+          "capacity_ah": 1.8683061328264219,
+          "soh_percent": 93.4153066413211
+        },
+        {
+          "cycle": 28,
+          "capacity_ah": 1.8560244070082998,
+          "soh_percent": 92.801220350415
+        },
+        {
+          "cycle": 29,
+          "capacity_ah": 1.8451997961855777,
+          "soh_percent": 92.25998980927889
+        },
+        {
+          "cycle": 30,
+          "capacity_ah": 1.857228890885317,
+          "soh_percent": 92.86144454426585
+        },
+        {
+          "cycle": 31,
+          "capacity_ah": 1.9247760889090635,
+          "soh_percent": 96.23880444545317
+        },
+        {
+          "cycle": 32,
+          "capacity_ah": 1.8822317526092551,
+          "soh_percent": 94.11158763046275
+        },
+        {
+          "cycle": 33,
+          "capacity_ah": 1.855276687885587,
+          "soh_percent": 92.76383439427936
+        },
+        {
+          "cycle": 34,
+          "capacity_ah": 1.8392508917181876,
+          "soh_percent": 91.96254458590938
+        },
+        {
+          "cycle": 35,
+          "capacity_ah": 1.8185396073994429,
+          "soh_percent": 90.92698036997214
+        },
+        {
+          "cycle": 36,
+          "capacity_ah": 1.8134770059567056,
+          "soh_percent": 90.67385029783527
+        },
+        {
+          "cycle": 37,
+          "capacity_ah": 1.7971018450305436,
+          "soh_percent": 89.85509225152718
+        },
+        {
+          "cycle": 38,
+          "capacity_ah": 1.7810046294120476,
+          "soh_percent": 89.05023147060238
+        },
+        {
+          "cycle": 39,
+          "capacity_ah": 1.7710130422682329,
+          "soh_percent": 88.55065211341164
+        },
+        {
+          "cycle": 40,
+          "capacity_ah": 1.7604712448170943,
+          "soh_percent": 88.02356224085472
+        },
+        {
+          "cycle": 41,
+          "capacity_ah": 1.7502913788006587,
+          "soh_percent": 87.51456894003293
+        },
+        {
+          "cycle": 42,
+          "capacity_ah": 1.7394925037732578,
+          "soh_percent": 86.97462518866288
+        },
+        {
+          "cycle": 43,
+          "capacity_ah": 1.7546766553637203,
+          "soh_percent": 87.73383276818602
+        },
+        {
+          "cycle": 44,
+          "capacity_ah": 1.7659390941842175,
+          "soh_percent": 88.29695470921088
+        },
+        {
+          "cycle": 45,
+          "capacity_ah": 1.7337887419624838,
+          "soh_percent": 86.68943709812419
+        },
+        {
+          "cycle": 46,
+          "capacity_ah": 1.713325912040734,
+          "soh_percent": 85.6662956020367
+        },
+        {
+          "cycle": 47,
+          "capacity_ah": 1.7024077813673466,
+          "soh_percent": 85.12038906836733
+        },
+        {
+          "cycle": 48,
+          "capacity_ah": 1.82371946178183,
+          "soh_percent": 91.1859730890915
+        },
+        {
+          "cycle": 49,
+          "capacity_ah": 1.8081284050314708,
+          "soh_percent": 90.40642025157354
+        },
+        {
+          "cycle": 50,
+          "capacity_ah": 1.7757610945034283,
+          "soh_percent": 88.78805472517142
+        },
+        {
+          "cycle": 51,
+          "capacity_ah": 1.7447409841836798,
+          "soh_percent": 87.237049209184
+        },
+        {
+          "cycle": 52,
+          "capacity_ah": 1.729207034132373,
+          "soh_percent": 86.46035170661865
+        },
+        {
+          "cycle": 53,
+          "capacity_ah": 1.7081086552553244,
+          "soh_percent": 85.40543276276622
+        },
+        {
+          "cycle": 54,
+          "capacity_ah": 1.6975954237461768,
+          "soh_percent": 84.87977118730883
+        },
+        {
+          "cycle": 55,
+          "capacity_ah": 1.6820634524029463,
+          "soh_percent": 84.10317262014732
+        },
+        {
+          "cycle": 56,
+          "capacity_ah": 1.6714768322295086,
+          "soh_percent": 83.57384161147543
+        },
+        {
+          "cycle": 57,
+          "capacity_ah": 1.6607591387047655,
+          "soh_percent": 83.03795693523827
+        },
+        {
+          "cycle": 58,
+          "capacity_ah": 1.651121015038069,
+          "soh_percent": 82.55605075190346
+        },
+        {
+          "cycle": 59,
+          "capacity_ah": 1.6401349256190927,
+          "soh_percent": 82.00674628095463
+        },
+        {
+          "cycle": 60,
+          "capacity_ah": 1.6291999416165441,
+          "soh_percent": 81.45999708082721
+        },
+        {
+          "cycle": 61,
+          "capacity_ah": 1.6088496302961666,
+          "soh_percent": 80.44248151480832
+        },
+        {
+          "cycle": 62,
+          "capacity_ah": 1.6035244898969248,
+          "soh_percent": 80.17622449484624
+        },
+        {
+          "cycle": 63,
+          "capacity_ah": 1.5989712144027983,
+          "soh_percent": 79.94856072013991
+        },
+        {
+          "cycle": 64,
+          "capacity_ah": 1.5876273123575604,
+          "soh_percent": 79.38136561787802
+        },
+        {
+          "cycle": 65,
+          "capacity_ah": 1.5829719744686166,
+          "soh_percent": 79.14859872343084
+        },
+        {
+          "cycle": 66,
+          "capacity_ah": 1.567137636713563,
+          "soh_percent": 78.35688183567815
+        },
+        {
+          "cycle": 67,
+          "capacity_ah": 1.5613446139713882,
+          "soh_percent": 78.06723069856942
+        },
+        {
+          "cycle": 68,
+          "capacity_ah": 1.5511711892790419,
+          "soh_percent": 77.5585594639521
+        },
+        {
+          "cycle": 69,
+          "capacity_ah": 1.5406741606295171,
+          "soh_percent": 77.03370803147585
+        },
+        {
+          "cycle": 70,
+          "capacity_ah": 1.5253138744624433,
+          "soh_percent": 76.26569372312217
+        },
+        {
+          "cycle": 71,
+          "capacity_ah": 1.5301570318067428,
+          "soh_percent": 76.50785159033714
+        },
+        {
+          "cycle": 72,
+          "capacity_ah": 1.5246566834474087,
+          "soh_percent": 76.23283417237043
+        },
+        {
+          "cycle": 73,
+          "capacity_ah": 1.5145492986655427,
+          "soh_percent": 75.72746493327713
+        },
+        {
+          "cycle": 74,
+          "capacity_ah": 1.509391504602082,
+          "soh_percent": 75.4695752301041
+        },
+        {
+          "cycle": 75,
+          "capacity_ah": 1.5039974333050705,
+          "soh_percent": 75.19987166525353
+        },
+        {
+          "cycle": 76,
+          "capacity_ah": 1.4935201918040188,
+          "soh_percent": 74.67600959020095
+        },
+        {
+          "cycle": 77,
+          "capacity_ah": 1.4876323024497422,
+          "soh_percent": 74.3816151224871
+        },
+        {
+          "cycle": 78,
+          "capacity_ah": 1.5302876214401704,
+          "soh_percent": 76.51438107200852
+        },
+        {
+          "cycle": 79,
+          "capacity_ah": 1.5040760088360112,
+          "soh_percent": 75.20380044180057
+        },
+        {
+          "cycle": 80,
+          "capacity_ah": 1.4887593608730894,
+          "soh_percent": 74.43796804365446
+        },
+        {
+          "cycle": 81,
+          "capacity_ah": 1.4782779285546637,
+          "soh_percent": 73.91389642773318
+        },
+        {
+          "cycle": 82,
+          "capacity_ah": 1.478459982215684,
+          "soh_percent": 73.9229991107842
+        },
+        {
+          "cycle": 83,
+          "capacity_ah": 1.473214844899973,
+          "soh_percent": 73.66074224499864
+        },
+        {
+          "cycle": 84,
+          "capacity_ah": 1.4675164935067897,
+          "soh_percent": 73.37582467533949
+        },
+        {
+          "cycle": 85,
+          "capacity_ah": 1.4516292657521335,
+          "soh_percent": 72.58146328760667
+        },
+        {
+          "cycle": 86,
+          "capacity_ah": 1.4519237720967177,
+          "soh_percent": 72.59618860483589
+        },
+        {
+          "cycle": 87,
+          "capacity_ah": 1.4471484694777745,
+          "soh_percent": 72.35742347388873
+        },
+        {
+          "cycle": 88,
+          "capacity_ah": 1.4468538105659885,
+          "soh_percent": 72.34269052829943
+        },
+        {
+          "cycle": 89,
+          "capacity_ah": 1.4416741930284678,
+          "soh_percent": 72.08370965142339
+        },
+        {
+          "cycle": 90,
+          "capacity_ah": 1.5935866593100128,
+          "soh_percent": 79.67933296550063
+        },
+        {
+          "cycle": 91,
+          "capacity_ah": 1.5463902376915637,
+          "soh_percent": 77.31951188457819
+        },
+        {
+          "cycle": 92,
+          "capacity_ah": 1.51470559175661,
+          "soh_percent": 75.73527958783049
+        },
+        {
+          "cycle": 93,
+          "capacity_ah": 1.4989786083335404,
+          "soh_percent": 74.94893041667702
+        },
+        {
+          "cycle": 94,
+          "capacity_ah": 1.4831110745410492,
+          "soh_percent": 74.15555372705246
+        },
+        {
+          "cycle": 95,
+          "capacity_ah": 1.4729664825468278,
+          "soh_percent": 73.6483241273414
+        },
+        {
+          "cycle": 96,
+          "capacity_ah": 1.4627604396099307,
+          "soh_percent": 73.13802198049653
+        },
+        {
+          "cycle": 97,
+          "capacity_ah": 1.4518364681062514,
+          "soh_percent": 72.59182340531257
+        },
+        {
+          "cycle": 98,
+          "capacity_ah": 1.4468670644030392,
+          "soh_percent": 72.34335322015197
+        },
+        {
+          "cycle": 99,
+          "capacity_ah": 1.441380399427779,
+          "soh_percent": 72.06901997138895
+        },
+        {
+          "cycle": 100,
+          "capacity_ah": 1.431210744960774,
+          "soh_percent": 71.5605372480387
+        },
+        {
+          "cycle": 101,
+          "capacity_ah": 1.4260247179525716,
+          "soh_percent": 71.30123589762857
+        },
+        {
+          "cycle": 102,
+          "capacity_ah": 1.420487649966195,
+          "soh_percent": 71.02438249830975
+        },
+        {
+          "cycle": 103,
+          "capacity_ah": 1.4207006230355006,
+          "soh_percent": 71.03503115177503
+        },
+        {
+          "cycle": 104,
+          "capacity_ah": 1.452255804330839,
+          "soh_percent": 72.61279021654194
+        },
+        {
+          "cycle": 105,
+          "capacity_ah": 1.431557632772571,
+          "soh_percent": 71.57788163862855
+        },
+        {
+          "cycle": 106,
+          "capacity_ah": 1.415015751158943,
+          "soh_percent": 70.75078755794715
+        },
+        {
+          "cycle": 107,
+          "capacity_ah": 1.4097311506517451,
+          "soh_percent": 70.48655753258726
+        },
+        {
+          "cycle": 108,
+          "capacity_ah": 1.404917318129309,
+          "soh_percent": 70.24586590646545
+        },
+        {
+          "cycle": 109,
+          "capacity_ah": 1.395164296571563,
+          "soh_percent": 69.75821482857815
+        },
+        {
+          "cycle": 110,
+          "capacity_ah": 1.3945343832614077,
+          "soh_percent": 69.72671916307038
+        },
+        {
+          "cycle": 111,
+          "capacity_ah": 1.3893171179312644,
+          "soh_percent": 69.46585589656323
+        },
+        {
+          "cycle": 112,
+          "capacity_ah": 1.3838379472327809,
+          "soh_percent": 69.19189736163904
+        },
+        {
+          "cycle": 113,
+          "capacity_ah": 1.3736814238195123,
+          "soh_percent": 68.68407119097562
+        },
+        {
+          "cycle": 114,
+          "capacity_ah": 1.3786059891863676,
+          "soh_percent": 68.93029945931838
+        },
+        {
+          "cycle": 115,
+          "capacity_ah": 1.3737600299108574,
+          "soh_percent": 68.68800149554288
+        },
+        {
+          "cycle": 116,
+          "capacity_ah": 1.3682580583942712,
+          "soh_percent": 68.41290291971356
+        },
+        {
+          "cycle": 117,
+          "capacity_ah": 1.3633024037317505,
+          "soh_percent": 68.16512018658753
+        },
+        {
+          "cycle": 118,
+          "capacity_ah": 1.3580966140172601,
+          "soh_percent": 67.904830700863
+        },
+        {
+          "cycle": 119,
+          "capacity_ah": 1.353269090999531,
+          "soh_percent": 67.66345454997655
+        },
+        {
+          "cycle": 120,
+          "capacity_ah": 1.3841605738237488,
+          "soh_percent": 69.20802869118744
+        },
+        {
+          "cycle": 121,
+          "capacity_ah": 1.4051467790651473,
+          "soh_percent": 70.25733895325736
+        },
+        {
+          "cycle": 122,
+          "capacity_ah": 1.378719022627353,
+          "soh_percent": 68.93595113136764
+        },
+        {
+          "cycle": 123,
+          "capacity_ah": 1.3682657783199066,
+          "soh_percent": 68.41328891599532
+        },
+        {
+          "cycle": 124,
+          "capacity_ah": 1.3573151296618016,
+          "soh_percent": 67.86575648309008
+        },
+        {
+          "cycle": 125,
+          "capacity_ah": 1.3524934638801596,
+          "soh_percent": 67.62467319400798
+        },
+        {
+          "cycle": 126,
+          "capacity_ah": 1.3474099151661236,
+          "soh_percent": 67.37049575830618
+        },
+        {
+          "cycle": 127,
+          "capacity_ah": 1.3370075130842318,
+          "soh_percent": 66.85037565421159
+        },
+        {
+          "cycle": 128,
+          "capacity_ah": 1.3312352966718526,
+          "soh_percent": 66.56176483359263
+        },
+        {
+          "cycle": 129,
+          "capacity_ah": 1.3259303781727643,
+          "soh_percent": 66.29651890863822
+        },
+        {
+          "cycle": 130,
+          "capacity_ah": 1.321578743867529,
+          "soh_percent": 66.07893719337645
+        },
+        {
+          "cycle": 131,
+          "capacity_ah": 1.321225074066109,
+          "soh_percent": 66.06125370330544
+        },
+        {
+          "cycle": 132,
+          "capacity_ah": 1.3156485301862682,
+          "soh_percent": 65.78242650931341
+        },
+        {
+          "cycle": 133,
+          "capacity_ah": 1.3209025697502388,
+          "soh_percent": 66.04512848751195
+        },
+        {
+          "cycle": 134,
+          "capacity_ah": 1.3474328767273906,
+          "soh_percent": 67.37164383636953
+        },
+        {
+          "cycle": 135,
+          "capacity_ah": 1.3260128072353616,
+          "soh_percent": 66.30064036176807
+        },
+        {
+          "cycle": 136,
+          "capacity_ah": 1.3101186784831063,
+          "soh_percent": 65.50593392415531
+        },
+        {
+          "cycle": 137,
+          "capacity_ah": 1.30521620229393,
+          "soh_percent": 65.2608101146965
+        },
+        {
+          "cycle": 138,
+          "capacity_ah": 1.3004061951355774,
+          "soh_percent": 65.02030975677887
+        },
+        {
+          "cycle": 139,
+          "capacity_ah": 1.300235735841116,
+          "soh_percent": 65.0117867920558
+        },
+        {
+          "cycle": 140,
+          "capacity_ah": 1.2895066722480755,
+          "soh_percent": 64.47533361240377
+        },
+        {
+          "cycle": 141,
+          "capacity_ah": 1.279253057384795,
+          "soh_percent": 63.96265286923975
+        },
+        {
+          "cycle": 142,
+          "capacity_ah": 1.2792078171714618,
+          "soh_percent": 63.96039085857309
+        },
+        {
+          "cycle": 143,
+          "capacity_ah": 1.274036760902923,
+          "soh_percent": 63.701838045146154
+        },
+        {
+          "cycle": 144,
+          "capacity_ah": 1.2741273923001468,
+          "soh_percent": 63.70636961500734
+        },
+        {
+          "cycle": 145,
+          "capacity_ah": 1.2637639426440779,
+          "soh_percent": 63.188197132203896
+        },
+        {
+          "cycle": 146,
+          "capacity_ah": 1.2581373688955233,
+          "soh_percent": 62.906868444776165
+        },
+        {
+          "cycle": 147,
+          "capacity_ah": 1.253259864055301,
+          "soh_percent": 62.66299320276505
+        },
+        {
+          "cycle": 148,
+          "capacity_ah": 1.2532313315493426,
+          "soh_percent": 62.661566577467134
+        },
+        {
+          "cycle": 149,
+          "capacity_ah": 1.2480874960313577,
+          "soh_percent": 62.40437480156788
+        },
+        {
+          "cycle": 150,
+          "capacity_ah": 1.2534354284944844,
+          "soh_percent": 62.67177142472422
+        },
+        {
+          "cycle": 151,
+          "capacity_ah": 1.2898048773266901,
+          "soh_percent": 64.49024386633451
+        },
+        {
+          "cycle": 152,
+          "capacity_ah": 1.2635402021758835,
+          "soh_percent": 63.17701010879417
+        },
+        {
+          "cycle": 153,
+          "capacity_ah": 1.2479761706842853,
+          "soh_percent": 62.39880853421427
+        },
+        {
+          "cycle": 154,
+          "capacity_ah": 1.2321202877943334,
+          "soh_percent": 61.60601438971667
+        },
+        {
+          "cycle": 155,
+          "capacity_ah": 1.2271137666213534,
+          "soh_percent": 61.35568833106767
+        },
+        {
+          "cycle": 156,
+          "capacity_ah": 1.2217397581377356,
+          "soh_percent": 61.08698790688678
+        },
+        {
+          "cycle": 157,
+          "capacity_ah": 1.211102678915174,
+          "soh_percent": 60.5551339457587
+        },
+        {
+          "cycle": 158,
+          "capacity_ah": 1.2056159765131735,
+          "soh_percent": 60.28079882565868
+        },
+        {
+          "cycle": 159,
+          "capacity_ah": 1.2008936262717274,
+          "soh_percent": 60.044681313586366
+        },
+        {
+          "cycle": 160,
+          "capacity_ah": 1.1905903985558335,
+          "soh_percent": 59.529519927791675
+        },
+        {
+          "cycle": 161,
+          "capacity_ah": 1.185179251041941,
+          "soh_percent": 59.25896255209705
+        },
+        {
+          "cycle": 162,
+          "capacity_ah": 1.1796706818144624,
+          "soh_percent": 58.983534090723126
+        },
+        {
+          "cycle": 163,
+          "capacity_ah": 1.1745952836753915,
+          "soh_percent": 58.729764183769575
+        },
+        {
+          "cycle": 164,
+          "capacity_ah": 1.15381833159625,
+          "soh_percent": 57.6909165798125
+        },
+        {
+          "cycle": 165,
+          "capacity_ah": 1.1644009557372264,
+          "soh_percent": 58.220047786861315
+        },
+        {
+          "cycle": 166,
+          "capacity_ah": 1.1587974947916069,
+          "soh_percent": 57.93987473958035
+        },
+        {
+          "cycle": 167,
+          "capacity_ah": 1.1749748834769171,
+          "soh_percent": 58.74874417384586
+        },
+        {
+          "cycle": 168,
+          "capacity_ah": 1.1856752327929356,
+          "soh_percent": 59.283761639646784
+        }
+      ],
+      "classification": {
+        "decision": "EOL_REVIEW",
+        "policy_version": "experimental-soh-v1",
+        "rationale": "Classification uses project-defined SOH bands; only the 70% threshold corresponds to this NASA experiment's 2 Ah to 1.4 Ah criterion."
+      },
+      "rul": {
+        "status": "available",
+        "model_version": "linear-residual-bootstrap-v1",
+        "threshold_ah": 1.4,
+        "estimated_remaining_cycles": 0.0,
+        "interval_90_cycles": [
+          0.0,
+          0.0
+        ],
+        "slope_ah_per_cycle": -0.0050866150698990874,
+        "prediction_kind": "model_prediction"
+      }
+    },
+    {
+      "battery_id": "B0007",
+      "cutoff_cycle": 168,
+      "latest_capacity_ah": 1.4324552720625434,
+      "rated_capacity_ah": 2.0,
+      "soh_percent": 71.62276360312717,
+      "degradation_rate_ah_per_cycle": -0.00326948107714598,
+      "measurements": [
+        {
+          "cycle": 1,
+          "capacity_ah": 1.89105229539079,
+          "soh_percent": 94.5526147695395
+        },
+        {
+          "cycle": 2,
+          "capacity_ah": 1.880637027686859,
+          "soh_percent": 94.03185138434294
+        },
+        {
+          "cycle": 3,
+          "capacity_ah": 1.8806626717011388,
+          "soh_percent": 94.03313358505694
+        },
+        {
+          "cycle": 4,
+          "capacity_ah": 1.8807709009833444,
+          "soh_percent": 94.03854504916723
+        },
+        {
+          "cycle": 5,
+          "capacity_ah": 1.8794508728285058,
+          "soh_percent": 93.97254364142529
+        },
+        {
+          "cycle": 6,
+          "capacity_ah": 1.8807003517117404,
+          "soh_percent": 94.03501758558703
+        },
+        {
+          "cycle": 7,
+          "capacity_ah": 1.8799352523566075,
+          "soh_percent": 93.99676261783037
+        },
+        {
+          "cycle": 8,
+          "capacity_ah": 1.8815088124038797,
+          "soh_percent": 94.07544062019399
+        },
+        {
+          "cycle": 9,
+          "capacity_ah": 1.8696907870385844,
+          "soh_percent": 93.48453935192921
+        },
+        {
+          "cycle": 10,
+          "capacity_ah": 1.870052380139199,
+          "soh_percent": 93.50261900695995
+        },
+        {
+          "cycle": 11,
+          "capacity_ah": 1.8700442394188577,
+          "soh_percent": 93.50221197094288
+        },
+        {
+          "cycle": 12,
+          "capacity_ah": 1.8596518987766364,
+          "soh_percent": 92.98259493883182
+        },
+        {
+          "cycle": 13,
+          "capacity_ah": 1.8590746560862206,
+          "soh_percent": 92.95373280431103
+        },
+        {
+          "cycle": 14,
+          "capacity_ah": 1.8590084577709232,
+          "soh_percent": 92.95042288854616
+        },
+        {
+          "cycle": 15,
+          "capacity_ah": 1.8593622586957048,
+          "soh_percent": 92.96811293478524
+        },
+        {
+          "cycle": 16,
+          "capacity_ah": 1.8587355450601035,
+          "soh_percent": 92.93677725300518
+        },
+        {
+          "cycle": 17,
+          "capacity_ah": 1.847817291322145,
+          "soh_percent": 92.39086456610724
+        },
+        {
+          "cycle": 18,
+          "capacity_ah": 1.8485252916137047,
+          "soh_percent": 92.42626458068524
+        },
+        {
+          "cycle": 19,
+          "capacity_ah": 1.848378951850034,
+          "soh_percent": 92.4189475925017
+        },
+        {
+          "cycle": 20,
+          "capacity_ah": 1.8807805437609766,
+          "soh_percent": 94.03902718804883
+        },
+        {
+          "cycle": 21,
+          "capacity_ah": 1.8814721597443598,
+          "soh_percent": 94.07360798721798
+        },
+        {
+          "cycle": 22,
+          "capacity_ah": 1.8810954313244785,
+          "soh_percent": 94.05477156622393
+        },
+        {
+          "cycle": 23,
+          "capacity_ah": 1.8710089649779995,
+          "soh_percent": 93.55044824889998
+        },
+        {
+          "cycle": 24,
+          "capacity_ah": 1.8701995151941375,
+          "soh_percent": 93.50997575970688
+        },
+        {
+          "cycle": 25,
+          "capacity_ah": 1.8706715362800985,
+          "soh_percent": 93.53357681400493
+        },
+        {
+          "cycle": 26,
+          "capacity_ah": 1.8596124644020169,
+          "soh_percent": 92.98062322010084
+        },
+        {
+          "cycle": 27,
+          "capacity_ah": 1.860033909718346,
+          "soh_percent": 93.0016954859173
+        },
+        {
+          "cycle": 28,
+          "capacity_ah": 1.8591653109160768,
+          "soh_percent": 92.95826554580384
+        },
+        {
+          "cycle": 29,
+          "capacity_ah": 1.8481398178778288,
+          "soh_percent": 92.40699089389143
+        },
+        {
+          "cycle": 30,
+          "capacity_ah": 1.849201702126164,
+          "soh_percent": 92.4600851063082
+        },
+        {
+          "cycle": 31,
+          "capacity_ah": 1.8834677437950846,
+          "soh_percent": 94.17338718975424
+        },
+        {
+          "cycle": 32,
+          "capacity_ah": 1.8628211117905844,
+          "soh_percent": 93.14105558952922
+        },
+        {
+          "cycle": 33,
+          "capacity_ah": 1.852085039652352,
+          "soh_percent": 92.6042519826176
+        },
+        {
+          "cycle": 34,
+          "capacity_ah": 1.8469504648208708,
+          "soh_percent": 92.34752324104353
+        },
+        {
+          "cycle": 35,
+          "capacity_ah": 1.836828431169018,
+          "soh_percent": 91.8414215584509
+        },
+        {
+          "cycle": 36,
+          "capacity_ah": 1.8371619619672275,
+          "soh_percent": 91.85809809836137
+        },
+        {
+          "cycle": 37,
+          "capacity_ah": 1.8316722583718854,
+          "soh_percent": 91.58361291859427
+        },
+        {
+          "cycle": 38,
+          "capacity_ah": 1.8211470951317783,
+          "soh_percent": 91.05735475658892
+        },
+        {
+          "cycle": 39,
+          "capacity_ah": 1.816506091511515,
+          "soh_percent": 90.82530457557574
+        },
+        {
+          "cycle": 40,
+          "capacity_ah": 1.8113815601504555,
+          "soh_percent": 90.56907800752278
+        },
+        {
+          "cycle": 41,
+          "capacity_ah": 1.8116056333939583,
+          "soh_percent": 90.58028166969791
+        },
+        {
+          "cycle": 42,
+          "capacity_ah": 1.8060548955557403,
+          "soh_percent": 90.30274477778701
+        },
+        {
+          "cycle": 43,
+          "capacity_ah": 1.8132041826994056,
+          "soh_percent": 90.66020913497029
+        },
+        {
+          "cycle": 44,
+          "capacity_ah": 1.8062641938283535,
+          "soh_percent": 90.31320969141767
+        },
+        {
+          "cycle": 45,
+          "capacity_ah": 1.7958310249900458,
+          "soh_percent": 89.79155124950229
+        },
+        {
+          "cycle": 46,
+          "capacity_ah": 1.7858852600390451,
+          "soh_percent": 89.29426300195226
+        },
+        {
+          "cycle": 47,
+          "capacity_ah": 1.7803268604502753,
+          "soh_percent": 89.01634302251377
+        },
+        {
+          "cycle": 48,
+          "capacity_ah": 1.8150756899575577,
+          "soh_percent": 90.75378449787789
+        },
+        {
+          "cycle": 49,
+          "capacity_ah": 1.8157025154845838,
+          "soh_percent": 90.78512577422919
+        },
+        {
+          "cycle": 50,
+          "capacity_ah": 1.8002432178056673,
+          "soh_percent": 90.01216089028337
+        },
+        {
+          "cycle": 51,
+          "capacity_ah": 1.7904476205609308,
+          "soh_percent": 89.52238102804654
+        },
+        {
+          "cycle": 52,
+          "capacity_ah": 1.780343032300132,
+          "soh_percent": 89.0171516150066
+        },
+        {
+          "cycle": 53,
+          "capacity_ah": 1.775328769596812,
+          "soh_percent": 88.7664384798406
+        },
+        {
+          "cycle": 54,
+          "capacity_ah": 1.7702629734732853,
+          "soh_percent": 88.51314867366426
+        },
+        {
+          "cycle": 55,
+          "capacity_ah": 1.760081061854204,
+          "soh_percent": 88.0040530927102
+        },
+        {
+          "cycle": 56,
+          "capacity_ah": 1.749647593537689,
+          "soh_percent": 87.48237967688445
+        },
+        {
+          "cycle": 57,
+          "capacity_ah": 1.749650075059311,
+          "soh_percent": 87.48250375296554
+        },
+        {
+          "cycle": 58,
+          "capacity_ah": 1.745028739214683,
+          "soh_percent": 87.25143696073415
+        },
+        {
+          "cycle": 59,
+          "capacity_ah": 1.7396457455286727,
+          "soh_percent": 86.98228727643364
+        },
+        {
+          "cycle": 60,
+          "capacity_ah": 1.7285642277717963,
+          "soh_percent": 86.42821138858982
+        },
+        {
+          "cycle": 61,
+          "capacity_ah": 1.723900324588418,
+          "soh_percent": 86.1950162294209
+        },
+        {
+          "cycle": 62,
+          "capacity_ah": 1.7139788776485192,
+          "soh_percent": 85.69894388242597
+        },
+        {
+          "cycle": 63,
+          "capacity_ah": 1.7139701997004613,
+          "soh_percent": 85.69850998502307
+        },
+        {
+          "cycle": 64,
+          "capacity_ah": 1.7036521173638766,
+          "soh_percent": 85.18260586819383
+        },
+        {
+          "cycle": 65,
+          "capacity_ah": 1.7040137474382486,
+          "soh_percent": 85.20068737191244
+        },
+        {
+          "cycle": 66,
+          "capacity_ah": 1.6935716157343033,
+          "soh_percent": 84.67858078671516
+        },
+        {
+          "cycle": 67,
+          "capacity_ah": 1.6876577363877656,
+          "soh_percent": 84.38288681938828
+        },
+        {
+          "cycle": 68,
+          "capacity_ah": 1.6830744356583152,
+          "soh_percent": 84.15372178291575
+        },
+        {
+          "cycle": 69,
+          "capacity_ah": 1.6779270142025482,
+          "soh_percent": 83.89635071012741
+        },
+        {
+          "cycle": 70,
+          "capacity_ah": 1.6732060275966172,
+          "soh_percent": 83.66030137983086
+        },
+        {
+          "cycle": 71,
+          "capacity_ah": 1.6674367208253988,
+          "soh_percent": 83.37183604126994
+        },
+        {
+          "cycle": 72,
+          "capacity_ah": 1.6622662630667526,
+          "soh_percent": 83.11331315333763
+        },
+        {
+          "cycle": 73,
+          "capacity_ah": 1.6574243065763063,
+          "soh_percent": 82.87121532881531
+        },
+        {
+          "cycle": 74,
+          "capacity_ah": 1.652538684928734,
+          "soh_percent": 82.6269342464367
+        },
+        {
+          "cycle": 75,
+          "capacity_ah": 1.6472174627573322,
+          "soh_percent": 82.3608731378666
+        },
+        {
+          "cycle": 76,
+          "capacity_ah": 1.6364136810898071,
+          "soh_percent": 81.82068405449036
+        },
+        {
+          "cycle": 77,
+          "capacity_ah": 1.6362554312048496,
+          "soh_percent": 81.81277156024248
+        },
+        {
+          "cycle": 78,
+          "capacity_ah": 1.641119179218384,
+          "soh_percent": 82.0559589609192
+        },
+        {
+          "cycle": 79,
+          "capacity_ah": 1.6315700789656966,
+          "soh_percent": 81.57850394828483
+        },
+        {
+          "cycle": 80,
+          "capacity_ah": 1.621213282987236,
+          "soh_percent": 81.0606641493618
+        },
+        {
+          "cycle": 81,
+          "capacity_ah": 1.6164273214762122,
+          "soh_percent": 80.82136607381061
+        },
+        {
+          "cycle": 82,
+          "capacity_ah": 1.615823510161921,
+          "soh_percent": 80.79117550809605
+        },
+        {
+          "cycle": 83,
+          "capacity_ah": 1.61672418029789,
+          "soh_percent": 80.83620901489451
+        },
+        {
+          "cycle": 84,
+          "capacity_ah": 1.6108655863730026,
+          "soh_percent": 80.54327931865014
+        },
+        {
+          "cycle": 85,
+          "capacity_ah": 1.6006603374309376,
+          "soh_percent": 80.03301687154688
+        },
+        {
+          "cycle": 86,
+          "capacity_ah": 1.5959174487005663,
+          "soh_percent": 79.79587243502831
+        },
+        {
+          "cycle": 87,
+          "capacity_ah": 1.5962179519462243,
+          "soh_percent": 79.81089759731121
+        },
+        {
+          "cycle": 88,
+          "capacity_ah": 1.5958065114633972,
+          "soh_percent": 79.79032557316987
+        },
+        {
+          "cycle": 89,
+          "capacity_ah": 1.5906507821480704,
+          "soh_percent": 79.53253910740352
+        },
+        {
+          "cycle": 90,
+          "capacity_ah": 1.6888211161855506,
+          "soh_percent": 84.44105580927753
+        },
+        {
+          "cycle": 91,
+          "capacity_ah": 1.6259938279733204,
+          "soh_percent": 81.29969139866601
+        },
+        {
+          "cycle": 92,
+          "capacity_ah": 1.6157433862812898,
+          "soh_percent": 80.78716931406449
+        },
+        {
+          "cycle": 93,
+          "capacity_ah": 1.6056626764846538,
+          "soh_percent": 80.28313382423269
+        },
+        {
+          "cycle": 94,
+          "capacity_ah": 1.5949746921524348,
+          "soh_percent": 79.74873460762174
+        },
+        {
+          "cycle": 95,
+          "capacity_ah": 1.5904102438871945,
+          "soh_percent": 79.52051219435972
+        },
+        {
+          "cycle": 96,
+          "capacity_ah": 1.5853517062988178,
+          "soh_percent": 79.26758531494089
+        },
+        {
+          "cycle": 97,
+          "capacity_ah": 1.5799737147242376,
+          "soh_percent": 78.99868573621188
+        },
+        {
+          "cycle": 98,
+          "capacity_ah": 1.5752185465278068,
+          "soh_percent": 78.76092732639034
+        },
+        {
+          "cycle": 99,
+          "capacity_ah": 1.569798484648868,
+          "soh_percent": 78.4899242324434
+        },
+        {
+          "cycle": 100,
+          "capacity_ah": 1.5702565375950357,
+          "soh_percent": 78.51282687975178
+        },
+        {
+          "cycle": 101,
+          "capacity_ah": 1.565249873909438,
+          "soh_percent": 78.2624936954719
+        },
+        {
+          "cycle": 102,
+          "capacity_ah": 1.559633933561147,
+          "soh_percent": 77.98169667805736
+        },
+        {
+          "cycle": 103,
+          "capacity_ah": 1.5649820533392105,
+          "soh_percent": 78.24910266696052
+        },
+        {
+          "cycle": 104,
+          "capacity_ah": 1.57497949984227,
+          "soh_percent": 78.7489749921135
+        },
+        {
+          "cycle": 105,
+          "capacity_ah": 1.5652811168780458,
+          "soh_percent": 78.2640558439023
+        },
+        {
+          "cycle": 106,
+          "capacity_ah": 1.559755497470126,
+          "soh_percent": 77.9877748735063
+        },
+        {
+          "cycle": 107,
+          "capacity_ah": 1.549897685670499,
+          "soh_percent": 77.49488428352494
+        },
+        {
+          "cycle": 108,
+          "capacity_ah": 1.5438771531345021,
+          "soh_percent": 77.1938576567251
+        },
+        {
+          "cycle": 109,
+          "capacity_ah": 1.5450187488690073,
+          "soh_percent": 77.25093744345037
+        },
+        {
+          "cycle": 110,
+          "capacity_ah": 1.5445940154102908,
+          "soh_percent": 77.22970077051454
+        },
+        {
+          "cycle": 111,
+          "capacity_ah": 1.5343086721758876,
+          "soh_percent": 76.71543360879438
+        },
+        {
+          "cycle": 112,
+          "capacity_ah": 1.5287603942958483,
+          "soh_percent": 76.43801971479242
+        },
+        {
+          "cycle": 113,
+          "capacity_ah": 1.5289260249179843,
+          "soh_percent": 76.44630124589922
+        },
+        {
+          "cycle": 114,
+          "capacity_ah": 1.529091650133123,
+          "soh_percent": 76.45458250665615
+        },
+        {
+          "cycle": 115,
+          "capacity_ah": 1.5239059324661248,
+          "soh_percent": 76.19529662330623
+        },
+        {
+          "cycle": 116,
+          "capacity_ah": 1.5186675419100615,
+          "soh_percent": 75.93337709550308
+        },
+        {
+          "cycle": 117,
+          "capacity_ah": 1.5136482266426952,
+          "soh_percent": 75.68241133213476
+        },
+        {
+          "cycle": 118,
+          "capacity_ah": 1.5136050185229033,
+          "soh_percent": 75.68025092614516
+        },
+        {
+          "cycle": 119,
+          "capacity_ah": 1.5139470614867965,
+          "soh_percent": 75.69735307433983
+        },
+        {
+          "cycle": 120,
+          "capacity_ah": 1.5339599193158786,
+          "soh_percent": 76.69799596579394
+        },
+        {
+          "cycle": 121,
+          "capacity_ah": 1.5391372798653098,
+          "soh_percent": 76.95686399326549
+        },
+        {
+          "cycle": 122,
+          "capacity_ah": 1.5236247972838737,
+          "soh_percent": 76.18123986419369
+        },
+        {
+          "cycle": 123,
+          "capacity_ah": 1.5135813035589147,
+          "soh_percent": 75.67906517794573
+        },
+        {
+          "cycle": 124,
+          "capacity_ah": 1.5077850749847914,
+          "soh_percent": 75.38925374923957
+        },
+        {
+          "cycle": 125,
+          "capacity_ah": 1.5031960676037333,
+          "soh_percent": 75.15980338018666
+        },
+        {
+          "cycle": 126,
+          "capacity_ah": 1.4978220596995881,
+          "soh_percent": 74.89110298497941
+        },
+        {
+          "cycle": 127,
+          "capacity_ah": 1.492848534633516,
+          "soh_percent": 74.6424267316758
+        },
+        {
+          "cycle": 128,
+          "capacity_ah": 1.492414389867026,
+          "soh_percent": 74.62071949335129
+        },
+        {
+          "cycle": 129,
+          "capacity_ah": 1.487482776538081,
+          "soh_percent": 74.37413882690404
+        },
+        {
+          "cycle": 130,
+          "capacity_ah": 1.482535148640411,
+          "soh_percent": 74.12675743202055
+        },
+        {
+          "cycle": 131,
+          "capacity_ah": 1.4827874322228984,
+          "soh_percent": 74.13937161114492
+        },
+        {
+          "cycle": 132,
+          "capacity_ah": 1.476971179775059,
+          "soh_percent": 73.84855898875296
+        },
+        {
+          "cycle": 133,
+          "capacity_ah": 1.4819015554137276,
+          "soh_percent": 74.09507777068637
+        },
+        {
+          "cycle": 134,
+          "capacity_ah": 1.4981366198874824,
+          "soh_percent": 74.90683099437412
+        },
+        {
+          "cycle": 135,
+          "capacity_ah": 1.4820775214392872,
+          "soh_percent": 74.10387607196436
+        },
+        {
+          "cycle": 136,
+          "capacity_ah": 1.4771155312812152,
+          "soh_percent": 73.85577656406076
+        },
+        {
+          "cycle": 137,
+          "capacity_ah": 1.4720772783056488,
+          "soh_percent": 73.60386391528245
+        },
+        {
+          "cycle": 138,
+          "capacity_ah": 1.472248013656454,
+          "soh_percent": 73.6124006828227
+        },
+        {
+          "cycle": 139,
+          "capacity_ah": 1.4670106672274665,
+          "soh_percent": 73.35053336137332
+        },
+        {
+          "cycle": 140,
+          "capacity_ah": 1.4617672495335379,
+          "soh_percent": 73.08836247667689
+        },
+        {
+          "cycle": 141,
+          "capacity_ah": 1.4566952670489708,
+          "soh_percent": 72.83476335244853
+        },
+        {
+          "cycle": 142,
+          "capacity_ah": 1.451354972758956,
+          "soh_percent": 72.5677486379478
+        },
+        {
+          "cycle": 143,
+          "capacity_ah": 1.451615926257375,
+          "soh_percent": 72.58079631286874
+        },
+        {
+          "cycle": 144,
+          "capacity_ah": 1.4468161332173683,
+          "soh_percent": 72.34080666086842
+        },
+        {
+          "cycle": 145,
+          "capacity_ah": 1.4467570607768785,
+          "soh_percent": 72.33785303884392
+        },
+        {
+          "cycle": 146,
+          "capacity_ah": 1.4413797481446793,
+          "soh_percent": 72.06898740723396
+        },
+        {
+          "cycle": 147,
+          "capacity_ah": 1.4362456252208178,
+          "soh_percent": 71.8122812610409
+        },
+        {
+          "cycle": 148,
+          "capacity_ah": 1.4368154153924828,
+          "soh_percent": 71.84077076962414
+        },
+        {
+          "cycle": 149,
+          "capacity_ah": 1.4362945145860047,
+          "soh_percent": 71.81472572930024
+        },
+        {
+          "cycle": 150,
+          "capacity_ah": 1.4418575315878015,
+          "soh_percent": 72.09287657939008
+        },
+        {
+          "cycle": 151,
+          "capacity_ah": 1.4672063484781797,
+          "soh_percent": 73.36031742390898
+        },
+        {
+          "cycle": 152,
+          "capacity_ah": 1.4518640367848885,
+          "soh_percent": 72.59320183924443
+        },
+        {
+          "cycle": 153,
+          "capacity_ah": 1.4471379752748499,
+          "soh_percent": 72.35689876374249
+        },
+        {
+          "cycle": 154,
+          "capacity_ah": 1.441790586562399,
+          "soh_percent": 72.08952932811995
+        },
+        {
+          "cycle": 155,
+          "capacity_ah": 1.431630947911111,
+          "soh_percent": 71.58154739555555
+        },
+        {
+          "cycle": 156,
+          "capacity_ah": 1.4318084249673686,
+          "soh_percent": 71.59042124836843
+        },
+        {
+          "cycle": 157,
+          "capacity_ah": 1.4262562585106868,
+          "soh_percent": 71.31281292553435
+        },
+        {
+          "cycle": 158,
+          "capacity_ah": 1.4260877528924913,
+          "soh_percent": 71.30438764462457
+        },
+        {
+          "cycle": 159,
+          "capacity_ah": 1.4212633510031694,
+          "soh_percent": 71.06316755015847
+        },
+        {
+          "cycle": 160,
+          "capacity_ah": 1.4163272748795108,
+          "soh_percent": 70.81636374397554
+        },
+        {
+          "cycle": 161,
+          "capacity_ah": 1.4165781829175994,
+          "soh_percent": 70.82890914587998
+        },
+        {
+          "cycle": 162,
+          "capacity_ah": 1.4108401729425177,
+          "soh_percent": 70.54200864712588
+        },
+        {
+          "cycle": 163,
+          "capacity_ah": 1.4109949628347804,
+          "soh_percent": 70.54974814173902
+        },
+        {
+          "cycle": 164,
+          "capacity_ah": 1.4061714290398801,
+          "soh_percent": 70.30857145199401
+        },
+        {
+          "cycle": 165,
+          "capacity_ah": 1.4063358479692922,
+          "soh_percent": 70.31679239846461
+        },
+        {
+          "cycle": 166,
+          "capacity_ah": 1.4004552399066514,
+          "soh_percent": 70.02276199533257
+        },
+        {
+          "cycle": 167,
+          "capacity_ah": 1.4217865046055154,
+          "soh_percent": 71.08932523027576
+        },
+        {
+          "cycle": 168,
+          "capacity_ah": 1.4324552720625434,
+          "soh_percent": 71.62276360312717
+        }
+      ],
+      "classification": {
+        "decision": "ENGINEERING_REVIEW",
+        "policy_version": "experimental-soh-v1",
+        "rationale": "Classification uses project-defined SOH bands; only the 70% threshold corresponds to this NASA experiment's 2 Ah to 1.4 Ah criterion."
+      },
+      "rul": {
+        "status": "available",
+        "model_version": "linear-residual-bootstrap-v1",
+        "threshold_ah": 1.4,
+        "estimated_remaining_cycles": 0.0,
+        "interval_90_cycles": [
+          0.0,
+          0.0
+        ],
+        "slope_ah_per_cycle": -0.00326948107714598,
+        "prediction_kind": "model_prediction"
+      }
+    },
+    {
+      "battery_id": "B0018",
+      "cutoff_cycle": 132,
+      "latest_capacity_ah": 1.341051440640485,
+      "rated_capacity_ah": 2.0,
+      "soh_percent": 67.05257203202424,
+      "degradation_rate_ah_per_cycle": -0.003926143770029227,
+      "measurements": [
+        {
+          "cycle": 1,
+          "capacity_ah": 1.8550045207910817,
+          "soh_percent": 92.75022603955408
+        },
+        {
+          "cycle": 2,
+          "capacity_ah": 1.8431955317089987,
+          "soh_percent": 92.15977658544993
+        },
+        {
+          "cycle": 3,
+          "capacity_ah": 1.8396018424355423,
+          "soh_percent": 91.98009212177712
+        },
+        {
+          "cycle": 4,
+          "capacity_ah": 1.8306736044962053,
+          "soh_percent": 91.53368022481027
+        },
+        {
+          "cycle": 5,
+          "capacity_ah": 1.8327002069419656,
+          "soh_percent": 91.63501034709827
+        },
+        {
+          "cycle": 6,
+          "capacity_ah": 1.8285288846046388,
+          "soh_percent": 91.42644423023194
+        },
+        {
+          "cycle": 7,
+          "capacity_ah": 1.8212011895697924,
+          "soh_percent": 91.06005947848962
+        },
+        {
+          "cycle": 8,
+          "capacity_ah": 1.8151700106433282,
+          "soh_percent": 90.75850053216641
+        },
+        {
+          "cycle": 9,
+          "capacity_ah": 1.8042980520967649,
+          "soh_percent": 90.21490260483824
+        },
+        {
+          "cycle": 10,
+          "capacity_ah": 1.8231002302844226,
+          "soh_percent": 91.15501151422113
+        },
+        {
+          "cycle": 11,
+          "capacity_ah": 1.8121253520255494,
+          "soh_percent": 90.60626760127747
+        },
+        {
+          "cycle": 12,
+          "capacity_ah": 1.8046916382117766,
+          "soh_percent": 90.23458191058883
+        },
+        {
+          "cycle": 13,
+          "capacity_ah": 1.790844349786295,
+          "soh_percent": 89.54221748931475
+        },
+        {
+          "cycle": 14,
+          "capacity_ah": 1.783470722841926,
+          "soh_percent": 89.1735361420963
+        },
+        {
+          "cycle": 15,
+          "capacity_ah": 1.7809386125310702,
+          "soh_percent": 89.04693062655352
+        },
+        {
+          "cycle": 16,
+          "capacity_ah": 1.771209039672698,
+          "soh_percent": 88.5604519836349
+        },
+        {
+          "cycle": 17,
+          "capacity_ah": 1.7686303996707076,
+          "soh_percent": 88.43151998353538
+        },
+        {
+          "cycle": 18,
+          "capacity_ah": 1.7536304801917124,
+          "soh_percent": 87.68152400958562
+        },
+        {
+          "cycle": 19,
+          "capacity_ah": 1.7462197416415093,
+          "soh_percent": 87.31098708207547
+        },
+        {
+          "cycle": 20,
+          "capacity_ah": 1.7376647337053737,
+          "soh_percent": 86.88323668526868
+        },
+        {
+          "cycle": 21,
+          "capacity_ah": 1.7315166735475835,
+          "soh_percent": 86.57583367737918
+        },
+        {
+          "cycle": 22,
+          "capacity_ah": 1.7085949894470602,
+          "soh_percent": 85.42974947235301
+        },
+        {
+          "cycle": 23,
+          "capacity_ah": 1.711469957068211,
+          "soh_percent": 85.57349785341056
+        },
+        {
+          "cycle": 24,
+          "capacity_ah": 1.7075021373272627,
+          "soh_percent": 85.37510686636314
+        },
+        {
+          "cycle": 25,
+          "capacity_ah": 1.7492382064360228,
+          "soh_percent": 87.46191032180114
+        },
+        {
+          "cycle": 26,
+          "capacity_ah": 1.7327697147429955,
+          "soh_percent": 86.63848573714978
+        },
+        {
+          "cycle": 27,
+          "capacity_ah": 1.7222313328292376,
+          "soh_percent": 86.11156664146188
+        },
+        {
+          "cycle": 28,
+          "capacity_ah": 1.711846298984729,
+          "soh_percent": 85.59231494923645
+        },
+        {
+          "cycle": 29,
+          "capacity_ah": 1.699267835126687,
+          "soh_percent": 84.96339175633435
+        },
+        {
+          "cycle": 30,
+          "capacity_ah": 1.6940366439243106,
+          "soh_percent": 84.70183219621553
+        },
+        {
+          "cycle": 31,
+          "capacity_ah": 1.6819027078768087,
+          "soh_percent": 84.09513539384044
+        },
+        {
+          "cycle": 32,
+          "capacity_ah": 1.6769770618433686,
+          "soh_percent": 83.84885309216843
+        },
+        {
+          "cycle": 33,
+          "capacity_ah": 1.6655229306478936,
+          "soh_percent": 83.27614653239468
+        },
+        {
+          "cycle": 34,
+          "capacity_ah": 1.6571924575832084,
+          "soh_percent": 82.85962287916043
+        },
+        {
+          "cycle": 35,
+          "capacity_ah": 1.6482241555294048,
+          "soh_percent": 82.41120777647023
+        },
+        {
+          "cycle": 36,
+          "capacity_ah": 1.6387701497987262,
+          "soh_percent": 81.93850748993631
+        },
+        {
+          "cycle": 37,
+          "capacity_ah": 1.6276486907262062,
+          "soh_percent": 81.38243453631031
+        },
+        {
+          "cycle": 38,
+          "capacity_ah": 1.62215370227252,
+          "soh_percent": 81.107685113626
+        },
+        {
+          "cycle": 39,
+          "capacity_ah": 1.6140066510467586,
+          "soh_percent": 80.70033255233793
+        },
+        {
+          "cycle": 40,
+          "capacity_ah": 1.6760516154424623,
+          "soh_percent": 83.80258077212311
+        },
+        {
+          "cycle": 41,
+          "capacity_ah": 1.649300642552199,
+          "soh_percent": 82.46503212760994
+        },
+        {
+          "cycle": 42,
+          "capacity_ah": 1.63238299185809,
+          "soh_percent": 81.6191495929045
+        },
+        {
+          "cycle": 43,
+          "capacity_ah": 1.6164159719025777,
+          "soh_percent": 80.82079859512888
+        },
+        {
+          "cycle": 44,
+          "capacity_ah": 1.6109028378249377,
+          "soh_percent": 80.54514189124689
+        },
+        {
+          "cycle": 45,
+          "capacity_ah": 1.5954638693695657,
+          "soh_percent": 79.77319346847828
+        },
+        {
+          "cycle": 46,
+          "capacity_ah": 1.726707440085764,
+          "soh_percent": 86.3353720042882
+        },
+        {
+          "cycle": 47,
+          "capacity_ah": 1.7165673917429753,
+          "soh_percent": 85.82836958714877
+        },
+        {
+          "cycle": 48,
+          "capacity_ah": 1.6958235570934848,
+          "soh_percent": 84.79117785467423
+        },
+        {
+          "cycle": 49,
+          "capacity_ah": 1.6777783190792557,
+          "soh_percent": 83.88891595396278
+        },
+        {
+          "cycle": 50,
+          "capacity_ah": 1.6606586897774192,
+          "soh_percent": 83.03293448887096
+        },
+        {
+          "cycle": 51,
+          "capacity_ah": 1.6664109274827466,
+          "soh_percent": 83.32054637413732
+        },
+        {
+          "cycle": 52,
+          "capacity_ah": 1.6468336174407805,
+          "soh_percent": 82.34168087203902
+        },
+        {
+          "cycle": 53,
+          "capacity_ah": 1.6257639928779952,
+          "soh_percent": 81.28819964389976
+        },
+        {
+          "cycle": 54,
+          "capacity_ah": 1.6121577411874595,
+          "soh_percent": 80.60788705937297
+        },
+        {
+          "cycle": 55,
+          "capacity_ah": 1.6057366823755344,
+          "soh_percent": 80.28683411877672
+        },
+        {
+          "cycle": 56,
+          "capacity_ah": 1.673645314879889,
+          "soh_percent": 83.68226574399445
+        },
+        {
+          "cycle": 57,
+          "capacity_ah": 1.6404348572349936,
+          "soh_percent": 82.02174286174969
+        },
+        {
+          "cycle": 58,
+          "capacity_ah": 1.6132653317422077,
+          "soh_percent": 80.66326658711039
+        },
+        {
+          "cycle": 59,
+          "capacity_ah": 1.5920964324686278,
+          "soh_percent": 79.60482162343139
+        },
+        {
+          "cycle": 60,
+          "capacity_ah": 1.5866011820698824,
+          "soh_percent": 79.33005910349412
+        },
+        {
+          "cycle": 61,
+          "capacity_ah": 1.5800766490336253,
+          "soh_percent": 79.00383245168126
+        },
+        {
+          "cycle": 62,
+          "capacity_ah": 1.5641732953289167,
+          "soh_percent": 78.20866476644584
+        },
+        {
+          "cycle": 63,
+          "capacity_ah": 1.555618272193922,
+          "soh_percent": 77.7809136096961
+        },
+        {
+          "cycle": 64,
+          "capacity_ah": 1.5402045278637397,
+          "soh_percent": 77.01022639318698
+        },
+        {
+          "cycle": 65,
+          "capacity_ah": 1.5321613015959863,
+          "soh_percent": 76.60806507979932
+        },
+        {
+          "cycle": 66,
+          "capacity_ah": 1.5316232403693415,
+          "soh_percent": 76.58116201846707
+        },
+        {
+          "cycle": 67,
+          "capacity_ah": 1.5222595950771978,
+          "soh_percent": 76.11297975385989
+        },
+        {
+          "cycle": 68,
+          "capacity_ah": 1.5065267126851283,
+          "soh_percent": 75.32633563425641
+        },
+        {
+          "cycle": 69,
+          "capacity_ah": 1.5014219556532926,
+          "soh_percent": 75.07109778266464
+        },
+        {
+          "cycle": 70,
+          "capacity_ah": 1.4963534117486457,
+          "soh_percent": 74.81767058743229
+        },
+        {
+          "cycle": 71,
+          "capacity_ah": 1.5334262000312422,
+          "soh_percent": 76.6713100015621
+        },
+        {
+          "cycle": 72,
+          "capacity_ah": 1.523845267514426,
+          "soh_percent": 76.1922633757213
+        },
+        {
+          "cycle": 73,
+          "capacity_ah": 1.5011920994261239,
+          "soh_percent": 75.05960497130619
+        },
+        {
+          "cycle": 74,
+          "capacity_ah": 1.492417671450291,
+          "soh_percent": 74.62088357251456
+        },
+        {
+          "cycle": 75,
+          "capacity_ah": 1.483323851940123,
+          "soh_percent": 74.16619259700616
+        },
+        {
+          "cycle": 76,
+          "capacity_ah": 1.4807376792294196,
+          "soh_percent": 74.03688396147098
+        },
+        {
+          "cycle": 77,
+          "capacity_ah": 1.4735077809902477,
+          "soh_percent": 73.67538904951239
+        },
+        {
+          "cycle": 78,
+          "capacity_ah": 1.46801928526661,
+          "soh_percent": 73.40096426333051
+        },
+        {
+          "cycle": 79,
+          "capacity_ah": 1.4580923557119019,
+          "soh_percent": 72.9046177855951
+        },
+        {
+          "cycle": 80,
+          "capacity_ah": 1.4478660988891399,
+          "soh_percent": 72.39330494445699
+        },
+        {
+          "cycle": 81,
+          "capacity_ah": 1.4527808777541982,
+          "soh_percent": 72.6390438877099
+        },
+        {
+          "cycle": 82,
+          "capacity_ah": 1.4425356364492432,
+          "soh_percent": 72.12678182246216
+        },
+        {
+          "cycle": 83,
+          "capacity_ah": 1.4392712877203313,
+          "soh_percent": 71.96356438601657
+        },
+        {
+          "cycle": 84,
+          "capacity_ah": 1.4286475681888218,
+          "soh_percent": 71.43237840944109
+        },
+        {
+          "cycle": 85,
+          "capacity_ah": 1.4249026750004896,
+          "soh_percent": 71.24513375002448
+        },
+        {
+          "cycle": 86,
+          "capacity_ah": 1.4698115324524124,
+          "soh_percent": 73.49057662262062
+        },
+        {
+          "cycle": 87,
+          "capacity_ah": 1.4525819651050202,
+          "soh_percent": 72.62909825525101
+        },
+        {
+          "cycle": 88,
+          "capacity_ah": 1.442834198908794,
+          "soh_percent": 72.1417099454397
+        },
+        {
+          "cycle": 89,
+          "capacity_ah": 1.428376058807949,
+          "soh_percent": 71.41880294039746
+        },
+        {
+          "cycle": 90,
+          "capacity_ah": 1.4154547844370715,
+          "soh_percent": 70.77273922185357
+        },
+        {
+          "cycle": 91,
+          "capacity_ah": 1.454576670077708,
+          "soh_percent": 72.7288335038854
+        },
+        {
+          "cycle": 92,
+          "capacity_ah": 1.4283179548274056,
+          "soh_percent": 71.41589774137029
+        },
+        {
+          "cycle": 93,
+          "capacity_ah": 1.4197026883204058,
+          "soh_percent": 70.98513441602029
+        },
+        {
+          "cycle": 94,
+          "capacity_ah": 1.4155606630306516,
+          "soh_percent": 70.77803315153258
+        },
+        {
+          "cycle": 95,
+          "capacity_ah": 1.405680035419228,
+          "soh_percent": 70.2840017709614
+        },
+        {
+          "cycle": 96,
+          "capacity_ah": 1.4084461071166137,
+          "soh_percent": 70.42230535583069
+        },
+        {
+          "cycle": 97,
+          "capacity_ah": 1.3968547782872414,
+          "soh_percent": 69.84273891436207
+        },
+        {
+          "cycle": 98,
+          "capacity_ah": 1.3935670371440676,
+          "soh_percent": 69.67835185720338
+        },
+        {
+          "cycle": 99,
+          "capacity_ah": 1.3893644292809475,
+          "soh_percent": 69.46822146404737
+        },
+        {
+          "cycle": 100,
+          "capacity_ah": 1.3785651415666713,
+          "soh_percent": 68.92825707833356
+        },
+        {
+          "cycle": 101,
+          "capacity_ah": 1.384901110085747,
+          "soh_percent": 69.24505550428735
+        },
+        {
+          "cycle": 102,
+          "capacity_ah": 1.3703251814242443,
+          "soh_percent": 68.51625907121222
+        },
+        {
+          "cycle": 103,
+          "capacity_ah": 1.3733464385229082,
+          "soh_percent": 68.6673219261454
+        },
+        {
+          "cycle": 104,
+          "capacity_ah": 1.3679487285504814,
+          "soh_percent": 68.39743642752407
+        },
+        {
+          "cycle": 105,
+          "capacity_ah": 1.3567141087089647,
+          "soh_percent": 67.83570543544823
+        },
+        {
+          "cycle": 106,
+          "capacity_ah": 1.4604310209194575,
+          "soh_percent": 73.02155104597287
+        },
+        {
+          "cycle": 107,
+          "capacity_ah": 1.4500998937104097,
+          "soh_percent": 72.50499468552049
+        },
+        {
+          "cycle": 108,
+          "capacity_ah": 1.4381406901824496,
+          "soh_percent": 71.90703450912248
+        },
+        {
+          "cycle": 109,
+          "capacity_ah": 1.4283681980964316,
+          "soh_percent": 71.41840990482157
+        },
+        {
+          "cycle": 110,
+          "capacity_ah": 1.4147874517552432,
+          "soh_percent": 70.73937258776216
+        },
+        {
+          "cycle": 111,
+          "capacity_ah": 1.413889163393182,
+          "soh_percent": 70.6944581696591
+        },
+        {
+          "cycle": 112,
+          "capacity_ah": 1.3989331662177225,
+          "soh_percent": 69.94665831088612
+        },
+        {
+          "cycle": 113,
+          "capacity_ah": 1.3953322584033976,
+          "soh_percent": 69.76661292016988
+        },
+        {
+          "cycle": 114,
+          "capacity_ah": 1.390046129540245,
+          "soh_percent": 69.50230647701225
+        },
+        {
+          "cycle": 115,
+          "capacity_ah": 1.3860271454209647,
+          "soh_percent": 69.30135727104823
+        },
+        {
+          "cycle": 116,
+          "capacity_ah": 1.388215260193751,
+          "soh_percent": 69.41076300968754
+        },
+        {
+          "cycle": 117,
+          "capacity_ah": 1.3761826562394497,
+          "soh_percent": 68.80913281197249
+        },
+        {
+          "cycle": 118,
+          "capacity_ah": 1.3647168898640165,
+          "soh_percent": 68.23584449320083
+        },
+        {
+          "cycle": 119,
+          "capacity_ah": 1.3589854739373584,
+          "soh_percent": 67.94927369686792
+        },
+        {
+          "cycle": 120,
+          "capacity_ah": 1.3462308764008801,
+          "soh_percent": 67.31154382004401
+        },
+        {
+          "cycle": 121,
+          "capacity_ah": 1.4268427818454643,
+          "soh_percent": 71.34213909227321
+        },
+        {
+          "cycle": 122,
+          "capacity_ah": 1.4064481483279663,
+          "soh_percent": 70.32240741639832
+        },
+        {
+          "cycle": 123,
+          "capacity_ah": 1.3934907492075153,
+          "soh_percent": 69.67453746037576
+        },
+        {
+          "cycle": 124,
+          "capacity_ah": 1.3882493512249316,
+          "soh_percent": 69.41246756124659
+        },
+        {
+          "cycle": 125,
+          "capacity_ah": 1.3701878338420928,
+          "soh_percent": 68.50939169210464
+        },
+        {
+          "cycle": 126,
+          "capacity_ah": 1.3796951665608619,
+          "soh_percent": 68.9847583280431
+        },
+        {
+          "cycle": 127,
+          "capacity_ah": 1.3686586323935683,
+          "soh_percent": 68.43293161967841
+        },
+        {
+          "cycle": 128,
+          "capacity_ah": 1.3627371779096438,
+          "soh_percent": 68.13685889548219
+        },
+        {
+          "cycle": 129,
+          "capacity_ah": 1.3634051133928073,
+          "soh_percent": 68.17025566964037
+        },
+        {
+          "cycle": 130,
+          "capacity_ah": 1.3518646035305233,
+          "soh_percent": 67.59323017652616
+        },
+        {
+          "cycle": 131,
+          "capacity_ah": 1.3547969729652622,
+          "soh_percent": 67.7398486482631
+        },
+        {
+          "cycle": 132,
+          "capacity_ah": 1.341051440640485,
+          "soh_percent": 67.05257203202424
+        }
+      ],
+      "classification": {
+        "decision": "EOL_REVIEW",
+        "policy_version": "experimental-soh-v1",
+        "rationale": "Classification uses project-defined SOH bands; only the 70% threshold corresponds to this NASA experiment's 2 Ah to 1.4 Ah criterion."
+      },
+      "rul": {
+        "status": "available",
+        "model_version": "linear-residual-bootstrap-v1",
+        "threshold_ah": 1.4,
+        "estimated_remaining_cycles": 0.0,
+        "interval_90_cycles": [
+          0.0,
+          0.0
+        ],
+        "slope_ah_per_cycle": -0.003926143770029227,
+        "prediction_kind": "model_prediction"
+      }
+    }
+  ]
+}

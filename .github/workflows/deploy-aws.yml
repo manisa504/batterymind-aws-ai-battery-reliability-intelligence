@@ -1,0 +1,17 @@
+name: Deploy AWS
+on: {workflow_dispatch: {}}
+permissions: {contents: read, id-token: write}
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: aws-demo-approval
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-2
+      - run: aws sts get-caller-identity
+      - run: echo "Deployment requires reviewed CDK diff and environment approval."
+

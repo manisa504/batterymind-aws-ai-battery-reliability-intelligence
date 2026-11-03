@@ -1,0 +1,19 @@
+{
+  "status": "PARTIAL",
+  "executed_date": "2026-11-02",
+  "postgresql_image": "pgvector/pgvector:pg16",
+  "pgvector_version": "0.8.7",
+  "passed": [
+    "assessment persisted across API container restart",
+    "cross-user repository query returned zero records",
+    "two concurrent requests with one idempotency key created one assessment",
+    "unit tests passed for correction, supersession, deletion, historical cutoff, and bounded context"
+  ],
+  "remaining": [
+    "live RDS restart and failover behavior",
+    "live Bedrock embedding creation and semantic recall",
+    "browser restart with Cognito identity",
+    "high-contention correction load test"
+  ]
+}
+
