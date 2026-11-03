@@ -223,7 +223,7 @@ class BatteryMindStack(Stack):
             logging=ecs.LogDrivers.aws_logs(stream_prefix="api", log_group=log_group),
             environment={
                 "BATTERYMIND_AWS_REGION": self.region,
-                "BATTERYMIND_BEDROCK_MODEL_ID": "us.amazon.nova-micro-v1:0",
+                "BATTERYMIND_BEDROCK_MODEL_ID": "google.gemma-3-12b-it",
                 "BATTERYMIND_BEDROCK_EMBEDDING_MODEL_ID": "amazon.titan-embed-text-v2:0",
                 "BATTERYMIND_DATABASE_HOST": database.db_instance_endpoint_address,
                 "BATTERYMIND_DATABASE_PORT": database.db_instance_endpoint_port,
@@ -250,10 +250,7 @@ class BatteryMindStack(Stack):
             iam.PolicyStatement(
                 actions=["bedrock:Converse", "bedrock:InvokeModel"],
                 resources=[
-                    f"arn:aws:bedrock:{self.region}:{self.account}:inference-profile/us.amazon.nova-micro-v1:0",
-                    "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-micro-v1:0",
-                    "arn:aws:bedrock:us-east-2::foundation-model/amazon.nova-micro-v1:0",
-                    "arn:aws:bedrock:us-west-2::foundation-model/amazon.nova-micro-v1:0",
+                    f"arn:aws:bedrock:{self.region}::foundation-model/google.gemma-3-12b-it",
                     f"arn:aws:bedrock:{self.region}::foundation-model/amazon.titan-embed-text-v2:0",
                 ],
             )
@@ -369,6 +366,7 @@ class BatteryMindStack(Stack):
                 flows=cognito.OAuthFlows(authorization_code_grant=True),
                 scopes=[cognito.OAuthScope.OPENID, cognito.OAuthScope.EMAIL],
                 callback_urls=[f"https://{distribution.distribution_domain_name}/"],
+                logout_urls=[f"https://{distribution.distribution_domain_name}/"],
             ),
             prevent_user_existence_errors=True,
         )

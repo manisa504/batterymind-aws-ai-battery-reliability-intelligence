@@ -12,11 +12,11 @@ It does not present laboratory observations as field safety outcomes.
 - The candidate NASA archive is reachable and contains B0005, B0006, B0007, and B0018.
 - The downloaded archive SHA-256 is recorded in `data/manifests/nasa-source.json`.
 - Local builds and tests are recorded under `docs/gates/` after execution.
-- The AWS stack (CDK: ECS Fargate ARM64, RDS PostgreSQL + pgvector, Cognito with MFA, CloudFront, SQS,
-  ECR) was deployed and tested live in `us-east-2`: authenticated assessment memory in RDS and
-  Amazon Bedrock (Nova Micro) explanations, which only rephrase values already computed by the rules.
-  Embedding-based recall and the SQS path are not yet exercised; gate G5 is BLOCKED
-  (`reports/release/aws-deployment.json`).
+- The AWS stack (CDK: ECS Fargate ARM64, RDS PostgreSQL + pgvector, Cognito with MFA, CloudFront, S3)
+  is deployed in `us-east-2`. A live end-to-end run passed 21 checks: MFA login, evidence-grounded chat
+  with Amazon Bedrock (Gemma 3 12B), Titan embeddings with pgvector recall of earlier assessments,
+  cross-user isolation, and recall after a forced container restart (`tests/e2e/run_live.py`).
+  Gates G4 and G5 remain BLOCKED on the items listed in `docs/gates/`.
 
 ## Local setup
 

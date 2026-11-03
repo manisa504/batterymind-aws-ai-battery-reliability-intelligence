@@ -20,5 +20,5 @@ def test_falls_back_when_bedrock_fails(monkeypatch):
     def boom(*a, **k):
         raise RuntimeError("no bedrock")
 
-    monkeypatch.setattr(explainer.boto3, "client", boom)
+    monkeypatch.setattr(explainer.llm, "converse", boom)
     assert explainer.explain(ANALYSIS) == ("rule text", None)

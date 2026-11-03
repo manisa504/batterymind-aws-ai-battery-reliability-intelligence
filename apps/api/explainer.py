@@ -6,22 +6,21 @@ them. If Bedrock is unconfigured or fails, the deterministic rule-based rational
 
 import logging
 
-import boto3
-
+from . import llm
 from .settings import settings
 
 log = logging.getLogger(__name__)
 
-_PROMPT = (
-    "You are explaining a laboratory battery-aging assessment to an engineer. Use only the numbers "
-    "below; do not invent values or thresholds, and make no numeric comparison other than stating the "
-    "decision band given. State that this is a NASA laboratory experiment, not field data. "
-    "Write at most 3 sentences.\n"
-    "Battery: {battery_id}\nCutoff cycle: {cutoff}\nMeasured latest capacity (Ah): {cap:.3f}\n"
-    "Derived state of health (%): {soh:.1f}\nDecision: {decision}\n"
+SYSTEM = (
+    "You explain a laboratory battery-aging assessment to an engineer. Use only the numbers provided; "
+    "do not invent values or thresholds, and make no numeric comparison other than stating the decision "
+    "band given. State that this is a NASA laboratory experiment, not field data. Write at most 3 sentences."
+)
+
+DECISION_BANDS = (
     "Decision bands by SOH: <=70 EOL_REVIEW; >70 to 75 ENGINEERING_REVIEW; >75 to 85 INCREASE_TESTING; "
     ">85 CONTINUE_MONITORING. Only the 70% line matches the NASA end-of-life criterion; the others are "
-    "project-defined.\nRule-based rationale: {rationale}"
+    "project-defined."
 )
 
 
@@ -30,23 +29,16 @@ def explain(analysis: dict) -> tuple[str, str | None]:
     rationale = analysis["classification"]["rationale"]
     if not settings.bedrock_model_id:
         return rationale, None
-    prompt = _PROMPT.format(
-        battery_id=analysis["battery_id"],
-        cutoff=analysis["cutoff_cycle"],
-        cap=analysis["latest_capacity_ah"],
-        soh=analysis["soh_percent"],
-        decision=analysis["classification"]["decision"],
-        rationale=rationale,
+    prompt = (
+        f"Battery: {analysis['battery_id']}\nCutoff cycle: {analysis['cutoff_cycle']}\n"
+        f"Measured latest capacity (Ah): {analysis['latest_capacity_ah']:.3f}\n"
+        f"Derived state of health (%): {analysis['soh_percent']:.1f}\n"
+        f"Decision: {analysis['classification']['decision']}\n{DECISION_BANDS}\n"
+        f"Rule-based rationale: {rationale}"
     )
     try:
-        client = boto3.client("bedrock-runtime", region_name=settings.aws_region)
-        reply = client.converse(
-            modelId=settings.bedrock_model_id,
-            messages=[{"role": "user", "content": [{"text": prompt}]}],
-            inferenceConfig={"maxTokens": settings.bedrock_max_tokens, "temperature": 0.2},
-        )
-        text = reply["output"]["message"]["content"][0]["text"].strip()
-        return (text or rationale), (settings.bedrock_model_id if text else None)
+        reply = llm.converse(SYSTEM, [{"role": "user", "content": prompt}])
+        return (reply["text"] or rationale), (reply["model_id"] if reply["text"] else None)
     except Exception:  # noqa: BLE001 - any Bedrock failure must degrade to the deterministic text
         log.exception("Bedrock explanation failed; using rule-based rationale")
         return rationale, None

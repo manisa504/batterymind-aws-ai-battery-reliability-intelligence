@@ -20,6 +20,7 @@ class Session(Base):
     objective: Mapped[str] = mapped_column(String(500))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now().astimezone())
     assessments: Mapped[list[Assessment]] = relationship(back_populates="session", cascade="all, delete-orphan")
+    turns: Mapped[list[ChatTurn]] = relationship(cascade="all, delete-orphan")
 
 
 class Assessment(Base):
@@ -42,3 +43,20 @@ class Assessment(Base):
     version: Mapped[int] = mapped_column(Integer, default=1)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now().astimezone())
     session: Mapped[Session] = relationship(back_populates="assessments")
+
+
+class ChatTurn(Base):
+    """Short-term conversational memory: one row per user or assistant message."""
+
+    __tablename__ = "chat_turns"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    session_id: Mapped[str] = mapped_column(ForeignKey("sessions.id", ondelete="CASCADE"), index=True)
+    user_id: Mapped[str] = mapped_column(String(128), index=True)
+    role: Mapped[str] = mapped_column(String(16))
+    content: Mapped[str] = mapped_column(Text)
+    model_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    input_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    output_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    latency_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now().astimezone())

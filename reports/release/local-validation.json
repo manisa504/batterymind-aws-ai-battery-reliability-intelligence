@@ -22,7 +22,7 @@
   },
   "blocked": {
     "aws_identity": "No AWS credentials are configured.",
-    "bedrock_model_access": "Account discovery in us-east-2 found active amazon.nova-micro-v1:0 and amazon.titan-embed-text-v2:0 models; live inference is not yet executed.",
+    "bedrock_model_access": "Superseded: chat uses google.gemma-3-12b-it and embeddings use amazon.titan-embed-text-v2:0, both on-demand in us-east-2; live inference evidence is in reports/performance/live-performance.json.",
     "paid_aws_deployment": "Not authorized.",
     "github_pages_publication": "Not authorized."
   },

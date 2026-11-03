@@ -12,7 +12,10 @@ data/processed
 data/raw
 DOC
 docs
-reports
+reports/*
+!reports/model_evaluation
+!reports/memory
+!reports/performance
 showcase
 tests
 *.sqlite3

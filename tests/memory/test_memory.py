@@ -77,3 +77,14 @@ def test_context_preserves_structured_evidence_and_budget():
     context = bounded_context("MEASURED: 1.8 Ah", memories, max_characters=80)
     assert context.startswith("MEASURED: 1.8 Ah")
     assert "most relevant" in context
+
+
+def test_delete_session_removes_its_assessments_and_other_users_cannot():
+    engine, db, _ = repository()
+    owner = MemoryRepository(db, "user-a")
+    session_id = owner.create_session("B0005", "objective").id
+    owner.add_turn(session_id, "user", "hello")
+    assert MemoryRepository(db, "user-b").delete_session(session_id) is False
+    assert owner.delete_session(session_id) is True
+    assert owner.recent_turns(session_id) == []
+    assert owner.get_session(session_id) is None

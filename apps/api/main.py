@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import logging
 from functools import lru_cache
+from pathlib import Path
 
 import pandas as pd
 from fastapi import Depends, FastAPI, HTTPException, Query, Response
@@ -13,13 +15,16 @@ from sqlalchemy.orm import sessionmaker
 
 from packages.battery_analytics import capacity_analysis
 from packages.decision_engine import classify
-from packages.memory_engine import Base, MemoryRepository
+from packages.memory_engine import Base, MemoryRepository, apply_schema
+from packages.memory_engine.embeddings import TitanEmbedder
 from packages.prediction import estimate_linear_rul
 
+from . import chat
 from .auth import Principal, current_principal
 from .explainer import explain
 from .settings import settings
 
+log = logging.getLogger(__name__)
 app = FastAPI(title="BatteryMind API", version="0.1.0", docs_url="/api/docs")
 app.add_middleware(
     CORSMiddleware,
@@ -29,6 +34,7 @@ app.add_middleware(
 )
 engine = create_engine(settings.resolved_database_url)
 SessionFactory = sessionmaker(bind=engine)
+apply_schema(engine)
 Base.metadata.create_all(engine)
 
 
@@ -134,6 +140,7 @@ def create_assessment(
         )
     except ValueError as error:
         raise HTTPException(status_code=409, detail=str(error)) from error
+    _remember(MemoryRepository(db, principal.user_id), record)
     response.headers["ETag"] = f'"{record.version}"'
     return {
         "id": record.id,
@@ -143,6 +150,21 @@ def create_assessment(
         "explanation": record.explanation,
         "explanation_source": explanation_source or "rule_based",
     }
+
+
+def _remember(repo: MemoryRepository, record) -> None:
+    """Embed the stored assessment for semantic recall. Failure never loses the assessment."""
+    if not settings.bedrock_embedding_model_id:
+        return
+    try:
+        text = f"{record.battery_id} cutoff {record.cutoff_cycle} {record.decision}: {record.explanation}"
+        repo.store_embedding(
+            record.id,
+            TitanEmbedder(settings.bedrock_embedding_model_id, settings.aws_region).embed(text),
+            settings.bedrock_embedding_model_id,
+        )
+    except Exception:  # noqa: BLE001
+        log.exception("Embedding failed for assessment %s", record.id)
 
 
 @app.get("/api/v1/batteries/{battery_id}/assessments")
@@ -176,10 +198,105 @@ def delete_assessment(
         raise HTTPException(status_code=404, detail="Assessment not found")
 
 
+REPORT_DIR = Path("reports")
+
+
+def _report(relative: str):
+    path = REPORT_DIR / relative
+    return json.loads(path.read_text()) if path.exists() else None
+
+
 @app.get("/api/v1/evaluation")
 def evaluation():
     return {
-        "status": "available_after_executed_evaluation",
-        "reports": ["reports/model_evaluation/rul-baselines.json", "reports/memory/memory-tests.json"],
-        "live_aws_validation": "BLOCKED",
+        "rul_baselines": _report("model_evaluation/rul-baselines.json"),
+        "memory_tests": _report("memory/memory-tests.json"),
+        "performance": _report("performance/live-performance.json"),
     }
+
+
+@app.get("/api/v1/usage")
+def usage(principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)):
+    return MemoryRepository(db, principal.user_id).usage()
+
+
+@app.get("/api/v1/batteries/{battery_id}/history")
+def full_history(
+    battery_id: str, principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)
+):
+    """All assessments for review, including superseded ones, newest first."""
+    records = MemoryRepository(db, principal.user_id).all_assessments(battery_id)
+    return {
+        "items": [
+            {
+                "id": x.id,
+                "cutoff_cycle": x.cutoff_cycle,
+                "decision": x.decision,
+                "explanation": x.explanation,
+                "policy_version": x.policy_version,
+                "model_version": x.model_version,
+                "validity": x.validity,
+                "supersedes_id": x.supersedes_id,
+                "version": x.version,
+                "created_at": x.created_at.isoformat(),
+                "soh_percent": json.loads(x.evidence_json).get("soh_percent"),
+                "latest_capacity_ah": json.loads(x.evidence_json).get("latest_capacity_ah"),
+            }
+            for x in records
+        ]
+    }
+
+
+@app.get("/api/v1/batteries/{battery_id}/sessions")
+def battery_sessions(
+    battery_id: str, principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)
+):
+    rows = MemoryRepository(db, principal.user_id).list_sessions(battery_id)
+    return {"items": [{"id": x.id, "objective": x.objective, "created_at": x.created_at.isoformat()} for x in rows]}
+
+
+@app.get("/api/v1/sessions/{session_id}/turns")
+def session_turns(
+    session_id: str, principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)
+):
+    repo = MemoryRepository(db, principal.user_id)
+    if repo.get_session(session_id) is None:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {
+        "items": [
+            {"role": t.role, "content": t.content, "created_at": t.created_at.isoformat()}
+            for t in repo.all_turns(session_id)
+        ]
+    }
+
+
+@app.delete("/api/v1/sessions/{session_id}", status_code=204)
+def delete_session(
+    session_id: str, principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)
+):
+    if not MemoryRepository(db, principal.user_id).delete_session(session_id):
+        raise HTTPException(status_code=404, detail="Session not found")
+
+
+class ChatRequest(BaseModel):
+    session_id: str
+    message: str = Field(min_length=1, max_length=1000)
+    cutoff_cycle: int | None = Field(default=None, gt=0)
+
+
+@app.post("/api/v1/chat")
+def chat_endpoint(
+    payload: ChatRequest, principal: Principal = Depends(current_principal), db: DbSession = Depends(db_session)
+):
+    repo = MemoryRepository(db, principal.user_id)
+    session = repo.get_session(payload.session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Session not found")
+    if not settings.bedrock_model_id:
+        raise HTTPException(status_code=503, detail="The language model is not configured")
+    analysis_result = analysis(session.battery_id, payload.cutoff_cycle)
+    try:
+        return chat.respond(repo, session, analysis_result, payload.message)
+    except Exception as error:
+        log.exception("Chat generation failed")
+        raise HTTPException(status_code=502, detail="The language model request failed") from error

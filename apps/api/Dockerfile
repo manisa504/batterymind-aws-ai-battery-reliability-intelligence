@@ -5,6 +5,7 @@ COPY pyproject.toml README.md ./
 COPY apps ./apps
 COPY packages ./packages
 COPY data/manifests ./data/manifests
+COPY reports ./reports
 COPY data/processed/cycles.parquet ./data/processed/cycles.parquet
 RUN pip install --no-cache-dir .
 USER 10001

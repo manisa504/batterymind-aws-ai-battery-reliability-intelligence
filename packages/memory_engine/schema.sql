@@ -48,3 +48,25 @@ ALTER TABLE memory_embeddings FORCE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS embeddings_owner ON memory_embeddings;
 CREATE POLICY embeddings_owner ON memory_embeddings USING (user_id = current_setting('app.user_id', true));
 
+CREATE TABLE IF NOT EXISTS chat_turns (
+  id varchar(36) PRIMARY KEY,
+  session_id varchar(36) NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+  user_id varchar(128) NOT NULL,
+  role varchar(16) NOT NULL,
+  content text NOT NULL,
+  model_id varchar(128),
+  input_tokens integer,
+  output_tokens integer,
+  latency_ms integer,
+  created_at timestamptz NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_chat_turns_session_id ON chat_turns(session_id);
+CREATE INDEX IF NOT EXISTS ix_chat_turns_user_id ON chat_turns(user_id);
+ALTER TABLE chat_turns ENABLE ROW LEVEL SECURITY;
+ALTER TABLE chat_turns FORCE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS chat_turns_owner ON chat_turns;
+CREATE POLICY chat_turns_owner ON chat_turns USING (user_id = current_setting('app.user_id', true));
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'batterymind_app') THEN CREATE ROLE batterymind_app NOLOGIN NOBYPASSRLS; END IF; END $$;
+GRANT batterymind_app TO CURRENT_USER;
+GRANT USAGE ON SCHEMA public TO batterymind_app;
+GRANT SELECT, INSERT, UPDATE, DELETE ON sessions, assessments, memory_embeddings, chat_turns TO batterymind_app;

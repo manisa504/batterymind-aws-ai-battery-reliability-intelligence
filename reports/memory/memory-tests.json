@@ -1,19 +1,21 @@
 {
-  "status": "PARTIAL",
-  "executed_date": "2026-11-02",
-  "postgresql_image": "pgvector/pgvector:pg16",
-  "pgvector_version": "0.8.7",
+  "status": "BLOCKED",
+  "executed_date": "2026-11-03",
+  "scope": "Local pgvector/PostgreSQL 16 tests (scripts/test_postgres.sh) plus live AWS end-to-end run (tests/e2e/run_live.py, reports/performance/live-performance.json)",
   "passed": [
-    "assessment persisted across API container restart",
-    "cross-user repository query returned zero records",
-    "two concurrent requests with one idempotency key created one assessment",
-    "unit tests passed for correction, supersession, deletion, historical cutoff, and bounded context"
+    "live: two MFA-authenticated users; cross-user turns, history, chat and delete all denied (404/empty)",
+    "live: assessments written to RDS with Titan embeddings; pgvector semantic recall returned 2 hits; context assembled from measurements plus valid prior assessments",
+    "live: conversation (4 turns) and assessments recalled after a forced ECS task replacement",
+    "live: assessment deletion; oversized message and anonymous chat rejected",
+    "local PostgreSQL: forced row-level security holds across commits via a non-bypass role; idempotent schema; similarity respects cutoff and validity; data survives a new connection pool",
+    "unit: correction, supersession, deletion, historical cutoff, bounded context, ranking"
   ],
   "remaining": [
-    "live RDS restart and failover behavior",
-    "live Bedrock embedding creation and semantic recall",
-    "browser restart with Cognito identity",
-    "high-contention correction load test"
+    "browser restart with Cognito identity (UI not driven in a browser)",
+    "recall from a different session than the one that created the memory (semantic search is user+battery scoped; not tested across two sessions)",
+    "live correction/supersession through the API",
+    "concurrent updates against live RDS",
+    "RDS failover behavior",
+    "measured context-compression ratio over a large history"
   ]
 }
-
