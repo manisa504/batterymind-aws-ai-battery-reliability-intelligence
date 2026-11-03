@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 app = FastAPI(title="BatteryMind API", version="0.1.0", docs_url="/api/docs")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.allowed_origin],
+    allow_origins=[o.strip() for o in settings.allowed_origin.split(",") if o.strip()],
     allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-BatteryMind-User"],
 )

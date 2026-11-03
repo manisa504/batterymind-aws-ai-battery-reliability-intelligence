@@ -27,3 +27,23 @@ def test_unknown_battery_is_404():
 def test_memory_requires_authentication():
     response = client.post("/api/v1/sessions", json={"battery_id": "B0005", "objective": "Review degradation"})
     assert response.status_code == 401
+
+
+def test_cors_allows_configured_origin_only(monkeypatch):
+    from apps.api import main
+
+    allowed = main.settings.allowed_origin.split(",")[0]
+    ok = client.options(
+        "/api/v1/chat",
+        headers={
+            "Origin": allowed,
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "authorization",
+        },
+    )
+    assert ok.headers.get("access-control-allow-origin") == allowed
+    denied = client.options(
+        "/api/v1/chat",
+        headers={"Origin": "https://evil.example", "Access-Control-Request-Method": "POST"},
+    )
+    assert "access-control-allow-origin" not in denied.headers

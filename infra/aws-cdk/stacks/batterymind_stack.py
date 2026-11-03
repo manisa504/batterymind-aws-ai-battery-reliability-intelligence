@@ -134,6 +134,7 @@ class BatteryMindStack(Stack):
                 exclude_punctuation=True,
             ),
         )
+        allow_destroy = str(self.node.try_get_context("allowDestroy")).lower() == "true"
         database = rds.DatabaseInstance(
             self,
             "Database",
@@ -149,11 +150,17 @@ class BatteryMindStack(Stack):
             storage_encrypted=True,
             multi_az=False,
             backup_retention=Duration.days(1),
-            deletion_protection=True,
+            # Teardown: deploy once with -c allowDestroy=true, then cdk destroy (see docs/runbooks/deployment.md).
+            deletion_protection=not allow_destroy,
             removal_policy=RemovalPolicy.SNAPSHOT,
             publicly_accessible=False,
             cloudwatch_logs_exports=["postgresql"],
         )
+        if allow_destroy:
+            NagSuppressions.add_resource_suppressions(
+                database,
+                [NagPackSuppression(id="AwsSolutions-RDS10", reason="Explicit teardown deployment (-c allowDestroy=true).")],
+            )
         NagSuppressions.add_resource_suppressions(
             database,
             [
@@ -217,6 +224,8 @@ class BatteryMindStack(Stack):
             memory_limit_mib=1024,
             runtime_platform=ecs.RuntimePlatform(cpu_architecture=ecs.CpuArchitecture.ARM64),
         )
+        extra_origins = [o.strip().rstrip("/") for o in str(self.node.try_get_context("appOrigins") or "").split(",") if o.strip()]
+        app_origins = [f"https://{distribution.distribution_domain_name}", *extra_origins]
         container = task.add_container(
             "Api",
             image=ecs.ContainerImage.from_ecr_repository(repository, str(self.node.try_get_context("imageTag") or "release")),
@@ -229,7 +238,7 @@ class BatteryMindStack(Stack):
                 "BATTERYMIND_DATABASE_PORT": database.db_instance_endpoint_port,
                 "BATTERYMIND_DATABASE_NAME": "batterymind",
                 "BATTERYMIND_DATA_BUCKET": data_bucket.bucket_name,
-                "BATTERYMIND_ALLOWED_ORIGIN": "https://batterymind-showcase.vercel.app",
+                "BATTERYMIND_ALLOWED_ORIGIN": ",".join(app_origins),
                 "BATTERYMIND_LOCAL_AUTH_ENABLED": "false",
             },
             secrets={
@@ -365,8 +374,8 @@ class BatteryMindStack(Stack):
             o_auth=cognito.OAuthSettings(
                 flows=cognito.OAuthFlows(authorization_code_grant=True),
                 scopes=[cognito.OAuthScope.OPENID, cognito.OAuthScope.EMAIL],
-                callback_urls=[f"https://{distribution.distribution_domain_name}/"],
-                logout_urls=[f"https://{distribution.distribution_domain_name}/"],
+                callback_urls=[f"https://{distribution.distribution_domain_name}/", *[f"{o}/" for o in app_origins[1:]]],
+                logout_urls=[f"https://{distribution.distribution_domain_name}/", *[f"{o}/" for o in app_origins[1:]]],
             ),
             prevent_user_existence_errors=True,
         )
