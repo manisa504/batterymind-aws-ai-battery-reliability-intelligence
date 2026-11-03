@@ -12,9 +12,11 @@ It does not present laboratory observations as field safety outcomes.
 - The candidate NASA archive is reachable and contains B0005, B0006, B0007, and B0018.
 - The downloaded archive SHA-256 is recorded in `data/manifests/nasa-source.json`.
 - Local builds and tests are recorded under `docs/gates/` after execution.
-- The AWS stack (CDK: ECS Fargate ARM64, RDS PostgreSQL + pgvector, Cognito, CloudFront, SQS, ECR) was
-  deployed and smoke-tested in `us-east-2`; see `reports/release/aws-deployment.json`. Authenticated
-  memory flows and live Bedrock validation remain BLOCKED (gate G5 is PARTIAL).
+- The AWS stack (CDK: ECS Fargate ARM64, RDS PostgreSQL + pgvector, Cognito with MFA, CloudFront, SQS,
+  ECR) was deployed and tested live in `us-east-2`: authenticated assessment memory in RDS and
+  Amazon Bedrock (Nova Micro) explanations, which only rephrase values already computed by the rules.
+  Embedding-based recall and the SQS path are not yet exercised; gate G5 is PARTIAL
+  (`reports/release/aws-deployment.json`).
 
 ## Local setup
 

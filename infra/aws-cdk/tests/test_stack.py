@@ -48,7 +48,7 @@ def test_initial_deployment_stays_scaled_to_zero_and_pins_bedrock_models():
                         {
                             "Environment": Match.array_with(
                                 [
-                                    {"Name": "BATTERYMIND_BEDROCK_MODEL_ID", "Value": "amazon.nova-micro-v1:0"},
+                                    {"Name": "BATTERYMIND_BEDROCK_MODEL_ID", "Value": "us.amazon.nova-micro-v1:0"},
                                     {
                                         "Name": "BATTERYMIND_BEDROCK_EMBEDDING_MODEL_ID",
                                         "Value": "amazon.titan-embed-text-v2:0",

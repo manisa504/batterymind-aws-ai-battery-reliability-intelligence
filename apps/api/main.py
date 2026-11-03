@@ -17,6 +17,7 @@ from packages.memory_engine import Base, MemoryRepository
 from packages.prediction import estimate_linear_rul
 
 from .auth import Principal, current_principal
+from .explainer import explain
 from .settings import settings
 
 app = FastAPI(title="BatteryMind API", version="0.1.0", docs_url="/api/docs")
@@ -116,7 +117,7 @@ def create_assessment(
 ):
     analysis_result = analysis(payload.battery_id, payload.cutoff_cycle)
     classification = analysis_result["classification"]
-    explanation = classification["rationale"]
+    explanation, explanation_source = explain(analysis_result)
     try:
         record = MemoryRepository(db, principal.user_id).store_assessment(
             session_id=payload.session_id,
@@ -126,7 +127,7 @@ def create_assessment(
             explanation=explanation,
             evidence=analysis_result,
             policy_version=classification["policy_version"],
-            model_version=None,
+            model_version=explanation_source,
             idempotency_key=payload.idempotency_key,
             supersedes_id=payload.supersedes_id,
             expected_version=payload.expected_version,
@@ -140,6 +141,7 @@ def create_assessment(
         "cutoff_cycle": record.cutoff_cycle,
         "validity": record.validity,
         "explanation": record.explanation,
+        "explanation_source": explanation_source or "rule_based",
     }
 
 
