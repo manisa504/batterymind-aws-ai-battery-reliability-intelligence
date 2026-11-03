@@ -105,6 +105,13 @@
         text-decoration: none;
         border-radius: 4px;
       }
+      h3 {
+        color: #fff;
+        margin-top: 36px;
+      }
+      code {
+        color: #b6ff62;
+      }
       table {
         border-collapse: collapse;
         width: 100%;
@@ -198,11 +205,11 @@
           />
         </div>
         <p>
-          The AWS system uses CloudFront/S3, Cognito, an HTTPS load balancer,
-          ECS Fargate, SQS, private RDS PostgreSQL with pgvector, Bedrock,
-          Secrets Manager, and CloudWatch. The Vercel showcase uses only a
-          versioned static export.
-        </p>
+          The AWS system serves the web app and <code>/api</code> through CloudFront. The API runs on ECS Fargate
+          behind a load balancer that accepts only CloudFront traffic, validates Cognito ID tokens (MFA required),
+          stores sessions, assessments, conversation turns, and Titan embeddings in private RDS PostgreSQL with
+          pgvector and forced row-level security, and calls Amazon Bedrock models that run in us-east-2.
+          The Vercel showcase uses only a versioned static export and works without AWS.</p>
       </section>
       <section>
         <p class="kicker">Method</p>
@@ -241,19 +248,34 @@
         </table>
       </section>
       <section id="evaluation">
-        <p class="kicker">Evaluation</p>
+        <p class="kicker">Verified results</p>
         <h2>Release claims follow executed gates.</h2>
-        <p>
-          G0 and G1 have local evidence. Analytics, memory, infrastructure,
-          application, and public-release gates stay partial or blocked until
-          their remaining checks run. Live Cognito, RDS, ECS, SQS, and Bedrock
-          behavior is not claimed without an authorized deployment.
-        </p>
+        <p>Every figure below is copied from a report in the repository. Gates use only PASS, FAIL, or BLOCKED.</p>
+        <table><tr><th>Gate</th><th>Status</th></tr><tr><td>G0</td><td>Product and requirements: PASS</td></tr><tr><td>G1</td><td>Real dataset validation: PASS</td></tr><tr><td>G2</td><td>AWS architecture: PASS (local design and IaC)</td></tr><tr><td>G3</td><td>Battery analytics: PASS</td></tr><tr><td>G4</td><td>Persistent memory: BLOCKED</td></tr><tr><td>G5</td><td>AWS production application: BLOCKED</td></tr><tr><td>G6</td><td>Independent showcase: PASS</td></tr><tr><td>G7</td><td>Documentation and release: BLOCKED</td></tr></table>
+        <h3>RUL baselines, chronological evaluation</h3>
+        <p>Mean absolute capacity error (Ah) on cycles after each cell's training cutoff; lower is better. The linear
+        model beats persistence on some cells and not others, and the dataset has four cells, so no broad
+        generalization is claimed.</p>
+        <table><tr><th>Cell</th><th>Trained through cycle</th><th>Linear MAE</th><th>Persistence MAE</th></tr><tr><td>B0005</td><td>100</td><td>0.0227</td><td>0.1119</td></tr><tr><td>B0006</td><td>100</td><td>0.1351</td><td>0.1250</td></tr><tr><td>B0007</td><td>100</td><td>0.0276</td><td>0.0890</td></tr><tr><td>B0018</td><td>79</td><td>0.0511</td><td>0.0566</td></tr></table>
+        <h3>Live AWS end-to-end run</h3>
+        <p>21 of 21 checks passed on 2026-11-03 against the deployed stack:
+        MFA sign-in, evidence-grounded chat, semantic recall of earlier assessments through pgvector, cross-user
+        denial, and recall after a forced container restart. Median latency from the test client over the public URL:
+        assessment with Bedrock and embedding 1883 ms,
+        chat reply 1733 ms (includes network time).</p>
         <div class="actions">
-          <a href="architecture/batterymind-aws.drawio">Editable diagram</a
-          ><a href="architecture/batterymind-aws.md">Architecture guide</a
-          ><a href="architecture/batterymind-aws.png">Architecture PNG</a>
+          <a href="architecture/batterymind-aws.drawio">Editable diagram</a><a href="architecture/batterymind-aws.md">Architecture guide</a><a href="architecture/batterymind-aws.png">Architecture PNG</a>
+          <a href="https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence/tree/main/reports">Evidence reports</a>
         </div>
+      </section>
+      <section id="app">
+        <p class="kicker">Live application</p>
+        <h2>An assistant that answers from measurements and remembers.</h2>
+        <p>The BatteryMind app is hosted on Vercel and calls the AWS API. After sign-in it answers questions from the
+        measured NASA data, recalls your earlier saved assessments, and shows what context it used. The AWS stack is
+        run on a schedule to limit cost, so the app may be offline; the independent showcase below always works.</p>
+        <div class="actions"><a href="https://batterymind-app.vercel.app">Open the BatteryMind app</a>
+        <a href="https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence">Source code</a></div>
       </section>
       <section id="showcase">
         <p class="kicker">Independent showcase</p>
@@ -276,10 +298,10 @@
           Production uses Cognito, least-privilege roles, private database
           networking, encryption, secret storage, immutable images, bounded
           retries, and log retention. RDS and the load balancer create idle
-          costs even when ECS scales to zero. The current dataset is small and
-          laboratory-specific; model performance cannot establish broad product
-          generalization.
-        </p>
+          costs even when ECS scales to zero. The current dataset is small and laboratory-specific; model performance cannot establish broad product
+          generalization. Not yet verified: a browser-driven UI test, recall across separate sessions, the SQS ingestion
+          path, and CloudWatch alarm and tracing review. The container image scan reports three HIGH findings in
+          base-operating-system packages.</p>
       </section>
     </main>
     <footer>
