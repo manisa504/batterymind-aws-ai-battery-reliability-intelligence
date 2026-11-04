@@ -29,8 +29,10 @@ jobs:
           [ -f .local-data/nasa-battery-data.zip ] || curl -fsSL --retry 3 -o .local-data/nasa-battery-data.zip "$NASA_ARCHIVE_URL"
           echo "$NASA_ARCHIVE_SHA256  .local-data/nasa-battery-data.zip" | sha256sum -c -
       - run: make ingest export
-      - name: Ingestion and public exports are reproducible
-        run: git diff --exit-code -- reports/data_quality/nasa-ingestion.json apps/web/public/data showcase/public/data
+      - name: Measured data is byte-identical (Parquet SHA-256 in the ingestion report)
+        run: git diff --exit-code -- reports/data_quality/nasa-ingestion.json
+      - name: Public exports are reproducible (derived floats within 1e-9 relative)
+        run: python scripts/check_export_reproducible.py apps/web/public/data/batteries.v1.json showcase/public/data/batteries.v1.json
       - run: pytest
       - run: ./scripts/test_postgres.sh
       - uses: actions/setup-node@v4

@@ -245,6 +245,7 @@ class BatteryMindStack(Stack):
                 "BATTERYMIND_DATABASE_NAME": "batterymind",
                 "BATTERYMIND_DATA_BUCKET": data_bucket.bucket_name,
                 "BATTERYMIND_ALLOWED_ORIGIN": ",".join(app_origins),
+                "BATTERYMIND_ENVIRONMENT": "production",
                 "BATTERYMIND_LOCAL_AUTH_ENABLED": "false",
             },
             secrets={

@@ -1,6 +1,7 @@
 from pathlib import Path
 from urllib.parse import quote_plus
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,10 +22,17 @@ class Settings(BaseSettings):
     bedrock_embedding_model_id: str | None = None
     bedrock_max_tokens: int = 500
     allowed_origin: str = "http://localhost:5173"
-    local_auth_enabled: bool = True
+    # Trusts the X-BatteryMind-User header without a token. Local development only; fails closed by default.
+    local_auth_enabled: bool = False
     alb_arn: str | None = None
     cognito_user_pool_id: str | None = None
     cognito_client_id: str | None = None
+
+    @model_validator(mode="after")
+    def _local_auth_only_in_local(self):
+        if self.local_auth_enabled and self.environment != "local":
+            raise ValueError("local_auth_enabled is only permitted when environment is 'local'")
+        return self
 
     @property
     def resolved_database_url(self) -> str:

@@ -33,7 +33,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in settings.allowed_origin.split(",") if o.strip()],
     allow_methods=["GET", "POST", "DELETE"],
-    allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-BatteryMind-User"],
+    allow_headers=["Authorization", "Content-Type", "Idempotency-Key"]
+    + (["X-BatteryMind-User"] if settings.local_auth_enabled else []),
 )
 engine = create_engine(settings.resolved_database_url)
 SessionFactory = sessionmaker(bind=engine)
