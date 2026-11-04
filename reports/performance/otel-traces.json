@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "executed_utc": "2026-11-04T02:42:05Z",
+  "image": "v13",
+  "method": "Four public API requests through CloudFront, then X-Ray GetTraceSummaries with service(\"batterymind-api\") over the last 15 minutes and BatchGetTraces on one trace.",
+  "path": "FastAPI OpenTelemetry SDK -> OTLP/HTTP 127.0.0.1:4318 -> CloudWatch agent sidecar 1.300074.1b2005 -> AWS X-Ray (us-east-2)",
+  "traces_found": 4,
+  "traces": [
+    {"id": "1-6aea9b7c-be8e3cb6c99aaf8f0be734e3", "path": "/api/v1/batteries/B0005/analysis?cutoff=100", "status": 200, "duration_ms": 107},
+    {"id": "1-6aea9b7d-74089488bf88b33fec5baae1", "path": "/api/v1/batteries/B0006/analysis", "status": 200, "duration_ms": 53},
+    {"id": "1-6aea9b7c-93563f2d986a7339b557e88a", "path": "/api/v1/batteries", "status": 200, "duration_ms": 5},
+    {"id": "1-6aea9b7c-af9eb05ca38faa5127fe14b7", "path": "/api/v1/evaluation", "status": 200, "duration_ms": 3}
+  ],
+  "not_verified": "Spans for SQLAlchemy and Bedrock calls were not inspected live (these requests were public analytics calls); they are covered by instrumentation but only the HTTP server spans were observed in X-Ray."
+}

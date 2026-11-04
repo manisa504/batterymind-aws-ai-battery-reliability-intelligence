@@ -34,6 +34,8 @@ jobs:
       - name: Public exports are reproducible (derived floats within 1e-9 relative)
         run: python scripts/check_export_reproducible.py apps/web/public/data/batteries.v1.json showcase/public/data/batteries.v1.json
       - run: pytest
+      - name: Documentation page matches gate files and reports
+        run: python scripts/build_docs_page.py --check
       - run: ./scripts/test_postgres.sh
       - uses: actions/setup-node@v4
         with: {node-version: '22', cache: npm, cache-dependency-path: '**/package-lock.json'}
