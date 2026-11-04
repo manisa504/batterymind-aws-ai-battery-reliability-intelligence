@@ -13,5 +13,38 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: us-east-2
       - run: aws sts get-caller-identity
-      - run: echo "Deployment requires reviewed CDK diff and environment approval."
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Resolve immutable release image
+        id: release
+        run: |
+          repository=$(aws cloudformation describe-stacks --stack-name BatteryMindDemo --query 'Stacks[0].Outputs[?OutputKey==`RepositoryUri`].OutputValue' --output text)
+          echo "repository=$repository" >> "$GITHUB_OUTPUT"
+          echo "tag=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+      - uses: aws-actions/amazon-ecr-login@v2
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: ${{ steps.release.outputs.repository }}:${{ steps.release.outputs.tag }}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+        working-directory: infra/aws-cdk
+      - name: Review deployment diff
+        working-directory: infra/aws-cdk
+        run: >-
+          npx --yes aws-cdk@latest diff --method template
+          -c region=us-east-2 -c cloudFrontPrefixListId=pl-b6a144df
+          -c appOrigins=https://batterymind-app.vercel.app
+          -c desiredCount=1 -c imageTag=${{ steps.release.outputs.tag }}
+      - name: Deploy reviewed release
+        working-directory: infra/aws-cdk
+        run: >-
+          npx --yes aws-cdk@latest deploy BatteryMindDemo --require-approval never
+          -c region=us-east-2 -c cloudFrontPrefixListId=pl-b6a144df
+          -c appOrigins=https://batterymind-app.vercel.app
+          -c desiredCount=1 -c imageTag=${{ steps.release.outputs.tag }}
 

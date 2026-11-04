@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "region": "us-east-2",
+  "priced_on": "2026-11-02",
+  "currency": "USD",
+  "eight_hour_fixed_subtotal": 2.95,
+  "always_on_monthly_reference": 60.80,
+  "items": [
+    {"resource": "RDS PostgreSQL db.t4g.micro", "demo_cost": 0.13, "monthly_cost": 11.52},
+    {"resource": "RDS gp2 20 GB", "demo_cost": 2.30, "monthly_cost": 2.30},
+    {"resource": "ECS Fargate ARM 0.5 vCPU / 1 GB", "demo_cost": 0.16, "monthly_cost": 14.22},
+    {"resource": "Application Load Balancer", "demo_cost": 0.18, "monthly_cost": 16.20},
+    {"resource": "ALB capacity at no more than 1 LCU", "demo_cost": 0.06, "monthly_cost": 5.76},
+    {"resource": "Three assumed public IPv4 addresses", "demo_cost": 0.12, "monthly_cost": 10.80}
+  ],
+  "excluded_usage": ["S3", "CloudFront", "ECR", "snapshots", "logs", "data transfer", "Bedrock", "taxes"],
+  "note": "Reference estimate, not an AWS bill. RDS storage and retained snapshots can continue to cost after compute is stopped."
+}

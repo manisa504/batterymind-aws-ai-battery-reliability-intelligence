@@ -1,23 +1,24 @@
 {
   "region": "us-east-2",
   "stack": "BatteryMindDemo",
-  "stack_status": "CREATE_COMPLETE",
+  "stack_status": "UPDATE_COMPLETE",
   "recorded": "2026-11-03",
-  "notes": "First attempt rolled back (PostgreSQL 16.8 no longer offered); retried with 16.15.",
-  "public_url": "https://d1j7jpzzsqdmya.cloudfront.net",
+  "notes": "Professional respin from the validated main checkpoint; PostgreSQL 16.15, one ECS task, AWS-generated CloudFront HTTPS hostname, and no paid domain.",
+  "public_url": "https://dve60f8xmf6go.cloudfront.net",
+  "vercel_app_url": "https://batterymind-app.vercel.app",
   "image": {
-    "tag": "v5",
-    "digest": "sha256:b391fb69cd3e50e06735c585157e5a03b37402a71f83e9d617295f3c5960b56a",
+    "tag": "v12",
+    "digest": "sha256:dbe79a4d39c8752c4f575062bf58e797e27d75e0772ed84972c13e51cdf18cec",
     "architecture": "arm64",
     "ecr_scan": {
       "status": "COMPLETE",
       "HIGH": 3,
       "MEDIUM": 9,
       "LOW": 3,
-      "scanned_tag": "v5",
-      "high_findings": "Debian base packages only: glibc x2, zlib"
+      "scanned_tag": "v12",
+      "high_findings": "Latest python:3.12-slim base still reports glibc x2 and zlib; ECR provides no fixed package versions. The affected strfmon, deprecated DNS-printing, and nonblocking gzwrite paths are not used by this workload."
     },
-    "note": "v3 supersedes release (immutable tags). ECR scan above was for release; v3 not re-scanned here."
+    "note": "v12 is the immutable release with promoted-S3 data loading and operating-cost evidence."
   },
   "ecs": {
     "desired": 1,
@@ -25,13 +26,17 @@
     "state": "steady"
   },
   "executed_checks": {
-    "live_e2e": "tests/e2e/run_live.py: 21 checks, status PASS",
-    "evidence": "reports/performance/live-performance.json"
+    "live_e2e": "tests/e2e/run_live.py: status PASS, including cross-session, correction, concurrency and restart",
+    "evidence": "reports/performance/live-performance.json",
+    "anonymous_aws_frontend_http": 200,
+    "anonymous_aws_api_http": 200,
+    "anonymous_vercel_app_http": 200,
+    "browser_showcase": "tests/browser/showcase.mjs: PASS",
+    "aws_ingestion": "reports/data_quality/aws-ingestion.json: PASS"
   },
   "not_yet_executed": [
-    "browser-driven UI test",
-    "SQS/ingestion job path",
-    "CloudWatch alarms and OpenTelemetry tracing review"
+    "OpenTelemetry trace export (setup skill unavailable)",
+    "GitHub OIDC provider (explicit Organizations SCP deny)"
   ],
   "fixes": [
     "Bedrock on-demand Nova model rejected in us-east-2 and its inference profile can route out of region; replaced with in-region Gemma 3 12B",

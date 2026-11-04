@@ -1,0 +1,34 @@
+{
+  "run_id": "aws-20261103-v11",
+  "region": "us-east-2",
+  "status": "PASS",
+  "started_utc": "2026-11-03T23:23:30.260414+00:00",
+  "finished_utc": "2026-11-03T23:23:43.874193+00:00",
+  "duration_s": 13.5,
+  "image": {
+    "tag": "v11",
+    "digest": "sha256:56fad7c9bf75e8009d586354dc4f5c80f6f95c9c50868b795347a9e9fb9ea67f"
+  },
+  "archive": {
+    "sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
+    "bytes": 209708670,
+    "s3_key": "raw/nasa/82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e.zip"
+  },
+  "rows": {
+    "cycles": 2167,
+    "samples": 2089050,
+    "impedance": 42576
+  },
+  "parquet_sha256": {
+    "cycles": "d66c5a60e832a81d21675c5dc918d43dcc22231ed3cc13cc01bfc820a3c88968",
+    "samples": "0945e423711dc2cea430ac8a59d22fb6aeafa1c15d1feb1f6f518502a3bb935d",
+    "impedance": "b00361cebade4a04ad65ab0cfd4cc3746e2de59f44e7e82f18a4a9f5308dcb4e"
+  },
+  "matches_committed_evidence": {
+    "cycles": true,
+    "samples": true,
+    "impedance": true
+  },
+  "promoted_to_current": true,
+  "evidence_object": "processed/runs/aws-20261103-v11/status.json"
+}

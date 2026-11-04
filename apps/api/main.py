@@ -5,7 +5,10 @@ import logging
 from functools import lru_cache
 from pathlib import Path
 
+import boto3
 import pandas as pd
+from botocore.config import Config
+from botocore.exceptions import ClientError
 from fastapi import Depends, FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -40,10 +43,27 @@ Base.metadata.create_all(engine)
 
 @lru_cache
 def cycles() -> pd.DataFrame:
+    if settings.data_bucket:
+        cached = Path("/tmp/batterymind/cycles.parquet")
+        cached.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            boto3.client(
+                "s3",
+                region_name=settings.aws_region,
+                config=Config(retries={"mode": "standard", "max_attempts": 3}),
+            ).download_file(settings.data_bucket, "processed/current/cycles.parquet", str(cached))
+            _data_source["cycles"] = f"s3://{settings.data_bucket}/processed/current/cycles.parquet"
+            return pd.read_parquet(cached)
+        except ClientError as error:
+            log.warning("Current S3 cycles are unavailable; using the baked verified copy: %s", error)
     path = settings.processed_data_dir / "cycles.parquet"
     if not path.exists():
         raise RuntimeError("Processed data is unavailable; run the verified ingestion pipeline")
+    _data_source["cycles"] = str(path)
     return pd.read_parquet(path)
+
+
+_data_source = {"cycles": "not_loaded"}
 
 
 def db_session():
@@ -67,10 +87,12 @@ class AssessmentCreate(BaseModel):
 
 @app.get("/health")
 def health():
+    frame = cycles()
     return {
         "status": "ok",
         "region": settings.aws_region,
-        "data_available": (settings.processed_data_dir / "cycles.parquet").exists(),
+        "data_available": not frame.empty,
+        "data_source": _data_source["cycles"],
     }
 
 
@@ -83,6 +105,7 @@ def batteries():
             for cell, rows in frame.groupby("battery_id")
         ],
         "provenance_manifest": "data/manifests/nasa-source.json",
+        "data_source": _data_source["cycles"],
     }
 
 
@@ -212,6 +235,7 @@ def evaluation():
         "rul_baselines": _report("model_evaluation/rul-baselines.json"),
         "memory_tests": _report("memory/memory-tests.json"),
         "performance": _report("performance/live-performance.json"),
+        "operating_cost": _report("cost/demo-cost.json"),
     }
 
 

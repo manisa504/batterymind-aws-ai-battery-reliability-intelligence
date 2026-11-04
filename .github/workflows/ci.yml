@@ -5,6 +5,9 @@ on:
     branches: [main]
 permissions:
   contents: read
+env:
+  NASA_ARCHIVE_URL: https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip
+  NASA_ARCHIVE_SHA256: 82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -14,13 +17,33 @@ jobs:
         with: {python-version: '3.12'}
       - run: pip install -e '.[dev]'
       - run: ruff check apps packages tests scripts
+      - run: ruff format --check apps packages tests scripts
+      # Real NASA data is not committed. Download it, verify the recorded SHA-256, and re-run ingestion.
+      - uses: actions/cache@v4
+        with:
+          path: .local-data/nasa-battery-data.zip
+          key: nasa-archive-${{ env.NASA_ARCHIVE_SHA256 }}
+      - name: Download and verify NASA archive
+        run: |
+          mkdir -p .local-data
+          [ -f .local-data/nasa-battery-data.zip ] || curl -fsSL --retry 3 -o .local-data/nasa-battery-data.zip "$NASA_ARCHIVE_URL"
+          echo "$NASA_ARCHIVE_SHA256  .local-data/nasa-battery-data.zip" | sha256sum -c -
+      - run: make ingest export
+      - name: Ingestion and public exports are reproducible
+        run: git diff --exit-code -- reports/data_quality/nasa-ingestion.json apps/web/public/data showcase/public/data
       - run: pytest
+      - run: ./scripts/test_postgres.sh
       - uses: actions/setup-node@v4
         with: {node-version: '22', cache: npm, cache-dependency-path: '**/package-lock.json'}
       - run: npm ci && npm run build
         working-directory: apps/web
       - run: npm ci && npm run build
         working-directory: showcase
+      - name: Browser test against the built showcase
+        run: |
+          (cd showcase && nohup npx vite preview --port 4173 --strictPort --host 127.0.0.1 > /tmp/preview.log 2>&1 &)
+          for i in $(seq 1 40); do curl -fs -o /dev/null http://127.0.0.1:4173/ && break; sleep 1; done
+          SHOWCASE_URL=http://127.0.0.1:4173/ CHROME_BIN="$(command -v google-chrome || command -v chromium)" node tests/browser/showcase.mjs
   infrastructure:
     runs-on: ubuntu-latest
     steps:
@@ -31,4 +54,3 @@ jobs:
         working-directory: infra/aws-cdk
       - run: pytest && python app.py
         working-directory: infra/aws-cdk
-

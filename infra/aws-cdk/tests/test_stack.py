@@ -61,3 +61,50 @@ def test_initial_deployment_stays_scaled_to_zero_and_pins_bedrock_models():
             )
         },
     )
+    result.has_resource_properties(
+        "AWS::Pipes::Pipe",
+        {
+            "DesiredState": "RUNNING",
+            "SourceParameters": {"SqsQueueParameters": {"BatchSize": 1}},
+            "TargetParameters": Match.object_like(
+                {
+                    "EcsTaskParameters": Match.object_like(
+                        {
+                            "LaunchType": "FARGATE",
+                            "TaskCount": 1,
+                            "NetworkConfiguration": Match.object_like(
+                                {"AwsvpcConfiguration": Match.object_like({"AssignPublicIp": "ENABLED"})}
+                            ),
+                        }
+                    )
+                }
+            ),
+        },
+    )
+
+
+def test_ingestion_pipe_runs_a_separate_arm_fargate_batch_task():
+    result = template()
+    result.has_resource_properties(
+        "AWS::ECS::TaskDefinition",
+        {
+            "Cpu": "2048",
+            "Memory": "8192",
+            "RuntimePlatform": {"CpuArchitecture": "ARM64"},
+            "ContainerDefinitions": Match.array_with(
+                [Match.object_like({"Name": "Ingestion", "Command": ["python", "-m", "packages.ingestion.worker"]})]
+            ),
+        },
+    )
+
+
+def test_operational_alarms_cover_api_database_and_dlq():
+    result = template()
+    result.resource_count_is("AWS::CloudWatch::Alarm", 5)
+    result.has_resource_properties("AWS::CloudWatch::Alarm", {"MetricName": "HTTPCode_Target_5XX_Count"})
+    result.has_resource_properties("AWS::CloudWatch::Alarm", {"MetricName": "RunningTaskCount"})
+    result.has_resource_properties("AWS::CloudWatch::Alarm", {"MetricName": "CPUUtilization"})
+    result.has_resource_properties("AWS::CloudWatch::Alarm", {"MetricName": "FreeStorageSpace"})
+    result.has_resource_properties(
+        "AWS::CloudWatch::Alarm", {"MetricName": "ApproximateNumberOfMessagesVisible", "Threshold": 1}
+    )

@@ -31,8 +31,15 @@ def engine():
 
 def store(repo, session_id, key, cutoff, decision="ENGINEERING_REVIEW"):
     return repo.store_assessment(
-        session_id=session_id, battery_id="B0005", cutoff_cycle=cutoff, decision=decision, explanation=key,
-        evidence={"soh_percent": 70.0}, policy_version="p", model_version=None, idempotency_key=key * 8,
+        session_id=session_id,
+        battery_id="B0005",
+        cutoff_cycle=cutoff,
+        decision=decision,
+        explanation=key,
+        evidence={"soh_percent": 70.0},
+        policy_version="p",
+        model_version=None,
+        idempotency_key=key * 8,
     )
 
 

@@ -19,6 +19,7 @@ import time
 import urllib.error
 import urllib.request
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import certifi
@@ -188,6 +189,65 @@ try:
         status == 200 and chat1["context"]["semantic_hits"] >= 1,
         chat1["context"]["semantic_hits"] if status == 200 else "",
     )
+    status, sess2 = call(
+        "POST", "/sessions", tok_a, {"battery_id": "B0005", "objective": "Independent follow-up session"}
+    )
+    status2, cross_session = call(
+        "POST",
+        "/chat",
+        tok_a,
+        {
+            "session_id": sess2.get("id"),
+            "cutoff_cycle": 120,
+            "message": "Recall the assessment I saved in my other session.",
+        },
+        "chat_cross_session",
+    )
+    check(
+        "assessment memory recalled across two sessions",
+        status == 201 and status2 == 200 and cross_session["context"]["prior_assessments_included"] >= 1,
+        status2,
+    )
+
+    status, before_correction = call("GET", "/batteries/B0005/history", tok_a)
+    original = next(x for x in before_correction["items"] if x["id"] == ids[1])
+    status2, correction = call(
+        "POST",
+        "/assessments",
+        tok_a,
+        {
+            "session_id": sess["id"],
+            "battery_id": "B0005",
+            "cutoff_cycle": 125,
+            "idempotency_key": f"e2e-correction-{uuid.uuid4().hex}",
+            "supersedes_id": original["id"],
+            "expected_version": original["version"],
+        },
+        "assessment_correction",
+    )
+    status3, corrected_history = call("GET", "/batteries/B0005/history", tok_a)
+    corrected_original = next(x for x in corrected_history["items"] if x["id"] == original["id"])
+    check(
+        "live correction supersedes the prior assessment",
+        status == 200 and status2 == 201 and status3 == 200 and corrected_original["validity"] == "superseded",
+        correction.get("id") if isinstance(correction, dict) else correction,
+    )
+
+    concurrent_key = f"e2e-concurrent-{uuid.uuid4().hex}"
+    concurrent_body = {
+        "session_id": sess["id"],
+        "battery_id": "B0005",
+        "cutoff_cycle": 130,
+        "idempotency_key": concurrent_key,
+    }
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        concurrent = list(pool.map(lambda _: call("POST", "/assessments", tok_a, concurrent_body), range(2)))
+    check(
+        "concurrent idempotent writes return one assessment",
+        all(status == 201 for status, _ in concurrent)
+        and len({payload.get("id") for _, payload in concurrent if isinstance(payload, dict)}) == 1,
+        [status for status, _ in concurrent],
+    )
     check(
         "context compressed within budget", status == 200 and chat1["context"]["characters_after_compression"] <= 5000
     )
@@ -222,7 +282,7 @@ try:
 
     check("ECS task replaced (container restart)", wait_for_stable_service())
     status, history_a = call("GET", "/batteries/B0005/history", tok_a)
-    check("after restart: assessments recalled", status == 200 and len(history_a["items"]) == 2, status)
+    check("after restart: assessments recalled", status == 200 and len(history_a["items"]) >= 4, status)
     status, turns = call("GET", f"/sessions/{sess['id']}/turns", tok_a)
     check("after restart: conversation recalled", status == 200 and len(turns["items"]) == 4, status)
     status, chat3 = call(
@@ -240,10 +300,15 @@ try:
 
     status, _ = call("DELETE", f"/assessments/{ids[0]}", tok_a)
     status2, history_a = call("GET", "/batteries/B0005/history", tok_a)
-    check("deletion removes assessment", status == 204 and len(history_a["items"]) == 1, (status, status2))
+    check(
+        "deletion removes assessment",
+        status == 204 and all(x["id"] != ids[0] for x in history_a["items"]),
+        (status, status2),
+    )
     status, usage = call("GET", "/usage", tok_a)
     check("usage metrics recorded", status == 200 and usage["assistant_replies"] >= 3, usage)
     call("DELETE", f"/sessions/{sess['id']}", tok_a)
+    call("DELETE", f"/sessions/{sess2['id']}", tok_a)
 finally:
     for name in users:
         try:

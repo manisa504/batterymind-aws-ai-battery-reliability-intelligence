@@ -7,6 +7,9 @@ from aws_cdk import (
     Stack,
 )
 from aws_cdk import (
+    aws_cloudwatch as cloudwatch,
+)
+from aws_cdk import (
     aws_cloudfront as cloudfront,
 )
 from aws_cdk import (
@@ -32,6 +35,9 @@ from aws_cdk import (
 )
 from aws_cdk import (
     aws_logs as logs,
+)
+from aws_cdk import (
+    aws_pipes as pipes,
 )
 from aws_cdk import (
     aws_rds as rds,
@@ -253,7 +259,12 @@ class BatteryMindStack(Stack):
             ),
         )
         container.add_port_mappings(ecs.PortMapping(container_port=8000))
-        data_bucket.grant_read_write(task.task_role)
+        task.task_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=["s3:GetObject"],
+                resources=[data_bucket.arn_for_objects("processed/current/cycles.parquet")],
+            )
+        )
         database_secret.grant_read(task.task_role)
         task.task_role.add_to_principal_policy(
             iam.PolicyStatement(
@@ -270,7 +281,7 @@ class BatteryMindStack(Stack):
                 NagPackSuppression(
                     id="AwsSolutions-IAM5",
                     reason=(
-                        "The task needs object-prefix access in its dedicated data bucket and model "
+                        "The task needs one current data object and model "
                         "access is constrained to Bedrock model resource types."
                     ),
                 )
@@ -291,6 +302,133 @@ class BatteryMindStack(Stack):
                 ],
                 apply_to_children=True,
             )
+
+        ingestion_log_group = logs.LogGroup(
+            self, "IngestionLogs", retention=logs.RetentionDays.ONE_MONTH, removal_policy=RemovalPolicy.DESTROY
+        )
+        ingestion_task = ecs.FargateTaskDefinition(
+            self,
+            "IngestionTask",
+            cpu=2048,
+            memory_limit_mib=8192,
+            runtime_platform=ecs.RuntimePlatform(cpu_architecture=ecs.CpuArchitecture.ARM64),
+        )
+        ingestion_container = ingestion_task.add_container(
+            "Ingestion",
+            image=ecs.ContainerImage.from_ecr_repository(
+                repository, str(self.node.try_get_context("imageTag") or "release")
+            ),
+            command=["python", "-m", "packages.ingestion.worker"],
+            logging=ecs.LogDrivers.aws_logs(stream_prefix="ingestion", log_group=ingestion_log_group),
+            environment={
+                "BATTERYMIND_AWS_REGION": self.region,
+                "BATTERYMIND_DATA_BUCKET": data_bucket.bucket_name,
+            },
+        )
+        ingestion_task.task_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=["s3:GetObject", "s3:PutObject"],
+                resources=[
+                    data_bucket.arn_for_objects("raw/nasa/*"),
+                    data_bucket.arn_for_objects("processed/runs/*"),
+                    data_bucket.arn_for_objects("processed/current/*"),
+                ],
+            )
+        )
+        ingestion_task.task_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=["s3:ListBucket"],
+                resources=[data_bucket.bucket_arn],
+                conditions={"StringLike": {"s3:prefix": ["raw/nasa/*"]}},
+            )
+        )
+        NagSuppressions.add_resource_suppressions(
+            ingestion_task,
+            [
+                NagPackSuppression(
+                    id="AwsSolutions-ECS2",
+                    reason="The batch task receives only bucket and run-request metadata; it has no credentials in env.",
+                )
+            ],
+        )
+        NagSuppressions.add_resource_suppressions(
+            ingestion_task.task_role,
+            [
+                NagPackSuppression(
+                    id="AwsSolutions-IAM5",
+                    reason="The ingestion task is limited to objects under three explicit prefixes in its dedicated bucket.",
+                )
+            ],
+            apply_to_children=True,
+        )
+        if ingestion_task.execution_role is not None:
+            NagSuppressions.add_resource_suppressions(
+                ingestion_task.execution_role,
+                [
+                    NagPackSuppression(
+                        id="AwsSolutions-IAM5",
+                        reason="ECS-generated ECR pull and log-stream permissions require service resource wildcards.",
+                    )
+                ],
+                apply_to_children=True,
+            )
+
+        ingestion_security_group = ec2.SecurityGroup(
+            self, "IngestionSecurityGroup", vpc=vpc, allow_all_outbound=True
+        )
+        pipe_role = iam.Role(
+            self, "IngestionPipeRole", assumed_by=iam.ServicePrincipal("pipes.amazonaws.com")
+        )
+        ingestion_queue.grant_consume_messages(pipe_role)
+        pipe_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=["ecs:RunTask"],
+                resources=[ingestion_task.task_definition_arn],
+                conditions={"ArnEquals": {"ecs:cluster": cluster.cluster_arn}},
+            )
+        )
+        pass_roles = [ingestion_task.task_role.role_arn]
+        if ingestion_task.execution_role is not None:
+            pass_roles.append(ingestion_task.execution_role.role_arn)
+        pipe_role.add_to_policy(iam.PolicyStatement(actions=["iam:PassRole"], resources=pass_roles))
+        pipes.CfnPipe(
+            self,
+            "IngestionPipe",
+            role_arn=pipe_role.role_arn,
+            source=ingestion_queue.queue_arn,
+            target=cluster.cluster_arn,
+            desired_state="RUNNING",
+            source_parameters=pipes.CfnPipe.PipeSourceParametersProperty(
+                sqs_queue_parameters=pipes.CfnPipe.PipeSourceSqsQueueParametersProperty(batch_size=1)
+            ),
+            target_parameters=pipes.CfnPipe.PipeTargetParametersProperty(
+                ecs_task_parameters=pipes.CfnPipe.PipeTargetEcsTaskParametersProperty(
+                    task_definition_arn=ingestion_task.task_definition_arn,
+                    launch_type="FARGATE",
+                    platform_version="LATEST",
+                    task_count=1,
+                    network_configuration=pipes.CfnPipe.NetworkConfigurationProperty(
+                        awsvpc_configuration=pipes.CfnPipe.AwsVpcConfigurationProperty(
+                            assign_public_ip="ENABLED",
+                            subnets=vpc.select_subnets(subnet_type=ec2.SubnetType.PUBLIC).subnet_ids,
+                            security_groups=[ingestion_security_group.security_group_id],
+                        )
+                    ),
+                    overrides=pipes.CfnPipe.EcsTaskOverrideProperty(
+                        container_overrides=[
+                            pipes.CfnPipe.EcsContainerOverrideProperty(
+                                name=ingestion_container.container_name,
+                                environment=[
+                                    pipes.CfnPipe.EcsEnvironmentVariableProperty(
+                                        name="BATTERYMIND_INGEST_REQUEST", value="$.body"
+                                    )
+                                ],
+                            )
+                        ]
+                    ),
+                )
+            ),
+        )
         NagSuppressions.add_resource_suppressions(
             task,
             [
@@ -381,6 +519,52 @@ class BatteryMindStack(Stack):
         )
         listener = load_balancer.add_listener("Http", port=80, open=False)
         listener.add_target_groups("Forward", target_groups=[target_group])
+        cloudwatch.Alarm(
+            self,
+            "ApiTarget5xxAlarm",
+            metric=target_group.metrics.http_code_target(
+                code=elbv2.HttpCodeTarget.TARGET_5XX_COUNT,
+                period=Duration.minutes(5),
+                statistic="Sum",
+            ),
+            threshold=5,
+            evaluation_periods=1,
+            treat_missing_data=cloudwatch.TreatMissingData.NOT_BREACHING,
+        )
+        cloudwatch.Alarm(
+            self,
+            "ApiRunningTaskAlarm",
+            metric=cloudwatch.Metric(
+                namespace="ECS/ContainerInsights",
+                metric_name="RunningTaskCount",
+                dimensions_map={"ClusterName": cluster.cluster_name, "ServiceName": service.service_name},
+                period=Duration.minutes(5),
+                statistic="Minimum",
+            ),
+            threshold=1,
+            comparison_operator=cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+            evaluation_periods=2,
+            treat_missing_data=cloudwatch.TreatMissingData.BREACHING,
+        )
+        database.metric_cpu_utilization(period=Duration.minutes(5), statistic="Average").create_alarm(
+            self, "DatabaseCpuAlarm", threshold=80, evaluation_periods=3
+        )
+        database.metric_free_storage_space(period=Duration.minutes(5), statistic="Minimum").create_alarm(
+            self,
+            "DatabaseFreeStorageAlarm",
+            threshold=2 * 1024 * 1024 * 1024,
+            comparison_operator=cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
+            evaluation_periods=1,
+        )
+        dead_letter_queue.metric_approximate_number_of_messages_visible(
+            period=Duration.minutes(5), statistic="Maximum"
+        ).create_alarm(
+            self,
+            "IngestionDeadLetterAlarm",
+            threshold=1,
+            evaluation_periods=1,
+            treat_missing_data=cloudwatch.TreatMissingData.NOT_BREACHING,
+        )
         distribution.add_behavior(
             "api/*",
             origins.LoadBalancerV2Origin(
@@ -404,6 +588,8 @@ class BatteryMindStack(Stack):
         CfnOutput(self, "UserPoolClientId", value=user_pool_client.user_pool_client_id)
         CfnOutput(self, "CognitoDomain", value=domain.base_url())
         CfnOutput(self, "RepositoryUri", value=repository.repository_uri)
+        CfnOutput(self, "IngestionQueueUrl", value=ingestion_queue.queue_url)
+        CfnOutput(self, "DataBucketName", value=data_bucket.bucket_name)
 
     def _bucket(self, name: str, *, retain: bool, access_logs: s3.IBucket) -> s3.Bucket:
         return s3.Bucket(

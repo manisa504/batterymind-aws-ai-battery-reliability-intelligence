@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     environment: str = "local"
     aws_region: str = "us-east-2"
     processed_data_dir: Path = Path("data/processed")
+    data_bucket: str | None = None
     database_url: str | None = "sqlite:///./batterymind.sqlite3"
     database_host: str | None = None
     database_port: int = 5432
@@ -31,8 +32,7 @@ class Settings(BaseSettings):
             user = quote_plus(self.database_user)
             password = quote_plus(self.database_password)
             return (
-                f"postgresql+psycopg://{user}:{password}@{self.database_host}:"
-                f"{self.database_port}/{self.database_name}"
+                f"postgresql+psycopg://{user}:{password}@{self.database_host}:{self.database_port}/{self.database_name}"
             )
         if self.database_url:
             return self.database_url

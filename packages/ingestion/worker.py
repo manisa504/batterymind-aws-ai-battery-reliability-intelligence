@@ -70,8 +70,14 @@ def run(request: dict, bucket: str, s3=None) -> dict:
             archive = work_dir / "archive.zip"
             size = _download(manifest["archive_url"], archive)
             digest = sha256(archive)
-            if digest != manifest["archive_sha256"] or size != manifest["archive_bytes"]:
-                raise ValueError(f"Archive does not match manifest (sha256 {digest}, {size} bytes)")
+            hash_matches = digest == manifest["archive_sha256"]
+            size_matches = size == manifest["archive_bytes"]
+            if not hash_matches or not size_matches:
+                raise ValueError(
+                    "Archive does not match manifest "
+                    f"(sha256_matches={hash_matches}, size_matches={size_matches}, "
+                    f"actual_sha256={digest}, actual_bytes={size})"
+                )
             raw_key = f"raw/nasa/{digest}.zip"
             if not _exists(s3, bucket, raw_key):
                 s3.upload_file(str(archive), bucket, raw_key, ExtraArgs={"Metadata": {"sha256": digest}})

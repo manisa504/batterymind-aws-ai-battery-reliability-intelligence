@@ -124,7 +124,8 @@ export function History({config, batteryId, cutoff}: Ctx & {config: AppConfig}) 
 }
 
 type PerCell = Record<string, {linear: {mae_ah: number}; persistence: {mae_ah: number}; training_cutoff_cycle: number}>;
-type Evaluation = {rul_baselines: {status: string; per_cell_chronological: PerCell} | null; memory_tests: {status: string; passed?: string[]; remaining?: string[]} | null; performance: {status: string; [k: string]: unknown} | null};
+type Cost = {status:string;region:string;priced_on:string;currency:string;eight_hour_fixed_subtotal:number;always_on_monthly_reference:number;items:{resource:string;demo_cost:number;monthly_cost:number}[];excluded_usage:string[];note:string};
+type Evaluation = {rul_baselines: {status: string; per_cell_chronological: PerCell} | null; memory_tests: {status: string; passed?: string[]; remaining?: string[]} | null; performance: {status: string; [k: string]: unknown} | null; operating_cost: Cost | null};
 
 export function EvaluationView({config, signedIn}: {config: AppConfig | null; signedIn: boolean}) {
   const [ev, setEv] = useState<Evaluation | null>(null);
@@ -143,6 +144,9 @@ export function EvaluationView({config, signedIn}: {config: AppConfig | null; si
         <tbody>{Object.entries(cells).map(([id, c]) => <tr key={id}><td>{id}</td><td>{c.training_cutoff_cycle}</td><td>{c.linear.mae_ah.toFixed(4)}</td><td>{c.persistence.mae_ah.toFixed(4)}</td></tr>)}</tbody></table></section>
     <section className="panel"><h3>Memory tests</h3><p>Report status: <b>{ev?.memory_tests?.status ?? 'unavailable'}</b></p>
       <ul>{(ev?.memory_tests?.passed ?? []).map(x => <li key={x}>Passed: {x}</li>)}</ul><ul>{(ev?.memory_tests?.remaining ?? []).map(x => <li key={x}>Not yet executed: {x}</li>)}</ul></section>
+    <section className="panel"><h3>Operating cost reference · {ev?.operating_cost?.region ?? 'us-east-2'}</h3>
+      {ev?.operating_cost ? <><p><b>${ev.operating_cost.eight_hour_fixed_subtotal.toFixed(2)}</b> modeled 8-hour fixed subtotal · <b>${ev.operating_cost.always_on_monthly_reference.toFixed(2)}</b> always-on monthly reference</p><table><thead><tr><th>Resource</th><th>8-hour demo</th><th>Monthly reference</th></tr></thead><tbody>{ev.operating_cost.items.map(x=><tr key={x.resource}><td>{x.resource}</td><td>${x.demo_cost.toFixed(2)}</td><td>${x.monthly_cost.toFixed(2)}</td></tr>)}</tbody></table><p className="hint">{ev.operating_cost.note} Excludes {ev.operating_cost.excluded_usage.join(', ')}. Priced {ev.operating_cost.priced_on}.</p></> : <p className="hint">Cost evidence is unavailable.</p>}
+    </section>
     <section className="panel"><h3>Your assistant usage</h3>
       {usage ? <p>{usage.assistant_replies} replies · {usage.input_tokens} input / {usage.output_tokens} output tokens · mean latency {usage.mean_latency_ms} ms</p> : <p className="hint">{signedIn ? 'No usage recorded yet.' : 'Sign in to see your own usage.'}</p>}
       <p>Performance report: <b>{ev?.performance?.status ?? 'unavailable'}</b></p></section>

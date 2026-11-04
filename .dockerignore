@@ -16,6 +16,10 @@ reports/*
 !reports/model_evaluation
 !reports/memory
 !reports/performance
+!reports/data_quality
+!reports/data_quality/nasa-ingestion.json
+!reports/cost
+!reports/cost/demo-cost.json
 showcase
 tests
 *.sqlite3
