@@ -1,8 +1,3 @@
-import os
-
-os.environ["BATTERYMIND_PROCESSED_DATA_DIR"] = "data/processed"
-os.environ["BATTERYMIND_DATABASE_URL"] = "sqlite://"
-
 from fastapi.testclient import TestClient
 
 from apps.api.main import app
