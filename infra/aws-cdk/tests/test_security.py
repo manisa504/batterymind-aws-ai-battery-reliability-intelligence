@@ -82,3 +82,18 @@ def test_cognito_requires_mfa_strong_passwords_and_no_self_sign_up():
     assert props["MfaConfiguration"] == "ON"
     assert props["Policies"]["PasswordPolicy"]["MinimumLength"] >= 14
     assert props["AdminCreateUserConfig"]["AllowAdminCreateUserOnly"] is True
+
+
+def test_tracing_sidecar_is_pinned_local_only_and_non_essential():
+    result = template()
+    containers = [
+        c for t in resources(result, "AWS::ECS::TaskDefinition").values() for c in t["Properties"]["ContainerDefinitions"]
+    ]
+    agent = next(c for c in containers if c["Name"] == "CloudWatchAgent")
+    assert agent["Image"].endswith(":1.300074.1b2005")
+    assert agent["Essential"] is False
+    config = json.loads(next(e["Value"] for e in agent["Environment"] if e["Name"] == "CW_CONFIG_CONTENT"))
+    assert config["traces"]["traces_collected"]["otlp"]["http_endpoint"].startswith("127.0.0.1:")
+    api = next(c for c in containers if c["Name"] == "Api")
+    env = {e["Name"]: e["Value"] for e in api["Environment"] if isinstance(e["Value"], str)}
+    assert env["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] == "http://127.0.0.1:4318/v1/traces"

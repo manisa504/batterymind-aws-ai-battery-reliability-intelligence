@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 
 from aws_cdk import (
     CfnOutput,
@@ -260,6 +261,35 @@ class BatteryMindStack(Stack):
             ),
         )
         container.add_port_mappings(ecs.PortMapping(container_port=8000))
+        # OpenTelemetry: the API exports OTLP/HTTP spans to a CloudWatch agent sidecar, which sends them to
+        # AWS X-Ray. The sidecar is non-essential so a tracing fault never stops the API.
+        container.add_environment("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", "http://127.0.0.1:4318/v1/traces")
+        container.add_environment("OTEL_SERVICE_NAME", "batterymind-api")
+        task.add_container(
+            "CloudWatchAgent",
+            image=ecs.ContainerImage.from_registry("public.ecr.aws/cloudwatch-agent/cloudwatch-agent:1.300074.1b2005"),
+            essential=False,
+            cpu=64,
+            memory_reservation_mib=96,
+            logging=ecs.LogDrivers.aws_logs(stream_prefix="otel", log_group=log_group),
+            environment={
+                "CW_CONFIG_CONTENT": json.dumps(
+                    {"traces": {"traces_collected": {"otlp": {"http_endpoint": "127.0.0.1:4318"}}}}
+                ),
+            },
+        )
+        task.task_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=[
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords",
+                    "xray:GetSamplingRules",
+                    "xray:GetSamplingTargets",
+                    "xray:GetSamplingStatisticSummaries",
+                ],
+                resources=["*"],  # X-Ray does not support resource-level permissions for these actions.
+            )
+        )
         task.task_role.add_to_policy(
             iam.PolicyStatement(
                 actions=["s3:GetObject"],
@@ -282,8 +312,8 @@ class BatteryMindStack(Stack):
                 NagPackSuppression(
                     id="AwsSolutions-IAM5",
                     reason=(
-                        "The task needs one current data object and model "
-                        "access is constrained to Bedrock model resource types."
+                        "The task needs one current data object; model access is constrained to two Bedrock model "
+                        "ARNs; X-Ray trace-write actions do not support resource-level permissions."
                     ),
                 )
             ],

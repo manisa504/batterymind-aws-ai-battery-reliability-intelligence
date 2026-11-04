@@ -22,7 +22,7 @@ from packages.memory_engine import Base, MemoryRepository, apply_schema
 from packages.memory_engine.embeddings import TitanEmbedder
 from packages.prediction import estimate_linear_rul
 
-from . import chat
+from . import chat, telemetry
 from .auth import Principal, current_principal
 from .explainer import explain
 from .settings import settings
@@ -40,6 +40,7 @@ engine = create_engine(settings.resolved_database_url)
 SessionFactory = sessionmaker(bind=engine)
 apply_schema(engine)
 Base.metadata.create_all(engine)
+telemetry.configure(app, engine)
 
 
 @lru_cache

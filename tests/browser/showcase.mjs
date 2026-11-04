@@ -19,10 +19,15 @@ const chrome = spawn(chromePath, [
   '--headless=new',
   '--disable-gpu',
   '--no-sandbox',
+  '--disable-dev-shm-usage',
+  '--no-first-run',
+  '--remote-debugging-address=127.0.0.1',
   '--remote-debugging-port=9223',
   `--user-data-dir=${profile}`,
   'about:blank',
-], {stdio: 'ignore'});
+], {stdio: ['ignore', 'ignore', 'pipe']});
+let chromeErrors = '';
+chrome.stderr.on('data', chunk => { chromeErrors = (chromeErrors + chunk).slice(-4000); });
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 let socket;
@@ -37,7 +42,7 @@ async function command(method, params = {}) {
 
 try {
   let target;
-  for (let attempt = 0; attempt < 40; attempt++) {
+  for (let attempt = 0; attempt < 120; attempt++) {
     try {
       target = await fetch(
         `http://127.0.0.1:9223/json/new?${showcaseUrl}`,
@@ -48,7 +53,7 @@ try {
       await delay(250);
     }
   }
-  if (!target) throw new Error('Chrome debugging endpoint did not start');
+  if (!target) throw new Error(`Chrome debugging endpoint did not start after 30 s\n${chromeErrors}`);
   socket = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => {
     socket.onopen = resolve;
