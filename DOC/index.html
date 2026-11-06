@@ -312,7 +312,7 @@
         <p>The dataset is small and laboratory-specific; model performance cannot establish broad product
         generalization. RDS and the load balancer create idle cost even when ECS scales to zero, so the AWS
         stack runs on a schedule. Open items recorded in the gate files:</p>
-        <ul><li><b>G5</b> GitHub Actions OIDC deploy role: BLOCKED — an AWS Organizations SCP denies IAM OIDC provider creation for the project account role; deployments are run manually from reviewed <code>cdk diff</code> output.</li><li><b>G7</b> Release completeness: BLOCKED only for GitHub Actions OIDC — an AWS Organizations SCP denies creation of the account OIDC provider. The application release itself is deployed and G5 is PASS; manual deployment uses a reviewed CDK diff until the account administrator changes the SCP.</li></ul>
+        <ul><li><b>G5</b> GitHub Actions OIDC deploy role: BLOCKED — an AWS Organizations SCP denies IAM OIDC provider creation for the project account role; deployments are run manually from reviewed <code>cdk diff</code> output.</li><li><b>G7</b> GitHub Actions OIDC: BLOCKED by an AWS Organizations SCP if live AWS deployment is requested again; manual deployment from a reviewed CDK diff remains documented.</li></ul>
       <!-- generated:limits:end -->
       </section>
     </main>

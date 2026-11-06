@@ -1,38 +1,31 @@
 # BatteryMind handoff — 2026-11-06
 
-Read this, then `AGENTS.md` and `docs/gates/`. Gates use only PASS / FAIL / BLOCKED.
+## Free public portfolio
 
-## Live release
-
-- AWS `BatteryMindDemo` is live in us-east-2 at https://d2e0z15r8r846m.cloudfront.net using immutable ARM64
-  image `v14` (`sha256:6c275dfd304583f61803f9983dafbd02e01674a7152bd44f0a5c094415da1ba8`).
-- ECS is steady at 1/1. RDS PostgreSQL/pgvector is private; Cognito MFA, Bedrock, SQS ingestion, CloudWatch alarms
-  and X-Ray tracing were verified live.
-- Vercel app: https://batterymind-app.vercel.app
-- Vercel showcase: https://batterymind-showcase.vercel.app
-- GitHub Pages: https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/
 - Repository: https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence
+- Documentation: https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/
+- Recruiter showcase: https://batterymind-showcase.vercel.app
+- Vercel application shell: https://batterymind-app.vercel.app
+- No paid custom domain is configured.
 
-## Acceptance evidence
+## AWS status
 
-- Real NASA ingestion run `aws-20261106-v14`: PASS; 2,167 cycles, 2,089,050 samples and 42,576 impedance rows;
-  deterministic Parquet hashes match committed evidence (`reports/data_quality/aws-ingestion.json`).
-- Live end-to-end suite on `v14`: PASS, including two-user MFA, Bedrock explanations, Titan embeddings, pgvector
-  memory, cross-user isolation, idempotent concurrent writes, corrections, deletion and ECS restart persistence
-  (`reports/performance/live-performance.json`).
-- OpenTelemetry to X-Ray: PASS, four current release traces (`reports/performance/otel-traces.json`).
-- ECR scan: COMPLETE. Five HIGH findings are in upstream Debian base packages (glibc x2, zlib x2, apt); AWS ECR
-  reports no fixed versions. Rebuild when upstream fixes are published.
+The `BatteryMindDemo` release was deployed and fully validated in us-east-2 on image `v14`, then intentionally
+destroyed on 2026-11-06 to eliminate ongoing AWS charges. Post-teardown checks found no BatteryMind CloudFormation
+stack, S3 bucket, ECR repository, Cognito pool, RDS instance or snapshot, ECS cluster, load balancer, or log group.
+The former AWS/CloudFront URL is offline by design.
 
-## External blocker
+Historical evidence remains committed:
 
-- GitHub Actions OIDC: BLOCKED by an explicit AWS Organizations SCP denial. Account administration must allow the
-  OIDC provider before CI can deploy directly. Manual releases use reviewed `cdk diff` output.
+- Real NASA ingestion and deterministic Parquet hashes: `reports/data_quality/aws-ingestion.json`
+- Live MFA, Bedrock, pgvector, isolation, concurrency and restart suite: `reports/performance/live-performance.json`
+- OpenTelemetry/X-Ray traces: `reports/performance/otel-traces.json`
+- Deployment and teardown inventory: `reports/release/aws-deployment.json`
 
-## Operations
+## Reprovisioning
 
-- Region is always `us-east-2`. Do not use `us.` Bedrock inference profiles because they can route out of region.
-- CDK outputs are local in `infra/aws-cdk/cdk-outputs.json` and intentionally ignored by Git.
-- Teardown and redeploy procedures are in `docs/runbooks/` and `README.md`; RDS/storage costs remain until
-  teardown, even if ECS is scaled to zero.
-- Do not commit raw NASA data, credentials, generated caches, private memories, CDK outputs or Vercel state.
+Deployment and teardown procedures are in `docs/runbooks/deployment.md`. Paid AWS provisioning requires Manisha's
+separate authorization. Use us-east-2 and do not use cross-region `us.` Bedrock inference profiles.
+
+GitHub Actions OIDC creation remains blocked by an AWS Organizations SCP. Manual deployment from a reviewed CDK
+diff was verified. Do not commit credentials, raw data, private memories, caches, CDK outputs, or Vercel state.

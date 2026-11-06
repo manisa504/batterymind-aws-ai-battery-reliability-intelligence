@@ -1,10 +1,11 @@
 {
   "region": "us-east-2",
   "stack": "BatteryMindDemo",
-  "stack_status": "UPDATE_COMPLETE",
+  "stack_status": "DELETE_COMPLETE",
   "recorded": "2026-11-06",
-  "notes": "Professional respin from the validated main checkpoint; PostgreSQL 16.15, one ECS task, AWS-generated CloudFront HTTPS hostname, and no paid domain.",
-  "public_url": "https://d2e0z15r8r846m.cloudfront.net",
+  "notes": "The release was validated live, then intentionally destroyed to eliminate ongoing AWS charges. Historical URLs and evidence are retained for reproducibility.",
+  "public_url": null,
+  "last_verified_public_url": "https://d2e0z15r8r846m.cloudfront.net",
   "vercel_app_url": "https://batterymind-app.vercel.app",
   "image": {
     "tag": "v14",
@@ -21,9 +22,9 @@
     "note": "v14 is the immutable release with promoted-S3 data loading, tracing, fail-closed production auth and operating-cost evidence."
   },
   "ecs": {
-    "desired": 1,
-    "running": 1,
-    "state": "steady"
+    "desired": 0,
+    "running": 0,
+    "state": "destroyed"
   },
   "executed_checks": {
     "live_e2e": "tests/e2e/run_live.py: status PASS on v14, including cross-session, correction, concurrency and restart",
@@ -37,6 +38,15 @@
   "external_blockers": [
     "GitHub OIDC provider (explicit Organizations SCP deny)"
   ],
+  "teardown": {
+    "executed_utc": "2026-11-06",
+    "stack": "deleted",
+    "retained_data_buckets_deleted": 3,
+    "retained_ecr_repositories_deleted": 3,
+    "retained_cognito_user_pools_deleted": 3,
+    "retained_rds_snapshots_deleted": 3,
+    "verification": "No BatteryMind CloudFormation stack, S3 bucket, ECR repository, Cognito pool, RDS instance/snapshot, ECS cluster, ALB or log group remains in us-east-2."
+  },
   "fixes": [
     "Bedrock on-demand Nova model rejected in us-east-2 and its inference profile can route out of region; replaced with in-region Gemma 3 12B",
     "schema.sql (pgvector, embeddings, RLS) was never applied to RDS; now applied idempotently at startup",
