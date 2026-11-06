@@ -1,7 +1,7 @@
 {
   "status": "PASS",
-  "executed_utc": "2026-11-03T23:45:09Z",
-  "target": "https://dve60f8xmf6go.cloudfront.net",
+  "executed_utc": "2026-11-06T17:57:41Z",
+  "target": "https://d2e0z15r8r846m.cloudfront.net",
   "checks": [
     {
       "check": "Cognito login with enforced MFA for two users",
@@ -16,7 +16,7 @@
     {
       "check": "assessment at cycle 40 stored with Bedrock explanation",
       "status": "PASS",
-      "detail": "This NASA laboratory experiment assessed battery B0005, which reached a cutoff cycle of 40 with a me"
+      "detail": "This is a NASA laboratory experiment assessing battery B0005, which reached a cutoff cycle of 40 wit"
     },
     {
       "check": "assessment at cycle 120 stored with Bedrock explanation",
@@ -26,7 +26,7 @@
     {
       "check": "chat recalls prior assessments (semantic + recency)",
       "status": "PASS",
-      "detail": "{'battery_id': 'B0005', 'cutoff_cycle': 120, 'measurements_used': 120, 'semantic_hits': 2, 'prior_assessments_available': 2, 'prior_assessments_included': 2, 'characters_before_compression': 1707, 'characters_after_compression': 1701}"
+      "detail": "{'battery_id': 'B0005', 'cutoff_cycle': 120, 'measurements_used': 120, 'semantic_hits': 2, 'prior_assessments_available': 2, 'prior_assessments_included': 2, 'characters_before_compression': 1732, 'characters_after_compression': 1726}"
     },
     {
       "check": "chat found semantic hits in pgvector",
@@ -41,7 +41,7 @@
     {
       "check": "live correction supersedes the prior assessment",
       "status": "PASS",
-      "detail": "0a9eae90-5266-4de8-a6ce-12adbc6f4b3f"
+      "detail": "c43f6d14-7666-4095-8ad6-9d0881369006"
     },
     {
       "check": "concurrent idempotent writes return one assessment",
@@ -121,34 +121,34 @@
     {
       "check": "usage metrics recorded",
       "status": "PASS",
-      "detail": "{'assistant_replies': 4, 'input_tokens': 2703, 'output_tokens': 336, 'mean_latency_ms': 869.5}"
+      "detail": "{'assistant_replies': 4, 'input_tokens': 2761, 'output_tokens': 351, 'mean_latency_ms': 1539.5}"
     }
   ],
   "latency_ms": {
     "create_session": {
       "n": 1,
-      "median": 686,
-      "max": 686
+      "median": 306,
+      "max": 306
     },
     "assessment_with_bedrock_and_embedding": {
       "n": 2,
-      "median": 1743,
-      "max": 1828
+      "median": 1653,
+      "max": 1735
     },
     "chat": {
       "n": 3,
-      "median": 1418,
-      "max": 1795
+      "median": 1725,
+      "max": 3869
     },
     "chat_cross_session": {
       "n": 1,
-      "median": 1366,
-      "max": 1366
+      "median": 1902,
+      "max": 1902
     },
     "assessment_correction": {
       "n": 1,
-      "median": 1613,
-      "max": 1613
+      "median": 1342,
+      "max": 1342
     }
   },
   "note": "Measured from the test client over the public CloudFront URL; includes network time."

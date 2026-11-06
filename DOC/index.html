@@ -252,7 +252,7 @@
         <h2>Release claims follow executed gates.</h2>
         <p>Every figure in this section is generated from a report in the repository
         (<code>scripts/build_docs_page.py</code>). Gates use only PASS, FAIL, or BLOCKED.</p>
-        <table><tr><th>Gate</th><th>Scope</th><th>Status</th></tr><tr><td>G0</td><td>Product and requirements</td><td><b>PASS</b></td></tr><tr><td>G1</td><td>Real dataset validation</td><td><b>PASS</b></td></tr><tr><td>G2</td><td>AWS architecture</td><td><b>PASS (local design and IaC)</b></td></tr><tr><td>G3</td><td>Battery analytics</td><td><b>PASS</b></td></tr><tr><td>G4</td><td>Persistent memory</td><td><b>PASS</b></td></tr><tr><td>G5</td><td>AWS production application</td><td><b>BLOCKED</b></td></tr><tr><td>G6</td><td>Independent showcase</td><td><b>PASS</b></td></tr><tr><td>G7</td><td>Documentation and release</td><td><b>BLOCKED</b></td></tr></table>
+        <table><tr><th>Gate</th><th>Scope</th><th>Status</th></tr><tr><td>G0</td><td>Product and requirements</td><td><b>PASS</b></td></tr><tr><td>G1</td><td>Real dataset validation</td><td><b>PASS</b></td></tr><tr><td>G2</td><td>AWS architecture</td><td><b>PASS (local design and IaC)</b></td></tr><tr><td>G3</td><td>Battery analytics</td><td><b>PASS</b></td></tr><tr><td>G4</td><td>Persistent memory</td><td><b>PASS</b></td></tr><tr><td>G5</td><td>AWS production application</td><td><b>PASS</b></td></tr><tr><td>G6</td><td>Independent showcase</td><td><b>PASS</b></td></tr><tr><td>G7</td><td>Documentation and release</td><td><b>BLOCKED</b></td></tr></table>
         <h3>RUL baselines, chronological evaluation</h3>
         <p>Mean absolute capacity error (Ah) on cycles after each cell's training cutoff; lower is better. The linear
         model beats persistence on some cells and not others, and the dataset has four cells, so no broad
@@ -260,14 +260,14 @@
         <table><tr><th>Cell</th><th>Trained through cycle</th><th>Linear MAE</th>
         <th>Persistence MAE</th></tr><tr><td>B0005</td><td>100</td><td>0.0227</td><td>0.1119</td></tr><tr><td>B0006</td><td>100</td><td>0.1351</td><td>0.1250</td></tr><tr><td>B0007</td><td>100</td><td>0.0276</td><td>0.0890</td></tr><tr><td>B0018</td><td>79</td><td>0.0511</td><td>0.0566</td></tr></table>
         <h3>AWS ingestion run</h3>
-        <p>Run <code>aws-20261103-v11</code> on ECS Fargate downloaded and checksum-verified the NASA archive,
+        <p>Run <code>aws-20261106-v14</code> on ECS Fargate downloaded and checksum-verified the NASA archive,
         rebuilt the Parquet outputs in 13.5 s, and matched the
         committed evidence byte for byte, so it was promoted.</p>
         <h3>Live AWS end-to-end run</h3>
-        <p>24 of 24 checks passed on 2026-11-03 against the deployed stack.
+        <p>24 of 24 checks passed on 2026-11-06 against the deployed stack.
         Median latency from the test client over the public URL (includes network time): chat reply
-        1418 ms; assessment with Bedrock explanation and embedding
-        1743 ms.</p>
+        1725 ms; assessment with Bedrock explanation and embedding
+        1653 ms.</p>
         <details><summary>All live checks</summary><ul><li>Cognito login with enforced MFA for two users: PASS</li><li>session created: PASS</li><li>assessment at cycle 40 stored with Bedrock explanation: PASS</li><li>assessment at cycle 120 stored with Bedrock explanation: PASS</li><li>chat recalls prior assessments (semantic + recency): PASS</li><li>chat found semantic hits in pgvector: PASS</li><li>assessment memory recalled across two sessions: PASS</li><li>live correction supersedes the prior assessment: PASS</li><li>concurrent idempotent writes return one assessment: PASS</li><li>context compressed within budget: PASS</li><li>second turn in same session: PASS</li><li>short-term memory persisted four turns: PASS</li><li>cross-user: other user cannot read turns: PASS</li><li>cross-user: other user sees no assessments: PASS</li><li>cross-user: other user cannot chat in the session: PASS</li><li>cross-user: other user cannot delete assessment: PASS</li><li>anonymous chat rejected: PASS</li><li>oversized message rejected: PASS</li><li>ECS task replaced (container restart): PASS</li><li>after restart: assessments recalled: PASS</li><li>after restart: conversation recalled: PASS</li><li>after restart: chat still recalls memory: PASS</li><li>deletion removes assessment: PASS</li><li>usage metrics recorded: PASS</li></ul></details>
         <div class="actions">
           <a href="architecture/batterymind-aws.drawio">Editable diagram</a>
@@ -312,7 +312,7 @@
         <p>The dataset is small and laboratory-specific; model performance cannot establish broad product
         generalization. RDS and the load balancer create idle cost even when ECS scales to zero, so the AWS
         stack runs on a schedule. Open items recorded in the gate files:</p>
-        <ul><li><b>G5</b> Live end-to-end suite on image <code>v13</code>: BLOCKED — not re-run before the stack was spun down on 2026-11-04.</li><li><b>G5</b> GitHub Actions OIDC deploy role: BLOCKED — an AWS Organizations SCP denies IAM OIDC provider creation for the project account role; deployments are run manually from reviewed <code>cdk diff</code> output.</li><li><b>G7</b> GitHub Pages publication: BLOCKED — not yet enabled or deployed.</li><li><b>G7</b> Release completeness: BLOCKED — G5 has open items (see G5).</li></ul>
+        <ul><li><b>G5</b> GitHub Actions OIDC deploy role: BLOCKED — an AWS Organizations SCP denies IAM OIDC provider creation for the project account role; deployments are run manually from reviewed <code>cdk diff</code> output.</li><li><b>G7</b> Release completeness: BLOCKED only for GitHub Actions OIDC — an AWS Organizations SCP denies creation of the account OIDC provider. The application release itself is deployed and G5 is PASS; manual deployment uses a reviewed CDK diff until the account administrator changes the SCP.</li></ul>
       <!-- generated:limits:end -->
       </section>
     </main>

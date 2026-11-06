@@ -2,23 +2,23 @@
   "region": "us-east-2",
   "stack": "BatteryMindDemo",
   "stack_status": "UPDATE_COMPLETE",
-  "recorded": "2026-11-03",
+  "recorded": "2026-11-06",
   "notes": "Professional respin from the validated main checkpoint; PostgreSQL 16.15, one ECS task, AWS-generated CloudFront HTTPS hostname, and no paid domain.",
-  "public_url": "https://dve60f8xmf6go.cloudfront.net",
+  "public_url": "https://d2e0z15r8r846m.cloudfront.net",
   "vercel_app_url": "https://batterymind-app.vercel.app",
   "image": {
-    "tag": "v12",
-    "digest": "sha256:dbe79a4d39c8752c4f575062bf58e797e27d75e0772ed84972c13e51cdf18cec",
+    "tag": "v14",
+    "digest": "sha256:6c275dfd304583f61803f9983dafbd02e01674a7152bd44f0a5c094415da1ba8",
     "architecture": "arm64",
     "ecr_scan": {
       "status": "COMPLETE",
-      "HIGH": 3,
+      "HIGH": 5,
       "MEDIUM": 9,
       "LOW": 3,
-      "scanned_tag": "v12",
-      "high_findings": "Latest python:3.12-slim base still reports glibc x2 and zlib; ECR provides no fixed package versions. The affected strfmon, deprecated DNS-printing, and nonblocking gzwrite paths are not used by this workload."
+      "scanned_tag": "v14",
+      "high_findings": "Latest python:3.12-slim base reports glibc x2, zlib x2 and apt; ECR provides no fixed package versions. The affected utilities and apt runtime paths are not invoked by this workload."
     },
-    "note": "v12 is the immutable release with promoted-S3 data loading and operating-cost evidence."
+    "note": "v14 is the immutable release with promoted-S3 data loading, tracing, fail-closed production auth and operating-cost evidence."
   },
   "ecs": {
     "desired": 1,
@@ -26,7 +26,7 @@
     "state": "steady"
   },
   "executed_checks": {
-    "live_e2e": "tests/e2e/run_live.py: status PASS, including cross-session, correction, concurrency and restart",
+    "live_e2e": "tests/e2e/run_live.py: status PASS on v14, including cross-session, correction, concurrency and restart",
     "evidence": "reports/performance/live-performance.json",
     "anonymous_aws_frontend_http": 200,
     "anonymous_aws_api_http": 200,
@@ -34,8 +34,7 @@
     "browser_showcase": "tests/browser/showcase.mjs: PASS",
     "aws_ingestion": "reports/data_quality/aws-ingestion.json: PASS"
   },
-  "not_yet_executed": [
-    "OpenTelemetry trace export (setup skill unavailable)",
+  "external_blockers": [
     "GitHub OIDC provider (explicit Organizations SCP deny)"
   ],
   "fixes": [

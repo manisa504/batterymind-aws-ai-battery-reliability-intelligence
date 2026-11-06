@@ -1,13 +1,13 @@
 {
-  "run_id": "aws-20261103-v11",
+  "run_id": "aws-20261106-v14",
   "region": "us-east-2",
   "status": "PASS",
-  "started_utc": "2026-11-03T23:23:30.260414+00:00",
-  "finished_utc": "2026-11-03T23:23:43.874193+00:00",
+  "started_utc": "2026-11-06T17:35:38.461568+00:00",
+  "finished_utc": "2026-11-06T17:35:52.057637+00:00",
   "duration_s": 13.5,
   "image": {
-    "tag": "v11",
-    "digest": "sha256:56fad7c9bf75e8009d586354dc4f5c80f6f95c9c50868b795347a9e9fb9ea67f"
+    "tag": "v14",
+    "digest": "sha256:6c275dfd304583f61803f9983dafbd02e01674a7152bd44f0a5c094415da1ba8"
   },
   "archive": {
     "sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
@@ -30,5 +30,5 @@
     "impedance": true
   },
   "promoted_to_current": true,
-  "evidence_object": "processed/runs/aws-20261103-v11/status.json"
+  "evidence_object": "processed/runs/aws-20261106-v14/status.json"
 }
