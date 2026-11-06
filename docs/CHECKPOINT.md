@@ -25,6 +25,11 @@ Historical evidence remains committed:
 - OpenTelemetry/X-Ray traces: `reports/performance/otel-traces.json`
 - Deployment and teardown inventory: `reports/release/aws-deployment.json`
 
+## Standing rule
+
+Manisha's instruction (2026-11-06): whenever AWS is brought up for any run, **tear it down as soon as the run completes** and
+verify that nothing billable remains. Start AWS only with her explicit go-ahead.
+
 ## Reprovisioning
 
 Deployment and teardown procedures are in `docs/runbooks/deployment.md`. Paid AWS provisioning requires Manisha's
