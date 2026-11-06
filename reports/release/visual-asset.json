@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "generated_date": "2026-11-06",
+  "provider": "Higgsfield API",
+  "model": "recraft/v4.1/text-to-image",
+  "request_id": "01a1b31e-5588-7ec4-b783-145b9fdf8b7e",
+  "format": "webp",
+  "dimensions": "1344x768",
+  "purpose": "BatteryMind editorial hero artwork for GitHub Pages and the production application shell",
+  "content_review": "PASS: no text, logos, people, unsafe damage, or unsupported engineering claims",
+  "credential_handling": "API credential supplied at runtime only and not written to the repository"
+}

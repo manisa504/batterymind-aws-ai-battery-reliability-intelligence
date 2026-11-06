@@ -152,3 +152,4 @@ private memories are excluded from Git.
 
 Designed and built by **Manisha**. Data: NASA Ames Prognostics Center of Excellence,
 [Li-ion Battery Aging Datasets](https://data.nasa.gov/dataset/li-ion-battery-aging-datasets).
+Hero artwork generated through Higgsfield API using Recraft V4.1.
