@@ -1,7 +1,7 @@
 {
   "executed_date": "2026-11-06",
   "project": "batterymind-showcase",
-  "deployment_id": "dpl_7voP3wqVCL6ekJCfG93i5wXU8FJA",
+  "deployment_id": "dpl_AkZLcDE7nFrMg7x2YrggSj54rB19",
   "ready_state": "READY",
   "target": "production",
   "production_url": "https://batterymind-showcase.vercel.app",
@@ -24,6 +24,13 @@
   },
   "app_mode_2026_11_06": "portfolio mode (no config.json); data views live, backend-dependent views show an offline notice",
   "app_url": "https://batterymind-app.vercel.app",
-  "app_deployment_id": "dpl_DEUcyWqhrmRVs24Ufnjzj6wxzNwz",
-  "presentation_refresh": "README, GitHub Pages case study, application navigation, typography, responsive layout, metadata, and complete four-diagram architecture index"
+  "app_deployment_id": "dpl_5oLctmNXUXceDgAoLgJoRGh8Ci4n",
+  "presentation_refresh": "Natural-width Manrope typography across all sites, prominent embedded overview video on Pages and showcase, visible Vercel application links, and responsive navigation",
+  "browser_verification": {
+    "viewports": ["1440x1000", "390x844"],
+    "horizontal_overflow": false,
+    "pages_and_showcase_app_links_visible": true,
+    "pages_and_showcase_video_playback": "PASS",
+    "video_duration_seconds": 94.713086
+  }
 }

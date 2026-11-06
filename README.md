@@ -7,6 +7,7 @@ transparent remaining-life baselines, deterministic engineering decisions, and a
 earlier assessments without treating generated text as evidence.
 
 [Explore the live showcase](https://batterymind-showcase.vercel.app) ·
+[Open the Vercel app](https://batterymind-app.vercel.app) ·
 [Read the technical case study](https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/) ·
 [Watch the 95-second overview](DOC/assets/batterymind-brag.mp4)
 
