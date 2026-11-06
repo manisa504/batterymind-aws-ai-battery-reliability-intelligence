@@ -1,191 +1,154 @@
-# BatteryMind — AWS-native AI battery reliability intelligence
+# BatteryMind
 
-**BatteryMind turns real NASA battery-aging experiments into traceable measurements, transparent analytics,
-versioned engineering decisions, and an AI assistant that remembers earlier assessments.**
-Built by Manisha as an engineering portfolio project: real data, production-style AWS infrastructure, and every
-claim backed by an executed test or a committed report.
+### Evidence-grounded battery reliability intelligence on AWS
 
-[![Watch the 95-second overview](DOC/assets/batterymind-brag-poster.png)](DOC/assets/batterymind-brag.mp4)
+BatteryMind turns authentic NASA Ames battery-aging experiments into cutoff-aware degradation analytics,
+transparent remaining-life baselines, deterministic engineering decisions, and an AI assistant that remembers
+earlier assessments without treating generated text as evidence.
 
-| | |
-|---|---|
-| **Explainer (GitHub Pages)** | https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/ |
-| **Interactive showcase** (no sign-in, no AWS needed) | https://batterymind-showcase.vercel.app |
-| **Chat application** (needs the AWS stack running) | https://batterymind-app.vercel.app |
-| **Overview video** | [`DOC/assets/batterymind-brag.mp4`](DOC/assets/batterymind-brag.mp4) |
+[Explore the live showcase](https://batterymind-showcase.vercel.app) ·
+[Read the technical case study](https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/) ·
+[Watch the 95-second overview](DOC/assets/batterymind-brag.mp4)
 
-> **Status.** The full AWS stack was deployed in `us-east-2`, validated end to end, and then **deliberately torn down
-> on 2026-11-06 to avoid charges**. GitHub, the explainer, the showcase and all evidence remain available at no
-> cost; the chat application needs the stack redeployed ([how](docs/runbooks/deployment.md)).
+> The AWS system was deployed, tested end to end in `us-east-2`, and intentionally removed after validation to
+> avoid ongoing charges. The static showcase, documentation, source, diagrams, and test evidence remain public.
 
----
+## What this project demonstrates
 
-## The problem
+- **Scientific data discipline:** source checksum verification, immutable raw archives, preserved units and source
+  indices, explicit missingness, and deterministic Parquet transformations.
+- **Honest predictive analytics:** measured capacity and SOH stay distinct from linear RUL estimates and bootstrap
+  uncertainty. Evaluation uses chronological cutoffs and battery-disjoint comparisons where feasible.
+- **Controlled AI:** a versioned rules engine makes the engineering classification. Bedrock explains the result;
+  it cannot invent measurements or override policy.
+- **Durable, isolated memory:** PostgreSQL and pgvector store user-owned sessions, assessments, corrections, and
+  evidence references with row-level isolation, idempotency, and deletion semantics.
+- **Production engineering:** React, FastAPI, Docker, CDK, Cognito MFA, ECS Fargate, RDS, SQS, Bedrock,
+  CloudWatch/X-Ray, CI, browser tests, and auditable release gates.
 
-Battery validation teams collect large volumes of aging data but struggle to keep analysis history, compare
-degradation across cycles, and explain why an earlier engineering decision was made. BatteryMind answers:
+## Product tour
 
-- Which cells show the greatest measured degradation, and how has a specific cell's capacity changed?
-- Which cells are approaching the experiment's end-of-life threshold, and what remaining life can the data support?
-- What did we conclude last session, what changed since, and what action does the evidence support?
+The independent [recruiter showcase](https://batterymind-showcase.vercel.app) works without AWS or sign-in. Choose
+a cell, move the historical cutoff, inspect measured capacity and SOH, compare cells, and review the decision and
+RUL baseline. The full React application additionally implements authenticated assistant conversations, assessment
+history, correction/deletion, evaluation results, and operating-cost evidence.
 
-It classifies each cell with a **versioned, deterministic policy** — `CONTINUE_MONITORING`, `INCREASE_TESTING`,
-`ENGINEERING_REVIEW`, `EOL_REVIEW` or `INSUFFICIENT_EVIDENCE`. The language model **explains** the decision and recalls
-history; it never makes the decision and never supplies a number. These are laboratory observations, not
-field-proven safety or maintenance outcomes.
-
-## What was verified
-
-Every figure links to a committed report. Gates use only **PASS / FAIL / BLOCKED**.
-
-| Claim | Evidence |
-|---|---|
-| Real data: 4 NASA Ames cells (B0005, B0006, B0007, B0018), 2,167 cycles, 2,089,050 samples, archive SHA-256 verified | [`reports/data_quality/nasa-ingestion.json`](reports/data_quality/nasa-ingestion.json) |
-| Ingestion reproduced on AWS Fargate in 13.5 s, byte-identical to the committed evidence, then promoted | [`reports/data_quality/aws-ingestion.json`](reports/data_quality/aws-ingestion.json) |
-| Live suite on AWS: **24 of 24** checks passed — MFA sign-in, evidence-grounded chat, pgvector recall across sessions, correction, concurrent writes, cross-user isolation, recall after a forced container restart | [`reports/performance/live-performance.json`](reports/performance/live-performance.json) |
-| OpenTelemetry traces: 4 of 4 live requests visible in AWS X-Ray | [`reports/performance/otel-traces.json`](reports/performance/otel-traces.json) |
-| RUL baselines evaluated chronologically (no future data) and leave-one-cell-out | [`reports/model_evaluation/rul-baselines.json`](reports/model_evaluation/rul-baselines.json) |
-| Security tests (token forgery, impersonation, route auth, input, CORS) and infrastructure assertions | [`tests/security/`](tests/security), [`infra/aws-cdk/tests/`](infra/aws-cdk/tests) |
-| CI re-downloads the real archive, verifies its checksum and re-runs ingestion on every push | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
-| Cost model: about $2.95 of fixed charges for an 8-hour demo; about $60.80 per month if left running | [`reports/cost/`](reports/cost) |
-
-| Gate | Scope | Status |
-|---|---|---|
-| G0 | Product and requirements | PASS |
-| G1 | Real dataset validation | PASS |
-| G2 | AWS architecture | PASS |
-| G3 | Battery analytics | PASS |
-| G4 | Persistent memory | PASS |
-| G5 | AWS production application | PASS |
-| G6 | Independent showcase | PASS |
-| G7 | Documentation and release | PASS — the optional GitHub Actions deploy role is waived (see Limitations) |
-
-Details and open items: [`docs/gates/`](docs/gates).
+| Verified release fact | Result | Evidence |
+|---|---:|---|
+| NASA cells / discharge cycles / samples | 4 / 2,167 / 2,089,050 | [Data-quality report](reports/data_quality/nasa-ingestion.json) |
+| Live AWS acceptance checks | 24 / 24 passed | [Live test report](reports/performance/live-performance.json) |
+| Traced public requests | 4 / 4 in X-Ray | [Trace report](reports/performance/otel-traces.json) |
+| AWS ingestion reproducibility | Byte-identical Parquet | [AWS ingestion report](reports/data_quality/aws-ingestion.json) |
+| Current release gates | G0–G7 PASS | [Gate evidence](docs/gates) |
 
 ## Architecture
 
-### AWS production architecture
+The four diagrams below are the complete architecture set. Every diagram is available as PNG/SVG and as editable
+draw.io source.
 
-![AWS architecture](DOC/architecture/batterymind-aws.png)
+### 1. AWS production system
 
-CloudFront serves the web assets and forwards `/api/*` to a load balancer that accepts only CloudFront origin
-addresses. The FastAPI service runs on ECS Fargate (ARM64) and verifies Cognito ID tokens (MFA required) on every
-protected request. State lives in private RDS PostgreSQL with pgvector. Chat uses Amazon Bedrock (Gemma 3 12B) and
-embeddings use Titan Text Embeddings V2, both on-demand in `us-east-2`. Ingestion runs as an SQS → EventBridge Pipe →
-Fargate batch task. Traces flow through a CloudWatch agent sidecar to X-Ray; five CloudWatch alarms watch the API,
-database and dead-letter queue. The infrastructure is AWS CDK (Python) with cdk-nag checks.
-Editable source: [`DOC/architecture/batterymind-aws.drawio`](DOC/architecture/batterymind-aws.drawio) ·
-[SVG](DOC/architecture/batterymind-aws.svg) · [guide](DOC/architecture/batterymind-aws.md).
+![BatteryMind AWS production architecture](DOC/architecture/batterymind-aws.png)
 
-### AI memory and retrieval pipeline
+CloudFront separates private static delivery from `/api/*`; Cognito protects user workflows; an ECS Fargate API
+uses private PostgreSQL/pgvector, Bedrock, and authoritative S3 evidence. SQS and EventBridge Pipes launch bounded
+ingestion tasks. CloudWatch, OpenTelemetry, and X-Ray provide operational evidence.
 
-![Memory pipeline](DOC/architecture/batterymind-memory.png)
+[Editable draw.io](DOC/architecture/batterymind-aws.drawio) · [SVG](DOC/architecture/batterymind-aws.svg) ·
+[Architecture guide](DOC/architecture/batterymind-aws.md)
 
-Each chat request authenticates the user, resolves the battery and session, retrieves the **authoritative**
-measurements, recalls valid earlier assessments (pgvector similarity plus recency), ranks them
-(0.45 relevance + 0.25 recency + 0.20 importance + 0.10 confidence), compresses to a 5,000-character budget, asks
-Gemma 3 12B to answer from that evidence, and stores the turns. Source: [`DOC/architecture/batterymind-memory.drawio`](DOC/architecture/batterymind-memory.drawio).
+### 2. Evidence-grounded memory
 
-### Data ingestion and promotion pipeline
+![BatteryMind memory and retrieval architecture](DOC/architecture/batterymind-memory.png)
 
-![Data pipeline](DOC/architecture/batterymind-data.png)
+Each request authenticates the user and resolves the battery and historical cutoff before retrieving numerical
+evidence. Only then does the system recall valid user-owned memories, rank and compress them, generate an explanation,
+and persist the conversation. Structured measurements remain authoritative.
 
-The task verifies the archive hash, keeps the original file untouched, writes deterministic Parquet, compares every
-output hash with the committed report, and **promotes only on an exact match**. Source: [`DOC/architecture/batterymind-data.drawio`](DOC/architecture/batterymind-data.drawio).
+[Editable draw.io](DOC/architecture/batterymind-memory.drawio) · [SVG](DOC/architecture/batterymind-memory.svg)
 
-### Build, deployment and hosting
+### 3. Data ingestion and promotion
 
-![Delivery](DOC/architecture/batterymind-delivery.png)
+![BatteryMind data ingestion architecture](DOC/architecture/batterymind-data.png)
 
-CI runs on every push; AWS is deployed manually from a reviewed diff; Pages and Vercel are published separately.
-Source: [`DOC/architecture/batterymind-delivery.drawio`](DOC/architecture/batterymind-delivery.drawio).
+The worker verifies the NASA archive, preserves the source unchanged, parses cycle/sample/impedance tables, validates
+quality and units, and promotes deterministic Parquet only when output hashes match the committed evidence.
 
-## How it works
+[Editable draw.io](DOC/architecture/batterymind-data.drawio) · [SVG](DOC/architecture/batterymind-data.svg)
 
-**Data.** Authentic NASA Ames lithium-ion aging experiments (B0005, B0006, B0007, B0018). Original files are preserved
-unchanged; source URL, byte count and SHA-256 are in [`data/manifests/nasa-source.json`](data/manifests/nasa-source.json). Missing values are
-recorded, never filled. Raw archives and Parquet are not committed; ingestion regenerates them.
+### 4. Delivery and publication
 
-**Analytics.** `SOH = measured discharge capacity ÷ 2 Ah × 100`. Degradation rate is the measured slope. The RUL baseline is a
-linear trend with a residual-bootstrap interval, evaluated chronologically and leave-one-cell-out. The NASA 1.4 Ah
-end-of-life criterion is applied only to these 2 Ah cells and is not generalized.
+![BatteryMind delivery architecture](DOC/architecture/batterymind-delivery.png)
 
-**Decision policy** (`experimental-soh-v1`, deterministic and versioned): SOH ≤ 70 % → `EOL_REVIEW`; ≤ 75 % →
-`ENGINEERING_REVIEW`; ≤ 85 % → `INCREASE_TESTING`; otherwise `CONTINUE_MONITORING`; fewer than two valid
-measurements → `INSUFFICIENT_EVIDENCE`. Only the 70 % line corresponds to the NASA experiment; the other bands are project-defined.
+GitHub CI rebuilds the evidence and tests the system. AWS deployment uses a reviewed CDK diff; GitHub Pages publishes
+the case study; Vercel independently hosts the app shell and credential-free showcase.
 
-**Memory.** Short-term (last 6 turns), episodic (saved assessments with cutoff, decision, policy and evidence,
-valid / superseded / deleted), and semantic (1,024-dimension embeddings in pgvector). Measured values stay in
-structured storage; vector search never supplies a number.
+[Editable draw.io](DOC/architecture/batterymind-delivery.drawio) · [SVG](DOC/architecture/batterymind-delivery.svg)
 
-**API** (`/api/v1`): `GET /batteries`, `/batteries/{id}/analysis?cutoff=`, `/evaluation` (public); with a Cognito ID
-token: `POST /sessions`, `/assessments`, `/chat`; `GET /batteries/{id}/history`, `/batteries/{id}/sessions`,
-`/sessions/{id}/turns`, `/usage`; `DELETE /assessments/{id}`, `/sessions/{id}`.
+## Engineering design
 
-**Web app** (`apps/web`, React + TypeScript): Overview, Analysis (capacity, voltage and temperature profiles,
-measured-versus-predicted trajectory, RUL with uncertainty), Assistant, Decision history (record, correct, delete) and Evaluation (error tables, memory tests, usage, operating-cost inventory).
+### Analytics and policy
 
-**Showcase** (`showcase/`): a separate static site built from a versioned export of the verified data. It has no
-connection to AWS, so it works even when the stack is off.
+`SOH = measured discharge capacity ÷ 2 Ah × 100`. The RUL baseline fits a linear trend using only measurements at or
+before the selected cutoff and estimates uncertainty from training residuals. The experiment-specific EOL threshold
+is 1.4 Ah. The `experimental-soh-v1` policy maps SOH to `CONTINUE_MONITORING`, `INCREASE_TESTING`,
+`ENGINEERING_REVIEW`, or `EOL_REVIEW`; insufficient evidence always takes precedence. Intermediate bands are project
+defaults, not NASA recommendations.
 
-## Security
+### Memory and security
 
-Cognito with required authenticator-app MFA and admin-only sign-up · JWT signature, issuer, audience, expiry and
-`token_use` verified in the API · per-user PostgreSQL row-level security through a non-bypass role, applied
-for every transaction · RDS in isolated subnets, encrypted · credentials in Secrets Manager · least-privilege task
-roles, Bedrock limited to two `us-east-2` model ARNs · immutable, scanned ECR images · S3 public access blocked and TLS
-required · bounded inputs and model output. Known gaps are listed under *Limitations*.
+Numerical evidence is retrieved before semantic memory. Recall is filtered by user, battery, validity, and historical
+cutoff, then ranked within a fixed context budget. Corrections supersede prior records; deletion removes associated
+turns and embeddings. Cognito MFA, JWT verification, PostgreSQL row-level security, isolated RDS networking,
+least-privilege roles, encrypted storage, bounded inference, and input limits protect the deployed workflow.
 
-## Run it locally
+### API and applications
+
+- `apps/api`: versioned FastAPI endpoints for batteries, cutoff analysis, sessions, assessments, chat, memory,
+  evaluation, and usage.
+- `apps/web`: production React/TypeScript workspace with Overview, Analysis, Assistant, Decision History, and
+  Evaluation views.
+- `showcase`: credential-free React application built from a versioned, validated public export.
+
+## Run locally
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-make install                       # Python dependencies
-make ingest                        # needs the archive at .local-data/nasa-battery-data.zip (SHA-256 is checked)
-make test                          # unit, security, API and memory tests
-./scripts/test_postgres.sh         # PostgreSQL + pgvector tests in a throwaway container
-npm --prefix apps/web install && npm --prefix apps/web run build
-npm --prefix showcase install && npm --prefix showcase run build
+make install
+make ingest                        # expects .local-data/nasa-battery-data.zip
+make test
+./scripts/test_postgres.sh         # ephemeral PostgreSQL + pgvector validation
+npm --prefix apps/web ci && npm --prefix apps/web run build
+npm --prefix showcase ci && npm --prefix showcase run build
 ```
 
-Regenerate the evidence-driven artifacts: `python scripts/build_docs_page.py` (explainer),
-`python scripts/build_architecture_diagram.py` and `python scripts/build_more_diagrams.py` (diagrams, need the draw.io CLI),
-`python scripts/build_brag_video.py` (video, needs macOS, Chrome and ffmpeg).
+The archive URL, byte count, and SHA-256 are recorded in
+[`data/manifests/nasa-source.json`](data/manifests/nasa-source.json). Raw data, credentials, generated caches, and
+private memories are excluded from Git.
 
-## Deploy and tear down
+## Repository map
 
-Infrastructure is AWS CDK in [`infra/aws-cdk`](infra/aws-cdk). Paid resources require explicit authorization; see
-[`docs/runbooks/deployment.md`](docs/runbooks/deployment.md) and [`docs/CHECKPOINT.md`](docs/CHECKPOINT.md). Teardown
-leaves no billable resources. The stack pins Region `us-east-2` and never uses cross-Region Bedrock inference profiles.
+| Path | Purpose |
+|---|---|
+| [`apps/`](apps) | FastAPI service and production React application |
+| [`showcase/`](showcase) | Independent public portfolio experience |
+| [`packages/`](packages) | Ingestion, analytics, prediction, policy, memory, and evaluation libraries |
+| [`infra/aws-cdk/`](infra/aws-cdk) | Python CDK infrastructure and security assertions |
+| [`DOC/`](DOC) | GitHub Pages case study, diagrams, and overview video |
+| [`docs/`](docs) | Product requirements, ADRs, risks, gates, and runbooks |
+| [`reports/`](reports) | Executed data, model, memory, performance, cost, security, and release evidence |
+| [`tests/`](tests) | Unit, integration, PostgreSQL, security, browser, and live E2E suites |
 
-## Repository layout
+## Limitations
 
-```
-apps/api            FastAPI service (auth, analytics, chat, memory endpoints, telemetry)
-apps/web            React + TypeScript application (Vercel project batterymind-app)
-showcase            independent static recruiter showcase (Vercel project batterymind-showcase)
-packages/           ingestion · battery_analytics · prediction · decision_engine · memory_engine · evaluation
-infra/aws-cdk       CDK stack and infrastructure tests
-data/manifests      source provenance and schema notes (no raw data)
-DOC/                GitHub Pages explainer, draw.io diagrams (+ SVG/PNG), overview video
-docs/               PRD, ADRs, aspect registry, gate reports, runbooks, risks, handoff checkpoint
-reports/            data quality, model evaluation, memory, performance, cost, release evidence
-tests/              unit · integration · memory · security · e2e (live) · browser
-scripts/            ingestion, exports, publishing, diagram, docs and video builders
-```
+- Four laboratory cells cannot establish broad model generalization or field safety.
+- The linear RUL model is an interpretable baseline and does not outperform persistence on every cell.
+- The authenticated AWS backend is offline by design; redeployment requires paid-resource authorization.
+- An AWS Organizations policy prevented creation of a GitHub Actions OIDC provider, so validated AWS releases used
+  manual deployment from a reviewed CDK diff.
+- The NASA catalog does not state a license; the project retains attribution and provenance.
 
-## Limitations and honest status
+## Ownership and attribution
 
-- **Small, laboratory-specific dataset.** Four cells cannot establish broad model generalization. The linear RUL
-  baseline beats a persistence baseline on some cells and not others ([report](reports/model_evaluation/rul-baselines.json)); errors describe this dataset only.
-- **GitHub Actions cannot deploy to AWS** (waived): an AWS Organizations policy denies creating the OIDC provider, so
-  deployments are run manually from a reviewed `cdk diff`. This does not affect any other gate.
-  fix yet; the affected code paths are not used by this workload.
-- **The live backend is currently off** to avoid cost, so the Vercel chat application shows its offline notice until redeployed.
-- The API and ingestion tasks run in public subnets with public IPs (no NAT gateway, to control cost); security groups admit only the load balancer.
-- The NASA catalog does not state a license; attribution and provenance are retained.
-
-## Attribution
-
-Project owner: **Manisha**. Data: NASA Ames Prognostics Center of Excellence Li-ion battery aging datasets
-([catalog](https://data.nasa.gov/dataset/li-ion-battery-aging-datasets)).
+Designed and built by **Manisha**. Data: NASA Ames Prognostics Center of Excellence,
+[Li-ion Battery Aging Datasets](https://data.nasa.gov/dataset/li-ion-battery-aging-datasets).

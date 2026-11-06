@@ -1,7 +1,7 @@
 {
-  "executed_date": "2026-11-02",
+  "executed_date": "2026-11-06",
   "project": "batterymind-showcase",
-  "deployment_id": "dpl_cQmgVqPmc6GGMwwN9KBExEw3Az4K",
+  "deployment_id": "dpl_7voP3wqVCL6ekJCfG93i5wXU8FJA",
   "ready_state": "READY",
   "target": "production",
   "production_url": "https://batterymind-showcase.vercel.app",
@@ -22,6 +22,8 @@
       "B0018"
     ]
   },
-  "app_mode_2026_11_06": "offline (no config.json); data views live, backend-dependent views show an offline notice",
-  "app_url": "https://batterymind-app.vercel.app"
+  "app_mode_2026_11_06": "portfolio mode (no config.json); data views live, backend-dependent views show an offline notice",
+  "app_url": "https://batterymind-app.vercel.app",
+  "app_deployment_id": "dpl_6k8HesYk7VHHrfkd2bAB8xkcKRyg",
+  "presentation_refresh": "README, GitHub Pages case study, application navigation, typography, responsive layout, metadata, and complete four-diagram architecture index"
 }

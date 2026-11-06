@@ -8,7 +8,8 @@ The diagram separates authenticated AWS production, independent public publishin
 4. Bedrock receives bounded structured evidence and valid memories to produce explanations.
 5. Workers consume ingestion jobs through SQS; failures move to the DLQ.
 6. Secrets Manager supplies credentials and CloudWatch/OpenTelemetry captures bounded telemetry.
-7. GitHub Actions uses OIDC to publish immutable ECR images and static assets.
+7. GitHub CI validates code, data reproduction, infrastructure, and applications. AWS releases use a manually
+   reviewed CDK diff because the account's Organizations policy blocks creation of a GitHub OIDC provider.
 8. Vercel receives only a versioned public JSON export; GitHub Pages receives documentation.
 
 Key decisions: `us-east-2`; no NAT gateways; public-subnet Fargate egress with task ingress restricted to
