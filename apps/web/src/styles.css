@@ -5,3 +5,4 @@
 .chat form{display:flex;gap:10px;margin-top:14px}.chat textarea{flex:1;background:#0f1722;color:#e8eef6;border:1px solid #3b4b5d;border-radius:8px;padding:10px;font:inherit;resize:vertical}.hint{color:#8ea0b5}.err{color:#ff8a80}
 .row{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.history{list-style:none;padding:0;display:grid;gap:12px}.history li{border:1px solid #253548;border-radius:10px;padding:14px}.history li.superseded{opacity:.6}.history p{margin:8px 0}.tag{font-size:12px;border:1px solid #3b4b5d;border-radius:99px;padding:2px 10px}.actions{display:flex;gap:10px;margin-top:10px}
 table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid #253548}
+.panel a{color:#55d6be;text-decoration:underline;text-underline-offset:3px}.panel a:hover{color:#9ff0de}

@@ -6,7 +6,7 @@ import {startLogin} from './auth';
 type Ctx = {config: AppConfig | null; signedIn: boolean; batteryId: string; cutoff: number};
 
 export function SignInGate({config, signedIn, children}: {config: AppConfig | null; signedIn: boolean; children: React.ReactNode}) {
-  if (!config) return <section className="panel"><h3>Live backend not configured</h3><p>This build is running as a static evidence export. The assistant, saved memory and history need the AWS-hosted deployment, which provides sign-in and the API.</p></section>;
+  if (!config) return <section className="panel"><h3>The AWS backend is offline</h3><p>BatteryMind's validated AWS stack (Cognito, ECS Fargate, RDS with pgvector, Bedrock) was deliberately torn down to avoid charges, so sign-in, the assistant, saved memory and history are unavailable right now. The Overview and Analysis views still work: they read the versioned export of the real NASA measurements.</p><p>Evidence that the live system worked is committed in the repository: 24 of 24 live checks, including MFA sign-in, recall across sessions and isolation between users. <a href="https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence/blob/main/reports/performance/live-performance.json">Live test report</a> · <a href="https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence/blob/main/docs/runbooks/deployment.md">How to redeploy</a> · <a href="https://manisa504.github.io/batterymind-aws-ai-battery-reliability-intelligence/">Explainer and video</a></p></section>;
   if (!signedIn) return <section className="panel"><h3>Sign in to use persistent memory</h3><p>Assistant conversations and assessments are stored per user in PostgreSQL. Sign-in uses Amazon Cognito with a required authenticator-app code.</p><button className="primary" onClick={() => startLogin(config)}>Sign in</button></section>;
   return <>{children}</>;
 }
@@ -135,7 +135,7 @@ export function EvaluationView({config, signedIn}: {config: AppConfig | null; si
     api<Evaluation>(config.apiBase, '/evaluation').then(setEv).catch(() => undefined);
     if (signedIn) api<typeof usage>(config.apiBase, '/usage').then(setUsage).catch(() => undefined);
   }, [config, signedIn]);
-  if (!config) return <section className="panel"><h3>Evaluation needs the live backend</h3><p>Reports are served by the AWS API.</p></section>;
+  if (!config) return <section className="panel"><h3>Evaluation reports are served by the AWS API</h3><p>The backend is offline, so this view is empty. The same reports are committed in the repository under <code>reports/</code>: <a href="https://github.com/manisa504/batterymind-aws-ai-battery-reliability-intelligence/tree/main/reports">open the evidence reports</a>.</p></section>;
   const cells = ev?.rul_baselines?.per_cell_chronological ?? {};
   return <>
     <section className="panel"><h3>RUL baselines (chronological, no future data)</h3>

@@ -15,6 +15,13 @@
   "export_verification": {
     "schema_version": "1.0.0",
     "battery_count": 4,
-    "battery_ids": ["B0005", "B0006", "B0007", "B0018"]
-  }
+    "battery_ids": [
+      "B0005",
+      "B0006",
+      "B0007",
+      "B0018"
+    ]
+  },
+  "app_mode_2026_11_06": "offline (no config.json); data views live, backend-dependent views show an offline notice",
+  "app_url": "https://batterymind-app.vercel.app"
 }
