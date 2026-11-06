@@ -35,7 +35,7 @@ verify that nothing billable remains. Start AWS only with her explicit go-ahead.
 Deployment and teardown procedures are in `docs/runbooks/deployment.md`. Paid AWS provisioning requires Manisha's
 separate authorization. Use us-east-2 and do not use cross-region `us.` Bedrock inference profiles.
 
-GitHub Actions OIDC creation remains blocked by an AWS Organizations SCP. Manual deployment from a reviewed CDK
+GitHub Actions OIDC creation is blocked by an AWS Organizations SCP; Manisha waived that step (2026-11-06). Manual deployment from a reviewed CDK
 diff was verified. Do not commit credentials, raw data, private memories, caches, CDK outputs, or Vercel state.
 
 ## Release artifacts (2026-11-06)
@@ -44,4 +44,4 @@ diff was verified. Do not commit credentials, raw data, private memories, caches
   `scripts/build_architecture_diagram.py` and `scripts/build_more_diagrams.py` (needs the draw.io CLI).
 - README documents the whole project and embeds all four diagrams; the explainer page has the video and diagrams.
 - Fixed unformatted chart axes in the showcase and app; both redeployed to Vercel.
-- Remaining blocker: G7 — GitHub Actions OIDC deploy role denied by an AWS Organizations policy.
+- All eight gates PASS. The only deviation is the waived GitHub Actions OIDC deploy role (AWS Organizations policy).

@@ -282,7 +282,7 @@
         <h2>Release claims follow executed gates.</h2>
         <p>Every figure in this section is generated from a report in the repository
         (<code>scripts/build_docs_page.py</code>). Gates use only PASS, FAIL, or BLOCKED.</p>
-        <table><tr><th>Gate</th><th>Scope</th><th>Status</th></tr><tr><td>G0</td><td>Product and requirements</td><td><b>PASS</b></td></tr><tr><td>G1</td><td>Real dataset validation</td><td><b>PASS</b></td></tr><tr><td>G2</td><td>AWS architecture</td><td><b>PASS (local design and IaC)</b></td></tr><tr><td>G3</td><td>Battery analytics</td><td><b>PASS</b></td></tr><tr><td>G4</td><td>Persistent memory</td><td><b>PASS</b></td></tr><tr><td>G5</td><td>AWS production application</td><td><b>PASS</b></td></tr><tr><td>G6</td><td>Independent showcase</td><td><b>PASS</b></td></tr><tr><td>G7</td><td>Documentation and release</td><td><b>BLOCKED</b></td></tr></table>
+        <table><tr><th>Gate</th><th>Scope</th><th>Status</th></tr><tr><td>G0</td><td>Product and requirements</td><td><b>PASS</b></td></tr><tr><td>G1</td><td>Real dataset validation</td><td><b>PASS</b></td></tr><tr><td>G2</td><td>AWS architecture</td><td><b>PASS (local design and IaC)</b></td></tr><tr><td>G3</td><td>Battery analytics</td><td><b>PASS</b></td></tr><tr><td>G4</td><td>Persistent memory</td><td><b>PASS</b></td></tr><tr><td>G5</td><td>AWS production application</td><td><b>PASS</b></td></tr><tr><td>G6</td><td>Independent showcase</td><td><b>PASS</b></td></tr><tr><td>G7</td><td>Documentation and release</td><td><b>PASS</b></td></tr></table>
         <h3>RUL baselines, chronological evaluation</h3>
         <p>Mean absolute capacity error (Ah) on cycles after each cell's training cutoff; lower is better. The linear
         model beats persistence on some cells and not others, and the dataset has four cells, so no broad
@@ -341,9 +341,10 @@
         </p>
         <!-- generated:limits:start -->
         <p>The dataset is small and laboratory-specific; model performance cannot establish broad product
-        generalization. RDS and the load balancer create idle cost even when ECS scales to zero, so the AWS
-        stack runs on a schedule. Open items recorded in the gate files:</p>
-        <ul><li><b>G5</b> GitHub Actions OIDC deploy role: BLOCKED — an AWS Organizations SCP denies IAM OIDC provider creation for the project account role; deployments are run manually from reviewed <code>cdk diff</code> output.</li><li><b>G7</b> GitHub Actions OIDC: BLOCKED by an AWS Organizations SCP if live AWS deployment is requested again; manual deployment from a reviewed CDK diff remains documented.</li></ul>
+        generalization. The validated AWS stack was torn down after testing to avoid charges, so the chat application
+        is offline until it is redeployed. One step was waived: an AWS Organizations policy blocks the GitHub Actions
+        deploy role, so AWS deployments are manual from a reviewed diff. Open items recorded in the gate files:</p>
+        <p>No gate has an open BLOCKED or FAIL item.</p>
       <!-- generated:limits:end -->
       </section>
     </main>

@@ -100,8 +100,9 @@ def limits_section() -> str:
     open_list = f"<ul>{''.join(items)}</ul>" if items else "<p>No gate has an open BLOCKED or FAIL item.</p>"
     return f"""
         <p>The dataset is small and laboratory-specific; model performance cannot establish broad product
-        generalization. RDS and the load balancer create idle cost even when ECS scales to zero, so the AWS
-        stack runs on a schedule. Open items recorded in the gate files:</p>
+        generalization. The validated AWS stack was torn down after testing to avoid charges, so the chat application
+        is offline until it is redeployed. One step was waived: an AWS Organizations policy blocks the GitHub Actions
+        deploy role, so AWS deployments are manual from a reviewed diff. Open items recorded in the gate files:</p>
         {open_list}
       """
 

@@ -58,7 +58,7 @@ Every figure links to a committed report. Gates use only **PASS / FAIL / BLOCKED
 | G4 | Persistent memory | PASS |
 | G5 | AWS production application | PASS |
 | G6 | Independent showcase | PASS |
-| G7 | Documentation and release | **BLOCKED** — the GitHub Actions OIDC deploy role cannot be created because an AWS Organizations policy denies it; deployments are run manually from a reviewed `cdk diff` |
+| G7 | Documentation and release | PASS — the optional GitHub Actions deploy role is waived (see Limitations) |
 
 Details and open items: [`docs/gates/`](docs/gates).
 
@@ -178,8 +178,8 @@ scripts/            ingestion, exports, publishing, diagram, docs and video buil
 
 - **Small, laboratory-specific dataset.** Four cells cannot establish broad model generalization. The linear RUL
   baseline beats a persistence baseline on some cells and not others ([report](reports/model_evaluation/rul-baselines.json)); errors describe this dataset only.
-- **GitHub Actions cannot deploy to AWS** (G7): an AWS Organizations policy denies creating the OIDC provider, so deployments are manual.
-- **Container image:** ECR scans report three HIGH findings in Debian base packages (glibc ×2, zlib) with no upstream
+- **GitHub Actions cannot deploy to AWS** (waived): an AWS Organizations policy denies creating the OIDC provider, so
+  deployments are run manually from a reviewed `cdk diff`. This does not affect any other gate.
   fix yet; the affected code paths are not used by this workload.
 - **The live backend is currently off** to avoid cost, so the Vercel chat application shows its offline notice until redeployed.
 - The API and ingestion tasks run in public subnets with public IPs (no NAT gateway, to control cost); security groups admit only the load balancer.
